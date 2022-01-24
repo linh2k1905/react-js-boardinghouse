@@ -6,7 +6,15 @@ import DropDownCity from './DropDownCity.js';
 import DropdownRoom from './DropDownRoom.js';
 import DropdownPrice from './DropdownPrice.js';
 import AreaSelect from './AreaSelect.js';
+import { FormattedMessage } from 'react-intl';
+import { LANGUAGES } from '../../utils';
+import { changeLanguageApp } from '../../store/actions'
+
 class HomeHeader extends Component {
+    changeLanguage = (language) => {
+        this.props.changeLanguageRedux(language);
+    }
+
 
     render() {
 
@@ -25,39 +33,40 @@ class HomeHeader extends Component {
 
                         </div>
                         <div className='right-content'>
-                            <div className='welcome-text'>TimPhongTro xin chào quý khách!!!</div>
+                            <div className='welcome-text'><FormattedMessage id="header.welcome" /> TimPhongTro </div>
                             <div className='child-right-content'>
 
-                                <a >Đăng kí</a>
+                                <a ><FormattedMessage id="header.signup" /></a>
                             </div>
                             <div className='child-right-content'>
-                                <a>Đăng nhập</a>
+                                <a><FormattedMessage id="login.login" /></a>
                             </div>
                             <div className='child-right-content btn-post'>
-                                <a>Đăng bài <i className="fas fa-plus-circle"></i> </a>
+                                <a><FormattedMessage id="header.post" /> <i className="fas fa-plus-circle"></i> </a>
                             </div>
-
-                            <i className="fas fa-question-circle"></i>Hỗ trợ
-
+                            <div className='language'>
+                                <div onClick={() => { this.changeLanguage(LANGUAGES.EN) }} className={this.props.language === LANGUAGES.EN ? 'language-en action' : 'language-en'}><span >EN</span></div>
+                                <div onClick={() => { this.changeLanguage(LANGUAGES.VI) }} className={this.props.language === LANGUAGES.VI ? 'language-vi action' : 'language-vi'}><span >VI</span></div>
+                            </div>
                         </div>
                     </div>
 
                 </div>
                 <div className='homepage-banner-header'>
                     <div className='banner-child'>
-                        Trang chủ
+                        <FormattedMessage id="header.home" />
                     </div>
                     <div className='banner-child'>
-                        Thuê phòng trọ
+                        <FormattedMessage id="header.room" />
                     </div>
                     <div className='banner-child'>
-                        Thuê căn hộ
+                        <FormattedMessage id="header.house" />
                     </div>
                     <div className='banner-child'>
-                        Thuê mặt bằng
+                        <FormattedMessage id="header.flat" />
                     </div>
                     <div className='banner-child'>
-                        Nhà cho thuê
+                        <FormattedMessage id="header.apartment" />
                     </div>
                 </div>
                 <div className='home-filter-header'>
@@ -77,7 +86,7 @@ class HomeHeader extends Component {
                         <DropdownPrice />
                     </div>
                     <div className='child-filter-header'>
-                        <button className='btn-filter-header'>Tìm kiếm
+                        <button className='btn-filter-header'><FormattedMessage id="header.find" />
                             <i className="fas fa-search"></i></button>
                     </div>
                 </div>
@@ -97,6 +106,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 

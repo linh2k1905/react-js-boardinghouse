@@ -27,7 +27,7 @@
             }
         }
         .center-content{
-            width: 25%;
+            width: 20%;
            // border:1px solid red;
             justify-content: space-between;
             display: flex;
@@ -39,13 +39,14 @@
 
         }
         .right-content{
-            width: 50%;
+            width: 55%;
             //border:1px solid rgb(209, 31, 135);
             display: flex;
             align-items: center;
             .welcome-text{
                 color: blue;
             }
+
             .child-right-content{
                 border: 1px solid orange;
                 height: 36px;
@@ -63,9 +64,52 @@
                 }
 
             }
-         
-           
-        }
+
+            .language{
+                .language-en {
+                    
+                    margin:0 10px;
+                    cursor: pointer;
+                    opacity: 0.28;
+                    &.action{
+                        opacity: 1;
+                        span{
+                        color: blue;
+                        
+                        }
+                    }
+                    &:hover{
+                        opacity: 1.1;
+                        color: red;
+                    }
+                  
+             
+                }
+                .language-vi{
+                    opacity: 0.28;
+                    margin:0 10px;
+                    cursor: pointer;
+                    &.action{
+                        opacity: 1;
+                    span{
+                       
+                            color: rgb(206, 17, 17);
+                        }
+                    }
+                    &:hover{
+                        opacity: 1.1;
+                        color: blue;
+                    }
+                   
+                    
+                }
+                
+            }
+
+            }
+            
+            
+            
 
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./AreaSelect.css";
-
+import { FormattedMessage } from 'react-intl';
 class AreaSelect extends Component {
     state = {
         value: 0
@@ -22,7 +22,7 @@ class AreaSelect extends Component {
         return (
             <React.Fragment>
                 <div className='bg-dropdown-toggle'>
-                    Diện tích
+                    <FormattedMessage id="header.area" />
                     <div className="def-number-input number-input">
                         <button onClick={this.decrease} className="minus"></button>
                         <input className="quantity" name="quantity"

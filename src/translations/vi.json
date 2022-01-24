@@ -1,4 +1,19 @@
 {
+    "header": {
+        "welcome": "Xin chào quý khách đến với",
+        "signup": " Đăng kí",
+        "post": " Đăng bài",
+        "home": "Trang Chủ",
+        "room": "Phòng trọ",
+        "house": "Nhà Trọ",
+        "flat": "Căn hộ",
+        "apartment": "Chung cư",
+        "find": "Tìm kiếm",
+        "city": "Thành phố",
+        "type": "Loại thuê",
+        "price": "Giá",
+        "area": "Diện tích"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

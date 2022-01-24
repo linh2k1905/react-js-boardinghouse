@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import './HomeHeader.scss'
+import './HomeHeader.scss';
+import { FormattedMessage } from 'react-intl';
 export default class DropdownRoom extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +30,7 @@ export default class DropdownRoom extends React.Component {
                     caret
                     className='bg-dropdown-toggle'>
                     <i className="fas fa-warehouse"></i>
-                    Phòng/Nhà trọ
+                    <FormattedMessage id="header.type" />
                 </DropdownToggle>
 
                 <DropdownMenu

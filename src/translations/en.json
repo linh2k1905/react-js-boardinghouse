@@ -1,4 +1,19 @@
 {
+    "header": {
+        "welcome": "Welcome to the Website",
+        "signup": " Sign Up",
+        "post": " Post a news",
+        "home": "HomePage",
+        "room": "Room",
+        "house": "House",
+        "flat": "Flat",
+        "apartment": "Apartment",
+        "find": "Search",
+        "city": "City",
+        "type": "Type",
+        "price": "Price",
+        "area": "Area"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

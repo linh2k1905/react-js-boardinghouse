@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import './HomeHeader.scss'
+import './HomeHeader.scss';
+import { FormattedMessage } from 'react-intl';
 export default class DropdownCity extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +30,8 @@ export default class DropdownCity extends React.Component {
                     caret
                     className='bg-dropdown-toggle'>
                     <i className="fas fa-map-marker-alt"></i>
-                    Tỉnh Thành phố
+                    <FormattedMessage id="header.city" />
+
                 </DropdownToggle>
 
                 <DropdownMenu
