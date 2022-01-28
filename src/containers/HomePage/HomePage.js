@@ -3,6 +3,11 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import DropdownCity from './DropDownCity';
+import TypeHouse from './Section/TypeHouse';
+import BodyHomePage from './BodyHomePage';
+import About from './Section/About';
+import HomeFooter from './HomeFooter';
+import './HomeHeader.scss'
 class HomePage extends Component {
 
     render() {
@@ -11,7 +16,10 @@ class HomePage extends Component {
         return (
             <div>
                 <HomeHeader />
-
+                <TypeHouse />
+                <BodyHomePage />
+                <About />
+                <HomeFooter />
 
             </div>
         );

@@ -4,18 +4,54 @@ import { connect } from 'react-redux';
 import './HomeHeader.scss';
 import DropDownCity from './DropDownCity.js';
 import DropdownRoom from './DropDownRoom.js';
-import DropdownPrice from './DropdownPrice.js';
-import AreaSelect from './AreaSelect.js';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions'
+import ModalArea from './ModalArea.js';
+import ModalPrice from './ModalPrice';
 
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpenModalArea: false,
+            isOpenModalPrice: false
+
+
+        };
+
+
+    }
     changeLanguage = (language) => {
         this.props.changeLanguageRedux(language);
     }
+    // area
+    handleClickArea = () => {
+        this.setState({
+            isOpenModalArea: true
+        })
+    }
 
+    toggleModalArea = () => {
+        this.setState({
+            isOpenModalArea: !this.state.isOpenModalArea
+        })
 
+    }
+
+    // PRICE
+    handleClickPrice = () => {
+        this.setState({
+            isOpenModalPrice: true
+        })
+    }
+
+    toggleModalPrice = () => {
+        this.setState({
+            isOpenModalPrice: !this.state.isOpenModalPrice
+        })
+
+    }
     render() {
 
 
@@ -80,10 +116,35 @@ class HomeHeader extends Component {
                         <DropdownRoom />
                     </div>
                     <div className='child-filter-header'>
-                        <AreaSelect />
+                        <button
+                            className='btn-modal'
+                            onClick={() => this.handleClickPrice()}
+                        >
+                            <FormattedMessage id="header.price" />
+                        </button>
+                        <div className="modal-users-container">
+                            <ModalPrice
+                                isOpen={this.state.isOpenModalPrice}
+                                toggleModalPrice={this.toggleModalPrice}
+
+
+                            />
+                        </div>
                     </div>
+
                     <div className='child-filter-header'>
-                        <DropdownPrice />
+                        <button
+                            onClick={() => this.handleClickArea()}
+                            className='btn-modal'
+                        ><FormattedMessage
+                                id="header.area" />
+                        </button>
+
+                        <ModalArea
+                            isOpen={this.state.isOpenModalArea}
+                            toggleModalArea={this.toggleModalArea}
+
+                        />
                     </div>
                     <div className='child-filter-header'>
                         <button className='btn-filter-header'><FormattedMessage id="header.find" />

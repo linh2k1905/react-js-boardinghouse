@@ -70,8 +70,7 @@ class ModalUser extends Component {
             this.props.createNewUser(this.state);
 
 
-            // console.log(" Call api")
-            // console.log('modal state', this.state)
+
 
         }
 
@@ -79,8 +78,7 @@ class ModalUser extends Component {
 
 
     render() {
-        // console.log('check props', this.props);
-        //console.log('check props open', this.props.isOpen)
+
         return (
 
             <Modal

@@ -11,7 +11,7 @@
         "find": "Search",
         "city": "City",
         "type": "Type",
-        "price": "Price",
+        "price": "Price(VND)",
         "area": "Area"
     },
     "common": {

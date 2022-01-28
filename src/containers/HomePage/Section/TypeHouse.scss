@@ -1,0 +1,98 @@
+.TypeHouse-session{
+    height: 330px;
+    background-color: #f5f5f5;
+   
+    
+    .TypeHouse-container{
+
+        height: inherit;
+        top:10px;
+        padding-top: 30px;
+        margin: 0 50px;
+        display: flex;
+        flex-direction: column;
+       .Typehouse-header{
+           height: 60px;
+           margin-top: 10px;
+           margin-bottom: 20px;
+           padding-top: 10px;
+           .btn-session {
+            float: right;
+            margin-right: 15px;
+            
+        }
+        .title-session{
+            font-size: 22px;
+            font-weight: 400;
+        }
+       }
+       .Typehouse-body{
+          
+       }
+       
+        .TypeHouse-customize{
+          
+         .img-customize{
+             background-image: url('../../../assets/typehouse/chungcu.jpg');
+             background-repeat: no-repeat;
+             background-size: cover;
+             background-color: #eee;
+             background-position: center center;
+             width:  278px;
+             height: 150px;
+         }
+        }
+    }
+
+}
+.slick-prev{
+   
+   
+    left: -20px !important;
+    z-index: 1000;
+    height: 48px !important;
+    width: 44px !important;
+    font-style: normal;
+    font-weight: 400;
+    background: #fff!important;
+    border: 2px solid #d7d7d7 !important;
+    &:hover{
+        background:  #d7d7d7 !important;
+    }
+    text-align: center!important;
+    justify-content: center!important;
+    justify-items: center!important;
+    align-items: center!important;
+    display: flex!important;
+    &.slick-arrow::before{
+        background: rgb(156, 155, 151);
+    }
+}
+.slick-next{
+    right: -20px!important;
+    height: 48px !important;
+    width: 44px !important;
+    background: #fff!important;
+    border: 2px solid #d7d7d7 !important;
+    z-index: 1000;
+    text-align: center!important;
+    justify-content: center!important;
+    justify-items: center!important;
+    align-items: center!important;
+    display: flex!important;
+    &:hover{
+        background:  #d7d7d7 !important;
+    }
+    &.slick-arrow::before{
+        background: rgb(156, 155, 151);
+        
+    }
+    
+}
+
+.slick-next::before{
+   // font-family: "Font Awesome 5 Free"!important;
+}
+.slick-prev::before{
+   // font-family: "Font Awesome 5 Free"!important;
+}

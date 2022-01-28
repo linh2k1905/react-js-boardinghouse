@@ -11,7 +11,7 @@
         "find": "Tìm kiếm",
         "city": "Thành phố",
         "type": "Loại thuê",
-        "price": "Giá",
+        "price": "Giá(VND)",
         "area": "Diện tích"
     },
     "common": {
