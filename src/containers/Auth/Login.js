@@ -5,8 +5,7 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import { handelLoginAPI } from '../../services/userService';
 import './Login.scss';
-import { userLoginSuccess } from '../../store/actions';
-//oimport { FormattedMessage } from 'react-intl';
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -40,15 +39,16 @@ class Login extends Component {
         })
         try {
             let data = await handelLoginAPI(this.state.username, this.state.password)
-            console.log(data)
-            if (data && data.errorCode !== 0) {
+            console.log('data', data)
+            if (data && data.error !== 0) {
                 this.setState({
                     errorMessage: data.messageCode
                 })
             }
-            if (data && data.errorCode === 0) {
-                this.props.userLoginSuccess(data.user)
-                console.log('login successfully')
+            if (data && data.error === 0) {
+                console.log(data.userdata)
+                this.props.userLoginSuccess(data.userdata)
+
             }
 
 

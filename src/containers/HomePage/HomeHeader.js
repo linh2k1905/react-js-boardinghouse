@@ -88,21 +88,24 @@ class HomeHeader extends Component {
                     </div>
 
                 </div>
-                <div className='homepage-banner-header'>
-                    <div className='banner-child'>
-                        <FormattedMessage id="header.home" />
-                    </div>
-                    <div className='banner-child'>
-                        <FormattedMessage id="header.room" />
-                    </div>
-                    <div className='banner-child'>
-                        <FormattedMessage id="header.house" />
-                    </div>
-                    <div className='banner-child'>
-                        <FormattedMessage id="header.flat" />
-                    </div>
-                    <div className='banner-child'>
-                        <FormattedMessage id="header.apartment" />
+                <div className='homepage-container-banner'>
+                    <div className='homepage-banner-header'>
+                        <div className='banner-child'>
+                            <FormattedMessage id="header.home" />
+                        </div>
+
+                        <div className='banner-child'>
+                            <FormattedMessage id="header.room" />
+                        </div>
+                        <div className='banner-child'>
+                            <FormattedMessage id="header.house" />
+                        </div>
+                        <div className='banner-child'>
+                            <FormattedMessage id="header.flat" />
+                        </div>
+                        <div className='banner-child'>
+                            <FormattedMessage id="header.apartment" />
+                        </div>
                     </div>
                 </div>
                 <div className='home-filter-header'>
