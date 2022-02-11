@@ -12,7 +12,8 @@
         "city": "Thành phố",
         "type": "Loại thuê",
         "price": "Giá(VND)",
-        "area": "Diện tích"
+        "area": "Diện tích",
+        "hello": "Xin chào, "
     },
     "common": {
         "add": "Thêm",
@@ -42,12 +43,14 @@
     },
     "menu": {
         "system": {
-            "header": "Hệ thống",
+            "user": "Quản lý người dùng",
+            "post": "Quản lý bài đăng",
+            "booking": "Quản lý lịch đặt",
+            "city": "Quản lý thành phố",
             "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "product-manage": "Quản lý gói",
-                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+                "user-manage": "Quản lý người dùng",
+                "user-owner": "Quản lý chủ trọ",
+                "user-admin": "Quản lý admin"
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"
@@ -59,8 +62,12 @@
             "fail-to-load-fouser": "Không thể tải về danh sách người dùng",
             "user-id": "Mã người sử dụng",
             "usertype": "Loại người dùng",
-            "username": "Tên người dùng",
-            "fullname": "Tên đầy đủ",
+            "lastname": "Họ",
+            "address": "Địa chỉ",
+            "upload": " Tải lên",
+            "image": "Hình ảnh",
+            "save": "Lưu",
+            "firstname": "Tên",
             "mobile": "Số điện thoại",
             "email": "Email",
             "status": "Trạng thái",

@@ -1,0 +1,26 @@
+.input-user{
+    padding: 10px;
+  
+    .btn-save{
+        color: black;
+        background-color: rgb(8, 8, 216);
+        float: right;
+    }
+    .load-image{
+        padding: 5px;
+        background: #ddd;
+        border-radius: 3px;
+    
+    }
+   
+}
+.preview-image-container{
+        
+    .preview-image{
+        width: 250px;
+        height: 250px;
+        padding: 10px;
+        margin: 10px;
+      
+    }
+}

@@ -12,7 +12,8 @@
         "city": "City",
         "type": "Type",
         "price": "Price(VND)",
-        "area": "Area"
+        "area": "Area",
+        "hello": "Hi, "
     },
     "common": {
         "add": "Add",
@@ -42,12 +43,14 @@
     },
     "menu": {
         "system": {
-            "header": "System",
+            "user": "Users",
+            "post": "Posts",
+            "booking": "Bookings",
+            "city": "Cities",
             "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "product-manage": "Package manage",
-                "register-package-group-or-account": "Register service package for group/account"
+                "user-manage": "Manage User",
+                "user-owner": "Manage Owner",
+                "user-admin": "Manage Admin"
             },
             "system-parameter": {
                 "header": "System-parameter"
@@ -59,8 +62,12 @@
             "fail-to-load-fouser": "Fail to load system users list",
             "user-id": "User ID",
             "usertype": "User type",
-            "username": "Username",
-            "fullname": "Fullname",
+            "lastname": "Last Name",
+            "address": "Address",
+            "upload": " Upload",
+            "image": "Image",
+            "save": "Save",
+            "firstname": "First Name",
             "mobile": "Phone",
             "email": "Email",
             "status": "Status",

@@ -24,10 +24,15 @@ const editUserService = (data) => {
 
     return axios.put('/api/edit-user', data);
 }
+const getRoleService = () => {
+
+    return axios.get('/api/getRole');
+}
 export {
     handelLoginAPI,
     getAllUser,
     createNewUserService,
     deleteUserService,
-    editUserService
+    editUserService,
+    getRoleService
 }
