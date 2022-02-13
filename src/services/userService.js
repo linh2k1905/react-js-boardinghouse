@@ -28,11 +28,16 @@ const getRoleService = () => {
 
     return axios.get('/api/getRole');
 }
+const getAllOwnerService = () => {
+
+    return axios.get('/api/top-owner-home');
+}
 export {
     handelLoginAPI,
     getAllUser,
     createNewUserService,
     deleteUserService,
     editUserService,
-    getRoleService
+    getRoleService,
+    getAllOwnerService
 }

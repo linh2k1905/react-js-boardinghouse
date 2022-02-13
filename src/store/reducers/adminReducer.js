@@ -2,7 +2,8 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     roles: [],
-    users: []
+    users: [],
+    owner: []
 
 }
 
@@ -26,8 +27,8 @@ const adminReducer = (state = initialState, action) => {
                 ...state
 
             }
-        case actionTypes.FETCH_ALL_USER_SUCCESS:
-            state.users = action.users;
+        case actionTypes.FETCH_OWNERS_SUCCESS:
+            state.owner = action.dataOwner;
 
 
             return {
@@ -36,8 +37,7 @@ const adminReducer = (state = initialState, action) => {
 
             }
         case actionTypes.FETCH_ALL_USERS_FAILED:
-            state.users = action.users;
-
+            state.owner = [];
 
             return {
 

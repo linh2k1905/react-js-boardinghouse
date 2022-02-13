@@ -263,7 +263,7 @@
         .Section-customize{
           
             .img-customize{
-                background-image: url('../../assets/typehouse/nhacap4.jpg');
+              
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-color: #eee;
@@ -364,7 +364,7 @@
             border:2px solid rgb(208, 208, 219);
             padding: 10px 10px;
             border-radius: 3px;
-        }
+        } 
     }
 }
 .btn-contact{
@@ -374,4 +374,26 @@
     border: none;
     
 
+}
+.Owner-Owner{
+    .Owner-container{
+      
+    float: right;
+    padding: 20px;
+    .Owner-header{
+        font-size: 21px;
+    font-weight: 400;
+   
+    }
+    .Owner-body{
+        .Owner-customize{
+            .image-avatar{
+                vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+            }
+        }
+    }
+    }
 }

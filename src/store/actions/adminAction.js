@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getRoleService, createNewUserService, getAllUser, deleteUserService, editUserService } from '../../services/userService';
+import { getRoleService, createNewUserService, getAllUser, deleteUserService, editUserService, getAllOwnerService } from '../../services/userService';
 import { toast } from 'react-toastify';
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
@@ -145,4 +145,34 @@ export const editUserSuccess = () => ({
 export const editUserFail = () => ({
     type: actionTypes.EDIT_USER_FAILED
 })
+export const fetchOwner = () => {
+
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllOwnerService();
+
+            if (res && res.errorCode === 0) {
+
+                dispatch({
+                    type: actionTypes.FETCH_OWNERS_SUCCESS,
+                    dataOwner: res.data
+                });
+
+            }
+            else {
+
+                dispatch({
+                    type: actionTypes.FETCH_OWNERS_FAILED
+                });
+
+            }
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_OWNERS_FAILED
+            });
+        }
+    }
+
+}
 

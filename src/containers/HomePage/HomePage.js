@@ -5,9 +5,11 @@ import HomeHeader from './HomeHeader';
 import DropdownCity from './DropDownCity';
 import TypeHouse from './Section/TypeHouse';
 import BodyHomePage from './BodyHomePage';
+
 import About from './Section/About';
 import HomeFooter from './HomeFooter';
 import './HomeHeader.scss'
+import Owner from './Section/Owner';
 class HomePage extends Component {
 
     render() {
@@ -17,6 +19,7 @@ class HomePage extends Component {
             <div>
                 <HomeHeader />
                 <TypeHouse />
+                <Owner />
                 <BodyHomePage />
                 <About />
                 <HomeFooter />
