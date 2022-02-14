@@ -36,12 +36,15 @@ class UserRedux extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
+        console.log('props', this.props)
         if (prevProps.roleRedux !== this.props.roleRedux) {
+
             this.setState({
                 roleArray: this.props.roleRedux
             })
         }
         if (prevProps.listusers !== this.props.listusers) {
+
             let arrRole = this.props.roleRedux
             this.setState({
 
@@ -83,6 +86,7 @@ class UserRedux extends Component {
         })
     }
     handleSaveUser = () => {
+        console.log('handle save', this.props);
 
         let isValid = this.checkValidInput();
         if (isValid === false) return;

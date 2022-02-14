@@ -14,8 +14,11 @@ class TableManageUser extends Component {
     }
     componentDidMount() {
         this.props.fetchUserRedux();
+
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
+
+
         if (prevProps.listusers !== this.props.listusers) {
             this.setState({
                 usersRedux: this.props.listusers
@@ -31,7 +34,10 @@ class TableManageUser extends Component {
     }
 
     render() {
+        console.log('check component đi mount', this.props.listusers)
         let arrUser = this.state.usersRedux;
+        console.log(arrUser)
+        console.log('array user', arrUser);
         return (
             <table id="TableManageUser">
                 <tr>
@@ -43,7 +49,7 @@ class TableManageUser extends Component {
                 </tr>
                 {arrUser && arrUser.map((item, index) => {
                     return (
-                        <tr key={index}>
+                        <tr id={index}>
                             <td>{item.email}</td>
                             <td>{item.firstName}</td>
                             <td>{item.lastName}</td>

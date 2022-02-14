@@ -17,9 +17,10 @@ class Owner extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
         console.log('check props', this.props)
+        console.log('check prev', prevProps)
         if (prevProps.ownerRedux != this.props.ownerRedux) {
             this.setState({
-                arrOwner: this.props.Owner
+                arrOwner: this.props.ownerRedux
             })
         }
     }
@@ -27,7 +28,7 @@ class Owner extends Component {
         this.props.loadTopOwner()
     }
     render() {
-        let arrOwner = this.props.ownerRedux;
+        let arrOwner = this.state.arrOwner;
         let { language } = this.props
 
         return (

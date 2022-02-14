@@ -34,6 +34,7 @@ export const fetchAllUserStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUser('ALL');
+            console.log('fetch all user', res)
             if (res && res.errorCode === 0) {
 
                 dispatch(fetchAllUserSuccess(res.users));
