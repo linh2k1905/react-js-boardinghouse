@@ -36,7 +36,7 @@ class UserRedux extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
-        console.log('props', this.props)
+
         if (prevProps.roleRedux !== this.props.roleRedux) {
 
             this.setState({
@@ -69,7 +69,7 @@ class UserRedux extends Component {
         let data = event.target.files;
 
         let file = data[0];
-        console.log(file);
+
         if (file) {
             let base64 = await CommonUtils.getBase64(file);
             let objectURL = URL.createObjectURL(file);
@@ -86,7 +86,7 @@ class UserRedux extends Component {
         })
     }
     handleSaveUser = () => {
-        console.log('handle save', this.props);
+
 
         let isValid = this.checkValidInput();
         if (isValid === false) return;
@@ -160,6 +160,7 @@ class UserRedux extends Component {
 
         let copyState = { ...this.state }
         copyState[id] = event.target.value;
+
         this.setState({
             ...copyState
         })
@@ -253,8 +254,8 @@ class UserRedux extends Component {
                                         return (
 
 
-                                            <option
-
+                                            <option key=
+                                                {index}
                                                 value={item.id}
                                             >{language === LANGUAGES.VI ? item.roleVi : item.name}</option>
 

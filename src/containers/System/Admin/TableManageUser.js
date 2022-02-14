@@ -34,10 +34,9 @@ class TableManageUser extends Component {
     }
 
     render() {
-        console.log('check component đi mount', this.props.listusers)
+
         let arrUser = this.state.usersRedux;
-        console.log(arrUser)
-        console.log('array user', arrUser);
+
         return (
             <table id="TableManageUser">
                 <tr>

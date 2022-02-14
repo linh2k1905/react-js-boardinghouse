@@ -16,8 +16,7 @@ class Owner extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
-        console.log('check props', this.props)
-        console.log('check prev', prevProps)
+
         if (prevProps.ownerRedux != this.props.ownerRedux) {
             this.setState({
                 arrOwner: this.props.ownerRedux
