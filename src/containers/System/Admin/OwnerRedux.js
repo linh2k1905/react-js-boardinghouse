@@ -5,10 +5,10 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import { toast } from 'react-toastify';
-import TableManageUser from './TableManageUser';
+import TableManageOwner from './TableManageOwner';
 import Lightbox from 'react-image-lightbox';
 
-class UserRedux extends Component {
+class OwnerRedux extends Component {
 
     constructor(props) {
         super(props);
@@ -23,7 +23,7 @@ class UserRedux extends Component {
             roleId: '',
             image: '',
             previewImageURL: '',
-            action: '',
+            action: CRUD_ACTIONS.CREATE,
             userEditId: '',
             isOpen: false
         }
@@ -92,7 +92,7 @@ class UserRedux extends Component {
         if (isValid === false) return;
         let { action } = this.state;
         if (action === CRUD_ACTIONS.CREATE) {
-            this.props.createNewUserRedux({
+            this.props.createNewOwnerRedux({
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 password: this.state.password,
@@ -105,7 +105,7 @@ class UserRedux extends Component {
             })
         }
         if (action === CRUD_ACTIONS.EDIT) {
-            this.props.editAUserRedux({
+            this.props.editAOwnerRedux({
                 id: this.state.userEditId,
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
@@ -170,10 +170,10 @@ class UserRedux extends Component {
         let roles = this.state.roleArray;
         let language = this.props.language;
         let { firstName, lastName, password, email, tel, address, roleId } = this.state;
-
+        console.log(this.state.action);
         return (
             <div className='container'>
-                <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-manage' /></div>
+                <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-owner' /></div>
 
                 <form>
                     <div className='row'>
@@ -318,7 +318,7 @@ class UserRedux extends Component {
 
                 </form>
                 <div className='col-12 mb-5'>
-                    <TableManageUser
+                    <TableManageOwner
                         handleEditUserFromParentKey={this.handleEditUserFromParent}
                         action={this.state.action}
                     />
@@ -341,9 +341,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
-        createNewUserRedux: (data) => dispatch(actions.createNewUser(data)),
-        editAUserRedux: (data) => dispatch(actions.editAUser(data))
+        createNewOwnerRedux: (data) => dispatch(actions.createNewUser(data)),
+        editAOwnerRedux: (data) => dispatch(actions.editAUser(data))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRedux);
+export default connect(mapStateToProps, mapDispatchToProps)(OwnerRedux);

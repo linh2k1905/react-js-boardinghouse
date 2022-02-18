@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import DropdownCity from './DropDownCity';
 import TypeHouse from './Section/TypeHouse';
+import HouseList from './Section/HouseList';
 import BodyHomePage from './BodyHomePage';
 
 import About from './Section/About';
@@ -19,6 +20,7 @@ class HomePage extends Component {
             <div>
                 <HomeHeader />
                 <TypeHouse />
+                <HouseList />
                 <Owner />
                 <BodyHomePage />
                 <About />

@@ -8,12 +8,18 @@ const handelLoginAPI = (email, password) => {
 const getAllUser = (idUser) => {
     return axios.get(`/api/get-all-users?id=${idUser}`);
 }
+const getAllPost = () => {
+    return axios.get('/api/get-all-house');
+}
 const createNewUserService = (data) => {
-    console.log(data);
+
     return axios.post('/api/create-new-user', data);
 }
+const createNewPostService = (data) => {
+
+    return axios.post('/api/create-new-post', data);
+}
 const deleteUserService = (idUser) => {
-    console.log(idUser);
     return axios.delete('/api/delete-user', {
         data: {
             id: idUser
@@ -32,6 +38,14 @@ const getAllOwnerService = () => {
 
     return axios.get('/api/top-owner-home');
 }
+const getTypeHouseService = () => {
+
+    return axios.get('/api/getTypeHouse');
+}
+const getCityService = () => {
+
+    return axios.get('/api/getCity');
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -39,5 +53,9 @@ export {
     deleteUserService,
     editUserService,
     getRoleService,
-    getAllOwnerService
+    getAllOwnerService,
+    getTypeHouseService,
+    getCityService,
+    createNewPostService,
+    getAllPost
 }

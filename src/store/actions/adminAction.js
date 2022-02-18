@@ -1,5 +1,14 @@
 import actionTypes from './actionTypes';
-import { getRoleService, createNewUserService, getAllUser, deleteUserService, editUserService, getAllOwnerService } from '../../services/userService';
+import {
+    getRoleService, createNewUserService,
+    getAllUser, deleteUserService,
+    editUserService, getAllOwnerService,
+    getTypeHouseService,
+    getCityService,
+    createNewPostService,
+
+
+} from '../../services/userService';
 import { toast } from 'react-toastify';
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
@@ -30,12 +39,72 @@ export const fetchRoleSuccess = (data) => ({
     data: data
 
 })
+export const fetchTypeHouseStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getTypeHouseService();
+
+            if (res && res.errorCode == 0) {
+
+                dispatch(fetchTypeHouseSuccess(res.data));
+            }
+            else {
+                dispatch(fetchTypeHouseFailed())
+            }
+
+        } catch (error) {
+            dispatch(fetchTypeHouseFailed())
+            console.log(error)
+
+        }
+    }
+}
+export const fetchTypeHouseFailed = () => ({
+    type: actionTypes.FETCH_TYPEHOUSE_FAILED,
+
+})
+export const fetchTypeHouseSuccess = (data) => ({
+    type: actionTypes.FETCH_TYPEHOUSE_SUCCESS,
+    data: data
+
+})
+
+export const fetchCitiesStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getCityService();
+
+            if (res && res.errorCode == 0) {
+
+                dispatch(fetchCitySuccess(res.data));
+            }
+            else {
+                dispatch(fetchCityFailed())
+            }
+
+        } catch (error) {
+            dispatch(fetchCityFailed())
+            console.log(error)
+
+        }
+    }
+}
+export const fetchCityFailed = () => ({
+    type: actionTypes.FETCH_CITY_FAILED,
+
+})
+export const fetchCitySuccess = (data) => ({
+    type: actionTypes.FETCH_CITY_SUCCESS,
+    data: data
+
+})
 export const fetchAllUserStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUser('ALL');
 
             if (res && res.errorCode === 0) {
+                console.log(res.users)
 
                 dispatch(fetchAllUserSuccess(res.users));
             }
@@ -51,6 +120,8 @@ export const fetchAllUserStart = () => {
     }
 
 }
+
+
 export const deleteAUser = (id) => {
     return async (dispatch, getState) => {
         try {
@@ -83,12 +154,12 @@ export const deleteUserFailed = () => ({
 
 
 export const fetchAllUserSuccess = (data) => ({
-    type: 'FETCH_ALL_USER_SUCCESS',
+    type: actionTypes.FETCH_ALL_USER_SUCCESS,
     users: data
 
 })
 export const fetchAllUserFailed = () => ({
-    type: 'FETCH_ALL_USERS_FAILED'
+    type: actionTypes.FETCH_ALL_USERS_FAILED
 })
 
 export const createNewUser = (data) => {
@@ -121,6 +192,37 @@ export const saveUserSuccess = () => ({
 })
 export const saveUserFail = () => ({
     type: 'CREATE_USER_FAILED'
+})
+export const createNewPost = (data) => {
+
+
+    return async (dispatch, getState) => {
+        try {
+            let res = await createNewPostService(data);
+
+            if (res && res.errorCode === 0) {
+                console.log('res create service', res);
+                toast.success("Create a new post success!!!");
+                dispatch(savePostSuccess());
+
+            }
+            else {
+                toast.success("Create a new user error!!!");
+                dispatch(savePostFail());
+
+            }
+
+        } catch (error) {
+            dispatch(savePostFail());
+        }
+    }
+
+}
+export const savePostSuccess = () => ({
+    type: actionTypes.CREATE_POST_SUCCESS
+})
+export const savePostFail = () => ({
+    type: actionTypes.CREATE_POST_FAILED
 })
 
 export const editAUser = (data) => {

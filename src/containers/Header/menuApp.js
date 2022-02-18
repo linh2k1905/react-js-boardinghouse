@@ -14,6 +14,7 @@ export const adminMenu = [
             },
             {
                 name: 'menu.system.system-administrator.user-owner',
+                link: '/system/manage-owner'
 
             },
             {
@@ -26,25 +27,21 @@ export const adminMenu = [
     },
     { //hệ thống
         name: 'menu.system.post',
+
         menus: [
             {
-                name: 'menu.system.system-administrator.header',
+                name: 'menu.system.post',
                 // subMenus: [
                 //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
 
                 // ]
+                link: '/system/post'
             },
-            {
-                name: 'menu.system.system-administrator.header',
 
-            },
-            {
-                name: 'menu.system.system-administrator.header',
-
-            }
 
         ]
+
 
     },
     { //hệ thống

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './TableManageUser.scss'
 import * as actions from '../../../store/actions';
 
-class TableManageUser extends Component {
+class TableManageOwner extends Component {
     constructor(profs) {
         super(profs)
         this.state = {
@@ -81,15 +81,15 @@ class TableManageUser extends Component {
 
 const mapStateToProps = state => {
     return {
-        listusers: state.admin.users
+        listusers: state.admin.owner
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
+        fetchUserRedux: () => dispatch(actions.fetchOwner()),
         deleteAUserRedux: (id) => dispatch(actions.deleteAUser(id))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableManageUser);
+export default connect(mapStateToProps, mapDispatchToProps)(TableManageOwner);
