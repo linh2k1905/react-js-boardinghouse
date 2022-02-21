@@ -5,9 +5,31 @@ import { FormattedMessage } from 'react-intl';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
-
+import * as actions from '../../../store/actions';
+import { LANGUAGES } from '../../../utils'
 class Section extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            typeHouselist: []
+
+        }
+    }
+
+    async componentDidMount() {
+
+
+        this.props.getTypeHouseStart();
+    }
+    componentDidUpdate(prevProps, prevState, snapsot) {
+        if (prevProps.typeHouseRedux != this.props.typeHouseRedux) {
+            this.setState({
+                typeHouselist: this.props.typeHouseRedux
+            })
+        }
+
+
+    }
 
     render() {
         let settings = {
@@ -18,41 +40,31 @@ class Section extends Component {
             slidesToScroll: 4,
 
         };
-
+        let typeHouseArray = this.state.typeHouselist;
         return (
             <div className='Section-section'>
                 <div className='Section-container'>
                     <div className='Section-header'>
-                        <span className='title-section'>Loại nhà được yêu thích</span>
+                        <span className='title-section'>Lựa chọn loại nhà </span>
                         <button className='btn-section'>Xem thêm</button>
                     </div>
                     <div className='Section-body'>
                         <Slider {...settings}>
+                            {typeHouseArray && typeHouseArray.length > 0 && typeHouseArray.map((item, index) => {
 
-                            <div className='Section-customize'>
-                                <div className='img-customize'></div>
-                                <div>Nha tro 1</div>
-                            </div>
-                            <div className='Section-customize'>
-                                <div className='img-customize'></div>
-                                <div>Nha tro 2</div>
-                            </div>
-                            <div className='Section-customize'>
-                                <div className='img-customize'></div>
-                                <div>Nha tro 3</div>
-                            </div>
-                            <div className='Section-customize'>
-                                <div className='img-customize'></div>
-                                <div>Nha tro 4</div>
-                            </div>
-                            <div className='Section-customize'>
-                                <div className='img-customize'></div>
-                                <div>Nha tro 5</div>
-                            </div>
-                            <div className='Section-customize'>
-                                <div className='img-customize'></div>
-                                <div>Nha tro 6</div>
-                            </div>
+                                return (
+                                    <div className='Section-customize'>
+                                        <div className='img-customize'
+
+                                        ></div>
+                                        <div className='type-house-name'>
+
+                                            {this.props.language == LANGUAGES.VI ? item.nameVi : item.name}
+                                        </div>
+                                    </div>)
+                            })}
+
+
 
 
                         </Slider>
@@ -70,12 +82,14 @@ class Section extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        languaguage: state.app.language
+        languaguage: state.app.language,
+        typeHouseRedux: state.admin.typeHouses,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
 
     };
 };

@@ -225,7 +225,7 @@
 
 .Section-section{
     height: 330px;
-    background-color: #f5f5f5;
+  border: 1px solid red;
    
     &.section-about{
        
@@ -252,6 +252,13 @@
            .btn-section {
             float: right;
             margin-right: 15px;
+           
+                float: right;
+                margin-right: 15px;
+                border: none;
+                border-radius: 7px;
+                color: orange;
+                border: 1px solid orange;
             
         }
         .title-section{
@@ -264,12 +271,16 @@
           
             .img-customize{
               
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-color: #eee;
-                background-position: center center;
+                background-image: url('../../assets/typehouse/apartment.jpg');
+               
                 width:  278px;
                 height: 150px;
+                
+            }
+            .type-house-name {
+                color: red;
+                font-weight: 600;
+                font-size: 20px;
             }
            }
           
@@ -376,10 +387,13 @@
 
 }
 .Owner-Owner{
+    margin: 10px;
     .Owner-container{
       
     float: right;
-    margin: 10px 10px;
+  
+   
+    width: 20%;
     .Owner-header{
         font-size: 21px;
     font-weight: 400;
@@ -396,6 +410,59 @@
         }
     }
     }
+    .Owner-container-left{
+      
+        float: left;
+      
+      
+      
+       
+        width: 70%;
+        .Owner-header{
+            font-size: 21px;
+            font-weight: 400;
+       
+        }
+        .Owner-body{
+           
+
+            .Owner-customize{
+                width: 100%;
+                display: flex;
+                .image-house{
+                    vertical-align: middle;
+                    width: 250px;
+                    height: 200px;
+                    
+                            }
+                        }
+            .contain-info-house{
+                width: 70%;
+                margin: 10px 10px;
+                .name-house{
+                        font-weight: 600;
+                        font-size: 20px;
+                        color: red;
+                }
+                .address-house{
+                    color: blue;
+                    font-size: 17px;
+                    
+                }
+                .price-house{
+                  
+                    font-size: 17px;
+                    color: #ec1fad;
+                }
+                .area-house{
+                  
+                    font-size: 17px;
+                   
+                }
+
+            }
+        }
+        }
 }
 .house-list{
  width: 87%;

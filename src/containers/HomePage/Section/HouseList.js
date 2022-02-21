@@ -32,18 +32,70 @@ class HouseList extends Component {
     render() {
 
         let listhouse = this.state.listHouseArr;
-        console.log(listhouse)
         return (
-            <div className='house-list'>
-                {listhouse.map((item, index) => {
-                    return (
-                        <div>
-                            {item.name}
-                        </div>
-                    )
-                })}
+            <div className='Owner-Owner'>
+                <div className='Owner-container-left'>
+                    {listhouse.map((item, index) => {
+                        let imagebase64 = '';
+                        if (item.image) {
+                            imagebase64 = new Buffer(item.image, 'base64').toString('binary');
 
+                        }
+                        return (
+                            <div className='Owner-body'>
+                                <div className='Owner-customize'>
 
+                                    <div className='img-customize image-house'
+                                        style={{ backgroundImage: `url(${imagebase64})` }}
+                                    ></div>
+                                    <div
+                                        className='contain-info-house'
+                                    >
+                                        <div className='name-house'>  {item.name}</div>
+                                        <div
+                                            className='address-house'>
+                                            <FormattedMessage id='system.user-manage.address'
+                                            />: {item.address}
+                                        </div>
+                                        <div
+                                            className='price-house'>
+                                            <FormattedMessage id='system.post-manage.price'
+                                            />: {item.price}
+
+                                        </div>
+                                        <div
+                                            className='area-house'>
+                                            <FormattedMessage id='system.post-manage.area'
+                                            />: {item.area} m2
+
+                                        </div>
+                                        <div
+                                            className='area-house'>
+                                            <FormattedMessage id='system.post-manage.descEn'
+                                            />: {item.descriptionEn}
+
+                                        </div>
+                                        <div
+                                            className='area-house'>
+                                            <FormattedMessage id='system.post-manage.descVi'
+                                            />: {item.descriptionVi}
+
+                                        </div>
+                                        <div
+                                            className='area-house'>
+                                            <FormattedMessage id='system.user-manage.mobile'
+                                            />: {item.User.tel}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        )
+                    })}
+
+                </div>
 
             </div>
         )
