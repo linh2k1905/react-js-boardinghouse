@@ -43,6 +43,7 @@ class Owner extends Component {
                             && arrOwner.map((item, index) => {
 
                                 let imagebase64 = '';
+                                console.log(item.image);
                                 if (item.image) {
                                     imagebase64 = new Buffer(item.image, 'base64').toString('binary');
                                 }

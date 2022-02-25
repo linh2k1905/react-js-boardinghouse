@@ -125,7 +125,7 @@ class OwnerRedux extends Component {
         let imagebase64 = '';
         if (user.image) {
             imagebase64 = new Buffer(user.image, 'base64').toString('binary');
-            console.log(imagebase64);
+
         }
 
         this.setState({
@@ -170,7 +170,7 @@ class OwnerRedux extends Component {
         let roles = this.state.roleArray;
         let language = this.props.language;
         let { firstName, lastName, password, email, tel, address, roleId } = this.state;
-        console.log(this.state.action);
+
         return (
             <div className='container'>
                 <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-owner' /></div>

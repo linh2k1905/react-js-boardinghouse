@@ -1,0 +1,36 @@
+.house-detail-container{
+   height: 800px;
+    border: 1px solid red;
+    margin: 0 50px;
+    
+    .house-intro{
+        display: flex;
+        height: 300px;     
+        .contain-left
+        {
+            width: 70%;
+            border: 1px solid gray;
+            margin-right: 25px;
+           
+        }
+      
+        .contain-right{
+            width: 30%;
+            border: 1px solid gray;
+            background-repeat:no-repeat ;
+            justify-content: center;
+        }
+    }
+
+    .detail-house-info{
+        width:70%;
+        border: 1px solid red;
+        height: 500px;
+       
+    }
+    .schedule-owner{
+        width: 30%;
+        border: 1px solid yellow;
+        height: 500px;
+    }
+}

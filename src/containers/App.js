@@ -11,10 +11,10 @@ import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authenticati
 import { path } from '../utils'
 
 import Home from '../routes/Home';
-//import Login from '../routes/Login';
 import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
+import DetailHouse from './User/House/DetailHouse'
 
 
 import HomePage from './HomePage/HomePage.js'
@@ -54,6 +54,7 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.DETAIL_HOUSE} component={DetailHouse} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

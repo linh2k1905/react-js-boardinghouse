@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { toast } from 'react-toastify';
-import TableManageOwner from './TableManageOwner';
-import Lightbox from 'react-image-lightbox';
+
+
 
 class PostManage extends Component {
 
@@ -16,6 +15,7 @@ class PostManage extends Component {
             userArray: [],
             cityArray: [],
             typeHouseArray: [],
+            listHouses: [],
             name: '',
             userId: '',
             cityId: '',
@@ -40,6 +40,7 @@ class PostManage extends Component {
         this.props.getTypeHouseStart();
         this.props.getCityStart();
         this.props.getOwner();
+        this.props.getAllPost()
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
@@ -59,6 +60,13 @@ class PostManage extends Component {
 
             this.setState({
                 userArray: this.props.ownerRedux
+
+            })
+        }
+        if (prevProps.postRedux != this.props.postRedux) {
+
+            this.setState({
+                listHouses: this.props.postRedux
 
             })
         }
@@ -162,14 +170,21 @@ class PostManage extends Component {
             ...copyState
 
         })
-        console.log("check onchange event", copyState);
+
+
+    }
+    handleEditPost = (house) => {
+        this.props.editPost(house)
+        console.log(house)
 
     }
     render() {
+
         let language = this.props.language;
         let typeHouses = this.state.typeHouseArray;
         let cities = this.state.cityArray;
         let users = this.state.userArray;
+        let houses = this.state.listHouses;
         let { name, userId, cityId, typeHouseId, address, price, area, lat, lang, descVi, descEn } = this.state;
         return (
             <div className='container'>
@@ -397,9 +412,56 @@ class PostManage extends Component {
                     </div>
 
                 </form>
-                <div className='col-12 mb-5'>
+                <div className='col-12 mb5'>
+                    <table className="TableManage">
+                        <tr>
+                            <th>User</th>
+                            <th>Adrress</th>
+                            <th>Owner</th>
+                            <th>CreateDate</th>
+                            <th>Action</th>
+
+                        </tr>
+                        {houses && houses.length > 0 &&
+                            houses.map((item, index) => {
+                                return (
+
+                                    <>
+
+
+                                        <tr id={index}>
+                                            <td>{item.name}</td>
+                                            <td>{item.address}</td>
+                                            <td>{item.User.firstName}</td>
+                                            <td>{item.createdAt}</td>
+                                            <td>
+                                                <button
+                                                    className='btn-edit'
+                                                    onClick={() => this.handleEditPost(item)}
+                                                >
+                                                    <i className="fas fa-edit"></i> </button>
+                                                <button className='btn-delete'
+                                                    onClick={() => this.handleDeletePost(item)}
+                                                >
+                                                    <i className="fas fa-trash-alt"></i></button>
+                                            </td>
+
+
+                                        </tr>
+
+
+
+                                    </>
+                                )
+                            })
+                        }
+
+                    </table>
+
+
 
                 </div>
+
 
             </div >
         )
@@ -412,7 +474,8 @@ const mapStateToProps = state => {
         language: state.app.language,
         typeHouseRedux: state.admin.typeHouses,
         citiesRedux: state.admin.cities,
-        ownerRedux: state.admin.owner
+        ownerRedux: state.admin.owner,
+        postRedux: state.admin.posts
 
 
     };
@@ -423,7 +486,9 @@ const mapDispatchToProps = dispatch => {
         getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
         getCityStart: () => dispatch(actions.fetchCitiesStart()),
         getOwner: () => dispatch(actions.fetchOwner()),
-        createNewPostRedux: (data) => dispatch(actions.createNewPost(data))
+        createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
+        getAllPost: () => dispatch(actions.fetchAllPost()),
+        editPost: (item) => dispatch(actions.fetchEditPost(item)),
 
     };
 };

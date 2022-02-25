@@ -25,7 +25,7 @@ export const fetchAllPostStart = () => {
             let res = await getAllPost();
 
             if (res && res.errorCode === 0) {
-                console.log(res.data)
+
 
                 dispatch(fetchAllPostSuccess(res.data));
             }

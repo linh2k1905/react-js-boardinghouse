@@ -17,7 +17,8 @@ class HomePage extends Component {
 
         return (
             <div>
-                <HomeHeader />
+                <HomeHeader
+                    isOpenFinder={true} />
                 <TypeHouse />
                 <HouseList />
                 <Owner />

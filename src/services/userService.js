@@ -46,6 +46,14 @@ const getCityService = () => {
 
     return axios.get('/api/getCity');
 }
+const getHouseServiceById = (id) => {
+
+    return axios.get(`/api/detail-house-by-id?id=${id}`);
+}
+const editPostService = (data) => {
+
+    return axios.put('/api/edit-house-by-id', data);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -57,5 +65,7 @@ export {
     getTypeHouseService,
     getCityService,
     createNewPostService,
-    getAllPost
+    getAllPost,
+    getHouseServiceById,
+    editPostService
 }

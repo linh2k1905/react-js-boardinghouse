@@ -5,7 +5,8 @@ const initialState = {
     users: [],
     owner: [],
     typeHouses: [],
-    cities: []
+    cities: [],
+    posts: []
 
 }
 
@@ -25,13 +26,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
 
             }
-        case actionTypes.FETCH_ROLE_SUCCESS:
-            state.roles = action.data
-            return {
 
-                ...state
-
-            }
         case actionTypes.FETCH_OWNERS_SUCCESS:
             state.owner = action.dataOwner;
 
@@ -41,7 +36,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state
 
             }
-        case actionTypes.FETCH_ALL_USERS_FAILED:
+        case actionTypes.FETCH_OWNERS_FAILED:
             state.owner = [];
 
             return {
@@ -68,23 +63,8 @@ const adminReducer = (state = initialState, action) => {
                 ...state
 
             }
-        case actionTypes.FETCH_OWNERS_SUCCESS:
-            state.owner = action.dataOwner;
 
 
-            return {
-
-                ...state
-
-            }
-        case actionTypes.FETCH_ALL_USERS_FAILED:
-            state.owner = [];
-
-            return {
-
-                ...state
-
-            }
         case actionTypes.FETCH_TYPEHOUSE_START:
             return {
                 ...state,
@@ -127,7 +107,23 @@ const adminReducer = (state = initialState, action) => {
 
             }
 
+        case actionTypes.FETCH_ALL_POST_SUCCESS:
+            state.posts = action.dataPosts;
 
+
+            return {
+
+                ...state
+
+            }
+        case actionTypes.FETCH_ALL_POST_FAILED:
+            state.posts = [];
+
+            return {
+
+                ...state
+
+            }
         default:
             return state;
     }

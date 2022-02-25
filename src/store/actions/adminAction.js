@@ -6,6 +6,8 @@ import {
     getTypeHouseService,
     getCityService,
     createNewPostService,
+    getAllPost,
+    editPostService
 
 
 } from '../../services/userService';
@@ -104,7 +106,6 @@ export const fetchAllUserStart = () => {
             let res = await getAllUser('ALL');
 
             if (res && res.errorCode === 0) {
-                console.log(res.users)
 
                 dispatch(fetchAllUserSuccess(res.users));
             }
@@ -278,4 +279,58 @@ export const fetchOwner = () => {
     }
 
 }
+export const fetchAllPost = () => {
 
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllPost();
+
+            if (res && res.errorCode === 0) {
+
+                dispatch({
+                    type: actionTypes.FETCH_ALL_POST_SUCCESS,
+                    dataPosts: res.data
+                });
+
+            }
+            else {
+
+                dispatch({
+                    type: actionTypes.FETCH_ALL_POST_FAILED
+                });
+
+            }
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_POST_FAILED
+            });
+        }
+    }
+
+}
+
+export const fetchEditPost = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await editPostService(data);
+            if (res && res.errorCode === 0) {
+                toast.success("Edit success");
+                dispatch(editPostSuccess());
+            }
+            else {
+                dispatch(editPostFail());
+            }
+        } catch (error) {
+            dispatch(editPostFail());
+        }
+    }
+}
+
+export const editPostSuccess = () => ({
+    type: actionTypes.EDIT_POST_SUCCESS
+})
+export const editPostFail = () => ({
+    type: actionTypes.EDIT_POST_FAILED
+})

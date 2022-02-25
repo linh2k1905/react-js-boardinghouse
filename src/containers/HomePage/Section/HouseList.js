@@ -6,8 +6,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-import { language } from '../../../utils';
+import { language, path } from '../../../utils';
 import * as actions from '../../../store/actions';
+import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router'
 class HouseList extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +31,10 @@ class HouseList extends Component {
         this.props.loadTopHouse();
 
     }
+    handleShowDetailHouse(item) {
+
+        this.props.history.push(`/detail-house/${item.id}`)
+    }
     render() {
 
         let listhouse = this.state.listHouseArr;
@@ -40,9 +46,12 @@ class HouseList extends Component {
                         if (item.image) {
                             imagebase64 = new Buffer(item.image, 'base64').toString('binary');
 
+
                         }
                         return (
-                            <div className='Owner-body'>
+                            <div className='Owner-body'
+
+                                onClick={() => this.handleShowDetailHouse(item)}>
                                 <div className='Owner-customize'>
 
                                     <div className='img-customize image-house'
@@ -122,4 +131,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HouseList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HouseList));

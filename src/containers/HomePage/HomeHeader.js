@@ -108,52 +108,59 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='home-filter-header'>
-                    <div className='child-filter-header'>
-
-                        <DropDownCity />
+                {
+                    this.props.isOpenFider === true &&
 
 
-                    </div>
-                    <div className='child-filter-header'>
-                        <DropdownRoom />
-                    </div>
-                    <div className='child-filter-header'>
-                        <button
-                            className='btn-modal'
-                            onClick={() => this.handleClickPrice()}
-                        >
-                            <FormattedMessage id="header.price" />
-                        </button>
-                        <div className="modal-users-container">
-                            <ModalPrice
-                                isOpen={this.state.isOpenModalPrice}
-                                toggleModalPrice={this.toggleModalPrice}
+                    <div className='home-filter-header'>
+                        <div className='child-filter-header'>
 
+                            <DropDownCity />
+
+
+                        </div>
+                        <div className='child-filter-header'>
+                            <DropdownRoom />
+                        </div>
+                        <div className='child-filter-header'>
+                            <button
+                                className='btn-modal'
+                                onClick={() => this.handleClickPrice()}
+                            >
+                                <FormattedMessage id="header.price" />
+                            </button>
+                            <div className="modal-users-container">
+                                <ModalPrice
+                                    isOpen={this.state.isOpenModalPrice}
+                                    toggleModalPrice={this.toggleModalPrice}
+
+
+                                />
+                            </div>
+                        </div>
+
+                        <div className='child-filter-header'>
+                            <button
+                                onClick={() => this.handleClickArea()}
+                                className='btn-modal'
+                            ><FormattedMessage
+                                    id="header.area" />
+                            </button>
+
+                            <ModalArea
+                                isOpen={this.state.isOpenModalArea}
+                                toggleModalArea={this.toggleModalArea}
 
                             />
                         </div>
+                        <div className='child-filter-header'>
+                            <button className='btn-filter-header'><FormattedMessage id="header.find" />
+                                <i className="fas fa-search"></i></button>
+                        </div>
                     </div>
 
-                    <div className='child-filter-header'>
-                        <button
-                            onClick={() => this.handleClickArea()}
-                            className='btn-modal'
-                        ><FormattedMessage
-                                id="header.area" />
-                        </button>
+                }
 
-                        <ModalArea
-                            isOpen={this.state.isOpenModalArea}
-                            toggleModalArea={this.toggleModalArea}
-
-                        />
-                    </div>
-                    <div className='child-filter-header'>
-                        <button className='btn-filter-header'><FormattedMessage id="header.find" />
-                            <i className="fas fa-search"></i></button>
-                    </div>
-                </div>
             </React.Fragment>
 
         );
