@@ -7,7 +7,10 @@ import {
     getCityService,
     createNewPostService,
     getAllPost,
-    editPostService
+    editPostService,
+    getAllHomeService,
+    deletePostService
+
 
 
 } from '../../services/userService';
@@ -310,9 +313,11 @@ export const fetchAllPost = () => {
 
 }
 
+
 export const fetchEditPost = (data) => {
     return async (dispatch, getState) => {
         try {
+            console.log('fecth edit post', data);
 
             let res = await editPostService(data);
             if (res && res.errorCode === 0) {
@@ -333,4 +338,64 @@ export const editPostSuccess = () => ({
 })
 export const editPostFail = () => ({
     type: actionTypes.EDIT_POST_FAILED
+})
+export const fetchAllHome = () => {
+
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllHomeService();
+
+            if (res && res.errorCode === 0) {
+
+                dispatch({
+                    type: actionTypes.FETCH_ALL_HOME_SUCCESS,
+                    dataHouses: res.data
+                });
+
+            }
+            else {
+
+                dispatch({
+                    type: actionTypes.FETCH_ALL_HOME_FAILED
+                });
+
+            }
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_ALL_POST_FAILED
+            });
+        }
+    }
+
+}
+
+export const deleteAPost = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await deletePostService(id);
+            if (res && res.errorCode === 0) {
+                toast.success("Delete post successfully!!");
+                dispatch(deletePostSuccess());
+                dispatch(fetchAllHome());
+            }
+            else {
+                toast.error("Delete user error!!");
+                dispatch(deletePostFailed());
+            }
+
+        } catch (error) {
+            dispatch(deletePostFailed());
+            toast.error("Delete post error!!");
+            console.log(error);
+
+        }
+    }
+
+}
+export const deletePostSuccess = () => ({
+    type: actionTypes.DELETE_POST_SUCCESS
+})
+export const deletePostFailed = () => ({
+    type: actionTypes.DELETE_POST_FAILED
 })

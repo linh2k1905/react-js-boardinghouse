@@ -6,7 +6,8 @@ const initialState = {
     owner: [],
     typeHouses: [],
     cities: [],
-    posts: []
+    posts: [],
+    allposts: []
 
 }
 
@@ -118,6 +119,23 @@ const adminReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_ALL_POST_FAILED:
             state.posts = [];
+
+            return {
+
+                ...state
+
+            }
+        case actionTypes.FETCH_ALL_HOME_SUCCESS:
+            state.allposts = action.dataHouses;
+
+
+            return {
+
+                ...state
+
+            }
+        case actionTypes.FETCH_ALL_HOME_FAIL:
+            state.allposts = [];
 
             return {
 

@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-
-
+import PostTable from './PostTable';
 
 class PostManage extends Component {
 
@@ -30,7 +29,8 @@ class PostManage extends Component {
             lang: '',
             descVi: '',
             descEn: '',
-            action: CRUD_ACTIONS.CREATE
+            action: CRUD_ACTIONS.CREATE,
+            idHouseEdit: ''
         }
     }
 
@@ -40,7 +40,7 @@ class PostManage extends Component {
         this.props.getTypeHouseStart();
         this.props.getCityStart();
         this.props.getOwner();
-        this.props.getAllPost()
+        this.props.getAllPost();
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
@@ -68,6 +68,11 @@ class PostManage extends Component {
             this.setState({
                 listHouses: this.props.postRedux
 
+            })
+        }
+        if (prevState.idHouseEdit != this.state.idHouseEdit) {
+            this.setState({
+                idHouseEdit: this.state.idHouseEdit
             })
         }
 
@@ -102,46 +107,8 @@ class PostManage extends Component {
 
     }
 
-    handleSavePost = () => {
 
 
-        let isValid = this.checkValidInput();
-        if (isValid === false) return;
-        let { action, name, userId, cityId, typeHouseId, price, address, image, area, lat, lang, descVi, descEn } = this.state;
-        if (action === CRUD_ACTIONS.CREATE) {
-            this.props.createNewPostRedux({
-                name: name,
-                userId: userId,
-                cityId: cityId,
-                typeHouseId: typeHouseId,
-                price: price,
-                address: address,
-                image: image,
-                area: area,
-                lat: lat,
-                lang: lang,
-                descEn: descEn,
-                descVi: descVi
-
-            })
-        }
-        // if (action === CRUD_ACTIONS.EDIT) {
-        //     this.props.editAUserRedux({
-        //         id: this.state.userEditId,
-        //         firstName: this.state.firstName,
-        //         lastName: this.state.lastName,
-        //         password: this.state.password,
-        //         email: this.state.email,
-        //         tel: this.state.tel,
-        //         address: this.state.address,
-        //         roleId: this.state.roleId,
-        //         image: this.state.image
-
-
-        //     })
-        // }
-
-    }
     handleOnChangeImage = async (event) => {
         let data = event.target.files;
 
@@ -170,12 +137,88 @@ class PostManage extends Component {
             ...copyState
 
         })
+        console.log(this.state);
+
 
 
     }
     handleEditPost = (house) => {
-        this.props.editPost(house)
-        console.log(house)
+
+        let imagebase64 = '';
+        if (house.image) {
+            imagebase64 = new Buffer(house.image, 'base64').toString('binary');
+
+        }
+        this.setState({
+            idHouseEdit: house.id,
+            name: house.name,
+            userId: house.idUser,
+            cityId: house.idCity,
+            typeHouseId: house.idTypeHouse,
+            price: house.price,
+            address: house.address,
+            image: house.image,
+            area: house.area,
+            lat: house.lat,
+            lang: house.lang,
+            descEn: house.descriptionEn,
+            descVi: house.descriptionVi,
+            action: CRUD_ACTIONS.EDIT,
+            previewImageURL: imagebase64,
+        })
+
+
+
+    }
+    handleSavePost = () => {
+
+
+        let isValid = this.checkValidInput();
+        if (isValid === false) return;
+        let { action, name, userId, cityId, typeHouseId, price, address, image, area, lat, lang, descVi, descEn, idHouseEdit } = this.state;
+
+        if (action === CRUD_ACTIONS.CREATE) {
+            this.props.createNewPostRedux({
+                name: name,
+                userId: userId,
+                cityId: cityId,
+                typeHouseId: typeHouseId,
+                price: price,
+                address: address,
+                image: image,
+                area: area,
+                lat: lat,
+                lang: lang,
+                descEn: descEn,
+                descVi: descVi
+
+            })
+        }
+        if (action === CRUD_ACTIONS.EDIT) {
+
+
+
+
+            this.props.editPostRedux({
+                name: this.state.name,
+                price: this.state.price,
+                address: this.state.address,
+                area: this.state.area,
+                lat: this.state.lat,
+                lang: this.state.lang,
+                descEn: this.state.descEn,
+                descVi: this.state.descVi,
+                id: this.state.idHouseEdit
+
+            })
+
+
+
+
+
+
+
+        }
 
     }
     render() {
@@ -185,7 +228,7 @@ class PostManage extends Component {
         let cities = this.state.cityArray;
         let users = this.state.userArray;
         let houses = this.state.listHouses;
-        let { name, userId, cityId, typeHouseId, address, price, area, lat, lang, descVi, descEn } = this.state;
+        let { name, userId, cityId, typeHouseId, address, price, area, lat, lang, descVi, descEn, action } = this.state;
         return (
             <div className='container'>
                 <div className="title" ><FormattedMessage id='system.post-manage.post-manage' /></div>
@@ -204,15 +247,18 @@ class PostManage extends Component {
                         </div>
                         <div className='col-3 input-user'>
                             <label><FormattedMessage id='system.post-manage.users' /></label>
+
                             <select
+
                                 className="form-control"
                                 onChange={(event) => {
                                     this.onChangeInput(event, "userId")
                                 }}
                                 value={userId}
-
+                                disabled={action === CRUD_ACTIONS.EDIT ? true : false}
 
                             >
+
                                 <option value="" selected disabled hidden>Choose here</option>
                                 {users && users.length > 0 &&
                                     users.map((item, index) => {
@@ -231,6 +277,7 @@ class PostManage extends Component {
                                 }
 
                             </select>
+
                         </div>
                         <div className='col-3 input-user'>
                             <label><FormattedMessage id='system.post-manage.cities' /></label>
@@ -239,6 +286,7 @@ class PostManage extends Component {
                                 onChange={(event) => this.onChangeInput(event, 'cityId')}
                                 value={cityId}
 
+                                disabled={action === CRUD_ACTIONS.EDIT ? true : false}
 
 
                             >
@@ -270,7 +318,7 @@ class PostManage extends Component {
                                 className="form-control"
                                 onChange={(event) => this.onChangeInput(event, 'typeHouseId')}
                                 value={typeHouseId}
-
+                                disabled={action === CRUD_ACTIONS.EDIT ? true : false}
 
 
                             >
@@ -412,55 +460,10 @@ class PostManage extends Component {
                     </div>
 
                 </form>
-                <div className='col-12 mb5'>
-                    <table className="TableManage">
-                        <tr>
-                            <th>User</th>
-                            <th>Adrress</th>
-                            <th>Owner</th>
-                            <th>CreateDate</th>
-                            <th>Action</th>
 
-                        </tr>
-                        {houses && houses.length > 0 &&
-                            houses.map((item, index) => {
-                                return (
-
-                                    <>
-
-
-                                        <tr id={index}>
-                                            <td>{item.name}</td>
-                                            <td>{item.address}</td>
-                                            <td>{item.User.firstName}</td>
-                                            <td>{item.createdAt}</td>
-                                            <td>
-                                                <button
-                                                    className='btn-edit'
-                                                    onClick={() => this.handleEditPost(item)}
-                                                >
-                                                    <i className="fas fa-edit"></i> </button>
-                                                <button className='btn-delete'
-                                                    onClick={() => this.handleDeletePost(item)}
-                                                >
-                                                    <i className="fas fa-trash-alt"></i></button>
-                                            </td>
-
-
-                                        </tr>
-
-
-
-                                    </>
-                                )
-                            })
-                        }
-
-                    </table>
-
-
-
-                </div>
+                <PostTable
+                    handleEditPost={this.handleEditPost}
+                />
 
 
             </div >
@@ -488,7 +491,9 @@ const mapDispatchToProps = dispatch => {
         getOwner: () => dispatch(actions.fetchOwner()),
         createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
         getAllPost: () => dispatch(actions.fetchAllPost()),
-        editPost: (item) => dispatch(actions.fetchEditPost(item)),
+        editPostRedux: (data) => dispatch(actions.fetchEditPost(data))
+
+
 
     };
 };

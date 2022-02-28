@@ -52,7 +52,18 @@ const getHouseServiceById = (id) => {
 }
 const editPostService = (data) => {
 
-    return axios.put('/api/edit-house-by-id', data);
+    return axios.put('/api/edit-house-by-id', data
+    );
+}
+const getAllHomeService = () => {
+    return axios.get('/api/get-all-home');
+}
+const deletePostService = (dataId) => {
+    return axios.delete('/api/delete-house-by-id', {
+        data: {
+            id: dataId
+        }
+    });
 }
 export {
     handelLoginAPI,
@@ -67,5 +78,7 @@ export {
     createNewPostService,
     getAllPost,
     getHouseServiceById,
-    editPostService
+    editPostService,
+    getAllHomeService,
+    deletePostService
 }
