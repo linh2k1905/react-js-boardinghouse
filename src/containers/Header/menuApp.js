@@ -51,6 +51,19 @@ export const adminMenu = [
     },
     { //hệ thống
         name: 'menu.system.city',
+        menus: [
+            {
+                name: 'menu.system.city',
+                // subMenus: [
+                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
+                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
+
+                // ]
+                link: '/system/city'
+            },
+
+
+        ]
 
 
     },

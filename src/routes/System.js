@@ -6,6 +6,7 @@ import UserRedux from '../containers/System/Admin/UserRedux';
 import TableManageOwner from '../containers/System/Admin/OwnerRedux';
 import PostManage from '../containers/System/Admin/PostManage';
 import Header from '../containers/Header/Header';
+import CityManage from '../containers/System/Admin/CityManage';
 class System extends Component {
     render() {
         const { systemMenuPath, isLoggedIn } = this.props;
@@ -20,7 +21,8 @@ class System extends Component {
                             <Route path="/system/user-manage" component={UserManage} />
                             <Route path="/system/user-redux" component={UserRedux} />
                             <Route path="/system/manage-owner" component={TableManageOwner} />
-                            <Route path="/system/" component={PostManage} />
+                            <Route path="/system/post" component={PostManage} />
+                            <Route path="/system/city" component={CityManage} />
 
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
