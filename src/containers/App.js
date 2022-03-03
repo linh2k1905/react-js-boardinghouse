@@ -19,6 +19,7 @@ import DetailHouse from './User/House/DetailHouse'
 
 import HomePage from './HomePage/HomePage.js'
 import CustomScrollbars from '../components/CustomScrollbars.js';
+import Owner from '../routes/Owner';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -55,6 +56,8 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_HOUSE} component={DetailHouse} />
+                                    <Route path="/system/manage-booking" component={userIsAuthenticated(Owner)} />
+
                                 </Switch>
                             </CustomScrollbars>
                         </div>

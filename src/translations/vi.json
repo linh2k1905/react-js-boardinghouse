@@ -46,10 +46,11 @@
             "user": "Quản lý người dùng",
             "post": "Quản lý bài đăng",
             "booking": "Quản lý lịch đặt",
-            "city": "Quản lý thành phố",
+            "list": "Quản lý thống kê",
             "system-administrator": {
                 "user-manage": "Quản lý người dùng",
                 "user-owner": "Quản lý chủ trọ",
+                "owner-booking": "Quản lý  lịch hẹn",
                 "user-admin": "Quản lý admin"
             },
             "system-parameter": {

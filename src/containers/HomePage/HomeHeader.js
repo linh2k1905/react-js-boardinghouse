@@ -109,7 +109,6 @@ class HomeHeader extends Component {
                     </div>
                 </div>
                 {
-                    this.props.isOpenFider === true &&
 
 
                     <div className='home-filter-header'>

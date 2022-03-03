@@ -4,7 +4,8 @@ export const path = {
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    DETAIL_HOUSE: '/detail-house/:id'
+    DETAIL_HOUSE: '/detail-house/:id',
+
 };
 
 export const LANGUAGES = {
@@ -31,4 +32,10 @@ export const CRUD_ACTIONS = {
     EDIT: "EDIT",
     DELETE: "DELETE",
     READ: "READ"
+}
+export const USER_ROLE = {
+    ADMIN: "1",
+    OWNER: "2",
+    USER: "3",
+    FLATMATE: "4"
 }

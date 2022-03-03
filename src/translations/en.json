@@ -43,13 +43,14 @@
     },
     "menu": {
         "system": {
-            "user": "Users",
-            "post": "Posts",
-            "booking": "Bookings",
-            "city": "Cities",
+            "user": "Users Management",
+            "post": "Posts Management",
+            "booking": "Bookings Management",
+            "list": "List Management",
             "system-administrator": {
                 "user-manage": "Manage User",
                 "user-owner": "Manage Owner",
+                "owner-booking": "Manage Booking",
                 "user-admin": "Manage Admin"
             },
             "system-parameter": {

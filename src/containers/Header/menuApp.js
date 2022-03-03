@@ -44,16 +44,28 @@ export const adminMenu = [
 
 
     },
-    { //hệ thống
+    {
         name: 'menu.system.booking',
+        menus: [
+            {
+                name: 'menu.system.system-administrator.owner-booking',
+                // subMenus: [
+                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
+                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
 
+                // ]
+                link: '/system/manage-booking'
+            },
+
+
+        ]
 
     },
     { //hệ thống
-        name: 'menu.system.city',
+        name: 'menu.system.list',
         menus: [
             {
-                name: 'menu.system.city',
+                name: 'menu.system.list',
                 // subMenus: [
                 //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
@@ -67,6 +79,31 @@ export const adminMenu = [
 
 
     },
+
+
+
+];
+export const ownerMenu = [
+
+    {
+        name: 'menu.system.user',
+        menus: [
+            {
+                name: 'menu.system.system-administrator.owner-booking',
+                // subMenus: [
+                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
+                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
+
+                // ]
+                link: '/system/manage-booking'
+            },
+
+
+        ]
+
+    },
+
+
 
 
 
