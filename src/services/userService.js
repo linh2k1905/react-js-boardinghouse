@@ -65,6 +65,11 @@ const deletePostService = (dataId) => {
         }
     });
 }
+
+const bulkCreateSchedulService = (data) => {
+
+    return axios.post('/api/create-bulk-schedule', data);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -80,5 +85,6 @@ export {
     getHouseServiceById,
     editPostService,
     getAllHomeService,
-    deletePostService
+    deletePostService,
+    bulkCreateSchedulService
 }

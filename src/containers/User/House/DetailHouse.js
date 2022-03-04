@@ -42,18 +42,9 @@ class DetailHouse extends Component {
         else {
             imagebase64 = ''
         }
-        let firstName, lastName;
+        let { City, name, HouseType, User, address, area, descriptionEn, descriptionVi, id, lang, lat, price } = this.state.detailHouse;
 
-        if (firstName)
 
-            firstName = this.state.detailHouse.User.firstName;
-        else {
-            firstName = ''
-        }
-        if (lastName)
-            lastName = this.state.detailHouse.User.lastName;
-        else lastName = ''
-        console.log(this.state.detailHouse)
         return (
             <React.Fragment>
                 <HomeHeader
@@ -81,6 +72,17 @@ class DetailHouse extends Component {
 
                         <div className='detail-house-info'>
 
+                            <p className='name-house-infor'><FormattedMessage id="system.post-manage.name" />: {name}</p>
+                            <p className='price-house-infor'><FormattedMessage id="system.post-manage.price" />: {price / 1000000}Triệu</p>
+                            <p className='price-house-area'><FormattedMessage id="system.post-manage.area" />: {area} M2</p>
+                            <div className='city-infor'><FormattedMessage id="system.post-manage.cities" />: {City ? City.name : 'Chưa xác định'} </div>
+
+                            <p className='address-house-infor'><FormattedMessage id="system.post-manage.address" />: {address}</p>
+                            <div className='desc-house'>
+                                <div>{descriptionEn ? descriptionEn : ''}
+                                </div>
+                                {descriptionVi ? descriptionVi : ''}
+                            </div>
 
                         </div>
 
@@ -88,8 +90,15 @@ class DetailHouse extends Component {
 
 
 
+
                         <div className='schedule-owner'>
-                            {lastName + firstName}
+                            <h3>Thông tin chủ trọ</h3>
+                            <p><FormattedMessage id="system.user-manage.firstname" /> {User ? User.firstName : ''}</p>
+                            <p><FormattedMessage id="system.user-manage.lastname" /> {User ? User.lastName : ''}</p>
+                            <p><FormattedMessage id="system.user-manage.mobile" /> {User ? User.tel : ''}</p>
+                            <p><FormattedMessage id="system.user-manage.address" /> {User ? User.address : ''}</p>
+
+
 
                         </div>
 

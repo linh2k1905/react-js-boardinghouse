@@ -10,6 +10,7 @@ import _ from 'lodash'
 import './ManageSchedule.scss';
 import moment, { months } from 'moment';
 import { LANGUAGES, dateFormat } from '../../../utils';
+import { bulkCreateSchedulService } from '../../../services/userService'
 let rangeTime = [{ value: "7am-8am", isSelect: false },
 { value: "8am-9am", isSelect: false },
 { value: "9am-10am", isSelect: false },
@@ -94,7 +95,7 @@ class ManageSchedule extends Component {
             rangeTime: time
         })
     }
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         let { rangeTime, selectedOption, currentDate } = this.state;
         if (!currentDate) {
             toast.error("You should choose date");
@@ -104,19 +105,27 @@ class ManageSchedule extends Component {
 
 
         }
-        let formatDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        let formatDate = new Date(currentDate).getTime();
+        console.log("check date", formatDate);
         let result = [];
         if (rangeTime && rangeTime.length > 0) {
             let selectedTime = rangeTime.filter(item => item.isSelect === true);
             if (selectedTime && selectedTime.length > 0) {
                 selectedTime.map(schedule => {
                     let obj = {};
-                    obj.ownerId = selectedOption.value;
+                    obj.idOwner = selectedOption.value;
                     obj.date = formatDate;
                     obj.time = schedule.value;
                     result.push(obj);
 
                 })
+
+                let res = await bulkCreateSchedulService({
+                    arrTime: result,
+                    idOwner: selectedOption.value,
+                    formatDate: formatDate
+                });
+                console.log('check res', res);
 
 
             }
@@ -130,6 +139,7 @@ class ManageSchedule extends Component {
     render() {
         const { isLoggedIn } = this.props;
         let time = this.state.rangeTime;
+
 
         return (
             <div className='manage-schedule-container'>

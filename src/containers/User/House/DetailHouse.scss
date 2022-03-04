@@ -1,6 +1,6 @@
 .house-detail-container{
    height: 800px;
-    border: 1px solid red;
+ 
     margin: 0 50px;
     
     .house-intro{
@@ -9,14 +9,14 @@
         .contain-left
         {
             width: 70%;
-            border: 1px solid gray;
+        
             margin-right: 25px;
            
         }
       
         .contain-right{
             width: 30%;
-            border: 1px solid gray;
+            
             background-repeat:no-repeat ;
             justify-content: center;
         }
@@ -24,13 +24,42 @@
 
     .detail-house-info{
         width:70%;
-        border: 1px solid red;
-        height: 500px;
        
+        height: 500px;
+        .address-house-infor {
+            font-size: 18px;
+            font-weight: 400;
+            color: blue;
+        }
+        .name-house-infor {
+            font-size: 20px;
+            font-weight: 600;
+            color: red;
+        }
+        .price-house-infor{
+            font-size: 20px;
+            font-weight: 600;
+            color: orange;
+
+        }
+        .price-house-area{
+            font-size: 20px;
+            font-weight: 600;
+            color: rgb(22, 11, 177);
+
+        }
+        .city-infor{
+          font-weight: 600px;
+          font-size: 20px;
+          color: blue;
+        }
+        .desc-house{
+            font-size: 18px;
+            color: blue;
+        }
     }
     .schedule-owner{
         width: 30%;
-        border: 1px solid yellow;
         height: 500px;
     }
 }
