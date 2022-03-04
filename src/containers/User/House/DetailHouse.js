@@ -5,7 +5,8 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
-import { getHouseServiceById } from '../../../services/userService'
+import { getHouseServiceById } from '../../../services/userService';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -41,8 +42,18 @@ class DetailHouse extends Component {
             imagebase64 = new Buffer(this.state.detailHouse.User.image, 'base64').toString('binary');
         else {
             imagebase64 = ''
-        }
+        };
+        let position = [];
         let { City, name, HouseType, User, address, area, descriptionEn, descriptionVi, id, lang, lat, price } = this.state.detailHouse;
+
+
+        if (lat && lang) {
+            position = [lat, lang];
+        }
+        else {
+            position = [10.0243192, 105.7727087];
+        }
+
 
 
         return (
@@ -84,6 +95,7 @@ class DetailHouse extends Component {
                                 {descriptionVi ? descriptionVi : ''}
                             </div>
 
+
                         </div>
 
 
@@ -104,6 +116,30 @@ class DetailHouse extends Component {
 
 
 
+                    </div>
+                    <div className='title'>Xem vị trí nhà trọ trên bản đồ </div>
+                    <div className='map-detail-house'>
+                        <MapContainer
+                            center={position}
+                            zoom={13} scrollWheelZoom={false}
+                            style={{ width: '100%', height: '99vh' }}
+
+
+
+                        >
+
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+                            />
+                            <Marker position={position}>
+                                <Popup>
+                                    A pretty CSS3 popup. <br /> Easily customizable.
+                                </Popup>
+                            </Marker>
+
+                        </MapContainer>
                     </div>
                     <div className='comment-house'></div>
 
