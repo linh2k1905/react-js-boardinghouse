@@ -9,13 +9,19 @@ import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions'
 import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
-
+import { getTypeHouseService } from '../../services/userService';
+import * as actions from '../../store/actions';
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isOpenModalArea: false,
-            isOpenModalPrice: false
+            isOpenModalPrice: false,
+            typeHouse: [],
+            citiesSelected: '',
+            roomSelected: '',
+            areaValue: '',
+            priceValue: ''
 
 
         };
@@ -52,10 +58,61 @@ class HomeHeader extends Component {
         })
 
     }
+
+    componentDidMount() {
+        this.props.getTypeHouseStart();
+
+
+    }
+    componentDidUpdate(prevProps, prevState, snapsot) {
+
+        if (prevProps.typeHouses != this.props.typeHouses) {
+            this.setState({
+                typeHouse: this.props.typeHouses
+            })
+        }
+
+
+    }
+    onClickSelectedCity = (city) => {
+        this.setState({
+            citiesSelected: city
+        })
+
+    }
+    selectedRoom = (room) => {
+        this.setState({
+            roomSelected: room
+        })
+
+
+    }
+    selectArea = (value) => {
+        console.log(value);
+        this.setState({
+            areaValue: value
+
+        })
+    }
+    selectPrice = (value) => {
+        console.log(value);
+        this.setState({
+            priceValue: value
+
+        })
+    }
+
+    searchHouseByUser = () => {
+        let { priceValue, areaValue, citiesSelected, roomSelected } = this.state;
+        if (priceValue && areaValue && citiesSelected && roomSelected) {
+            console.log(this.state);
+        }
+    }
     render() {
-
-
+        let { language } = this.props;
+        let { typeHouse, citiesSelected, roomSelected, areaValue, priceValue } = this.state;
         return (
+
             <React.Fragment>
                 <div className='home-header-container'>
                     <div className='home-header-content'>
@@ -90,22 +147,21 @@ class HomeHeader extends Component {
                 </div>
                 <div className='homepage-container-banner'>
                     <div className='homepage-banner-header'>
-                        <div className='banner-child'>
-                            <FormattedMessage id="header.home" />
-                        </div>
 
-                        <div className='banner-child'>
-                            <FormattedMessage id="header.room" />
-                        </div>
-                        <div className='banner-child'>
-                            <FormattedMessage id="header.house" />
-                        </div>
-                        <div className='banner-child'>
-                            <FormattedMessage id="header.flat" />
-                        </div>
-                        <div className='banner-child'>
-                            <FormattedMessage id="header.apartment" />
-                        </div>
+                        {typeHouse && typeHouse.length > 0 &&
+                            typeHouse.map((item, index) => {
+                                return (
+
+                                    <div className='banner-child'>
+                                        {
+                                            language === LANGUAGES.VI ? item.nameVi : item.name}
+                                    </div>
+                                )
+
+                            })}
+
+
+
                     </div>
                 </div>
                 {
@@ -114,24 +170,29 @@ class HomeHeader extends Component {
                     <div className='home-filter-header'>
                         <div className='child-filter-header'>
 
-                            <DropDownCity />
+                            <DropDownCity
+                                selectedCity={this.onClickSelectedCity}
+                            />
 
 
                         </div>
                         <div className='child-filter-header'>
-                            <DropdownRoom />
+                            <DropdownRoom
+                                selectedRoom={this.selectedRoom} />
                         </div>
                         <div className='child-filter-header'>
                             <button
                                 className='btn-modal'
                                 onClick={() => this.handleClickPrice()}
                             >
-                                <FormattedMessage id="header.price" />
+                                {priceValue ? `${priceValue} Triệu(VND) ` : <FormattedMessage id="header.price" />}
+
                             </button>
                             <div className="modal-users-container">
                                 <ModalPrice
                                     isOpen={this.state.isOpenModalPrice}
                                     toggleModalPrice={this.toggleModalPrice}
+                                    selectPrice={this.selectPrice}
 
 
                                 />
@@ -142,18 +203,25 @@ class HomeHeader extends Component {
                             <button
                                 onClick={() => this.handleClickArea()}
                                 className='btn-modal'
-                            ><FormattedMessage
-                                    id="header.area" />
+                            >
+                                {areaValue ? `${areaValue} M2 ` : <FormattedMessage id="header.area" />}
+
                             </button>
 
                             <ModalArea
                                 isOpen={this.state.isOpenModalArea}
                                 toggleModalArea={this.toggleModalArea}
+                                selectArea={this.selectArea}
 
                             />
                         </div>
                         <div className='child-filter-header'>
-                            <button className='btn-filter-header'><FormattedMessage id="header.find" />
+                            <button
+
+                                className='btn-filter-header'
+                                onClick={this.searchHouseByUser}
+                            >
+                                <FormattedMessage id="header.find" />
                                 <i className="fas fa-search"></i></button>
                         </div>
                     </div>
@@ -170,13 +238,15 @@ class HomeHeader extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language
+        language: state.app.language,
+        typeHouses: state.admin.typeHouses
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageRedux: (language) => dispatch(changeLanguageApp(language)),
+        getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
     };
 };
 

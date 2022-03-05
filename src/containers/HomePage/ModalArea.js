@@ -37,7 +37,8 @@ class ModalArea extends React.Component {
         super(props);
         this.state = {
 
-            value: 0
+            value: ''
+
         };
 
         this.toggle = this.toggle.bind(this);
@@ -46,11 +47,11 @@ class ModalArea extends React.Component {
     toggle() {
         this.props.toggleModalArea()
     }
-    handleOnchange = (event) => {
-
+    handleOnchangeArea = (event) => {
         this.setState({
             value: event.target.value
         })
+        this.props.selectArea(this.state.value);
 
 
     }
@@ -69,13 +70,13 @@ class ModalArea extends React.Component {
                 <ModalBody>
                     <Slider
                         size="small"
-                        defaultValue={10}
+                        defaultValue={0}
                         aria-label="Small"
                         valueLabelDisplay="auto"
                         marks={marks}
                         min={0}
                         max={50}
-                        onChange={(event) => this.handleOnchange(event)}
+                        onChange={(event) => this.handleOnchangeArea(event)}
                     />
                     {
 

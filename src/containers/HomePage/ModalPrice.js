@@ -37,7 +37,7 @@ class ModalPrice extends React.Component {
         super(props);
         this.state = {
 
-            valuePrice: 0
+            valuePrice: ''
         };
 
 
@@ -51,6 +51,7 @@ class ModalPrice extends React.Component {
         this.setState({
             valuePrice: event.target.value
         })
+        this.props.selectPrice(this.state.valuePrice);
 
 
     }
@@ -76,7 +77,7 @@ class ModalPrice extends React.Component {
                 <ModalBody>
                     <Slider
                         size="small"
-                        defaultValue={1}
+                        defaultValue={0}
                         aria-label="Small"
                         valueLabelDisplay="auto"
                         marks={marks}

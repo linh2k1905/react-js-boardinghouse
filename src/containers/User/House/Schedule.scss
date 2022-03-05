@@ -1,0 +1,35 @@
+.all-schedule{
+   
+    height: 50px;
+    select{
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid blue;
+        outline: none;
+        cursor: pointer;
+        option{
+            cursor: pointer;
+            border: 0.5px solid blue;
+            background-color: rgb(5, 5, 94);
+            color: white;
+        }
+    }
+  
+   
+
+}
+.available-time{
+   
+   
+    padding: 10px 10px;
+    button{
+        background-color: blue;
+        color: white;
+        margin: 5px;
+        border: none;
+        height: 25px;
+        font-size: 12px;
+        width: 24%;
+    }
+}

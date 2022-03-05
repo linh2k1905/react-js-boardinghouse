@@ -91,6 +91,7 @@ class DetailHouse extends Component {
 
                             <p className='address-house-infor'><FormattedMessage id="system.post-manage.address" />: {address}</p>
                             <div className='desc-house'>
+                                <span>Mô tả</span>
                                 <div>{descriptionEn ? descriptionEn : ''}
                                 </div>
                                 {descriptionVi ? descriptionVi : ''}
@@ -106,24 +107,26 @@ class DetailHouse extends Component {
 
                         <div className='schedule-owner'>
 
-                            <Schedule
-                                ownerIdFromParent={User && User.id ? User.id : 0}
 
-                            />
                             <h3>Thông tin chủ trọ</h3>
-                            <p><FormattedMessage id="system.user-manage.firstname" /> {User ? User.firstName : ''}</p>
-                            <p><FormattedMessage id="system.user-manage.lastname" /> {User ? User.lastName : ''}</p>
+                            <p><FormattedMessage id="system.user-manage.firstname" /> {User ? User.firstName : ''} {User ? User.lastName : ''}</p>
                             <p><FormattedMessage id="system.user-manage.mobile" /> {User ? User.tel : ''}</p>
                             <p><FormattedMessage id="system.user-manage.address" /> {User ? User.address : ''}</p>
 
 
+                            <Schedule
+                                ownerIdFromParent={User && User.id ? User.id : 0}
+
+                            />
 
                         </div>
 
 
 
+
                     </div>
-                    <div className='title'>Xem vị trí nhà trọ trên bản đồ </div>
+
+                    <div className='title md-20'>Xem vị trí nhà trọ trên bản đồ </div>
                     <div className='map-detail-house'>
                         <MapContainer
                             center={position}

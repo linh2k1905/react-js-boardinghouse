@@ -12,7 +12,8 @@ class Schedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allDays: []
+            allDays: [],
+            availableTime: [],
         }
     }
 
@@ -57,15 +58,24 @@ class Schedule extends Component {
             console.log('useer and date ', id, typeof date);
             let res = await getScheduleOwnerFromDate(id, date);
             console.log(res);
+            if (res && res.data) {
+                this.setState({
+                    availableTime: res.data
+                })
+            }
 
         }
     }
+    capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     render() {
-        let { allDays } = this.state;
+        let { allDays, availableTime } = this.state;
 
         return (
             <React.Fragment>
                 <div className='all-schedule'>
+                    <h3>Lịch hẹn chủ nhà</h3>
 
                     <select
                         onChange={(event) => this.handleSelectSchedule(event)}
@@ -76,7 +86,7 @@ class Schedule extends Component {
                                     <option
                                         key={index}
                                         value={item.value}
-                                    >{item.label}</option>
+                                    >{this.capitalizeFirstLetter(item.label)}</option>
                                 )
                             })
                         }
@@ -84,6 +94,20 @@ class Schedule extends Component {
 
 
                     </select>
+
+                </div>
+
+
+                <div className='available-time'>
+                    {
+                        availableTime && availableTime.length > 0 &&
+                        availableTime.map((item, index) => {
+                            return (
+
+                                <button className=''>{item.time}</button>
+                            )
+                        })
+                    }
                 </div>
             </React.Fragment>
         )

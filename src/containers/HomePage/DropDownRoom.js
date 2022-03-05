@@ -12,7 +12,8 @@ class DropdownRoom extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             dropdownOpen: false,
-            arrRoom: []
+            arrRoom: [],
+            roomSelect: ''
         };
     }
 
@@ -36,8 +37,17 @@ class DropdownRoom extends React.Component {
 
 
     }
+    changeValue = (e) => {
+        this.setState({
+            roomSelect: e.currentTarget.textContent
+        })
+
+        this.props.selectedRoom(e.currentTarget.textContent);
+    }
     render() {
         let rooms = this.state.arrRoom;
+        let { languaguage } = this.props;
+        let { roomSelect } = this.state;
         return (
 
             <Dropdown
@@ -49,7 +59,8 @@ class DropdownRoom extends React.Component {
                     caret
                     className='bg-dropdown-toggle'>
                     <i className="fas fa-warehouse"></i>
-                    <FormattedMessage id="header.type" />
+                    {roomSelect ? roomSelect : <FormattedMessage id="header.type" />}
+
                 </DropdownToggle>
 
                 <DropdownMenu
@@ -58,7 +69,9 @@ class DropdownRoom extends React.Component {
                         return (
 
 
-                            <DropdownItem className=''>{LANGUAGES.VI ? item.nameVi : item.name}</DropdownItem>
+                            <DropdownItem className=''>
+                                <div onClick={this.changeValue}>{languaguage === LANGUAGES.EN ? item.name : item.nameVi}</div>
+                            </DropdownItem>
                         )
                     })}
 

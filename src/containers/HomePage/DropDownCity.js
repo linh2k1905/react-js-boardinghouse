@@ -12,7 +12,8 @@ class DropdownCity extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             dropdownOpen: false,
-            arrCity: []
+            arrCity: [],
+            citySelect: ''
         };
     }
     async componentDidMount() {
@@ -37,9 +38,17 @@ class DropdownCity extends React.Component {
         }));
     }
 
+    changeValue = (e) => {
+        this.setState({
+            citySelect: e.currentTarget.textContent
+        })
 
+        this.props.selectedCity(e.currentTarget.textContent)
+    }
     render() {
-        let cities = this.state.arrCity
+        let cities = this.state.arrCity;
+        let { citySelect } = this.state;
+
         return (
 
             <Dropdown
@@ -51,16 +60,18 @@ class DropdownCity extends React.Component {
                     caret
                     className='bg-dropdown-toggle'>
                     <i className="fas fa-map-marker-alt"></i>
-                    <FormattedMessage id="header.city" />
+                    {citySelect ? citySelect : <FormattedMessage id="header.city" />}
+
 
                 </DropdownToggle>
 
-                <DropdownMenu
-
-                    className='dropdown-menu-edit'>
+                <DropdownMenu className='dropdown-menu-edit'>
                     {cities && cities.length > 0 && cities.map((item, index) => {
                         return (
-                            <DropdownItem >{item.name}</DropdownItem>
+                            <DropdownItem>
+                                <div onClick={this.changeValue}>{item.name}</div>
+
+                            </DropdownItem>
                         )
                     })}
 
