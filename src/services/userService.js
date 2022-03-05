@@ -70,6 +70,10 @@ const bulkCreateSchedulService = (data) => {
 
     return axios.post('/api/create-bulk-schedule', data);
 }
+const getScheduleOwnerFromDate = (id, date) => {
+
+    return axios.get(`api/get-schedule-owner?id=${id}&date=${date}`);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -86,5 +90,6 @@ export {
     editPostService,
     getAllHomeService,
     deletePostService,
-    bulkCreateSchedulService
+    bulkCreateSchedulService,
+    getScheduleOwnerFromDate
 }

@@ -114,7 +114,7 @@ class ManageSchedule extends Component {
                 selectedTime.map(schedule => {
                     let obj = {};
                     obj.idOwner = selectedOption.value;
-                    obj.date = formatDate;
+                    obj.date = formatDate.toString();
                     obj.time = schedule.value;
                     result.push(obj);
 
@@ -123,7 +123,7 @@ class ManageSchedule extends Component {
                 let res = await bulkCreateSchedulService({
                     arrTime: result,
                     idOwner: selectedOption.value,
-                    formatDate: formatDate
+                    formatDate: formatDate.toString()
                 });
                 console.log('check res', res);
 

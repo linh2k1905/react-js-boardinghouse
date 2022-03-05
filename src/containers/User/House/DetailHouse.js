@@ -7,6 +7,7 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
 import { getHouseServiceById } from '../../../services/userService';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import Schedule from './Schedule'
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -104,6 +105,11 @@ class DetailHouse extends Component {
 
 
                         <div className='schedule-owner'>
+
+                            <Schedule
+                                ownerIdFromParent={User && User.id ? User.id : 0}
+
+                            />
                             <h3>Thông tin chủ trọ</h3>
                             <p><FormattedMessage id="system.user-manage.firstname" /> {User ? User.firstName : ''}</p>
                             <p><FormattedMessage id="system.user-manage.lastname" /> {User ? User.lastName : ''}</p>
