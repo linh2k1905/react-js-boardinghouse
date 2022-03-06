@@ -15,7 +15,8 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSearch: false
+            isSearch: false,
+            listHouseFiler: []
 
         }
     }
@@ -26,6 +27,12 @@ class HomePage extends Component {
         })
 
     }
+    listHouseFilerFunction = (value) => {
+        this.setState({
+            listHouseFiler: value
+        })
+        console.log('value check filter list house', value);
+    }
 
     render() {
         let { isSearch } = this.state;
@@ -35,9 +42,14 @@ class HomePage extends Component {
             <div>
                 <HomeHeader
                     isOpenFinder={true}
-                    isSearchCheck={this.isSearchCheck} />
+                    isSearchCheck={this.isSearchCheck}
+                    listHouseFilerFunction={this.listHouseFilerFunction}
+                />
                 <TypeHouse />
-                {isSearch === false ? <HouseList /> : <HouseListFilter />}
+                {isSearch === false ? <HouseList /> : <HouseListFilter
+                    listHouseFilers={this.state.listHouseFiler}
+
+                />}
 
                 <Owner />
                 <BodyHomePage />

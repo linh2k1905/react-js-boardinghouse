@@ -77,7 +77,7 @@ class HomeHeader extends Component {
 
     }
     onClickSelectedCity = (city) => {
-        console.log(city);
+
         this.setState({
             citiesSelected: city
         })
@@ -91,14 +91,14 @@ class HomeHeader extends Component {
 
     }
     selectArea = (value) => {
-        console.log(value);
+
         this.setState({
             areaValue: value
 
         })
     }
     selectPrice = (value) => {
-        console.log(value);
+
         this.setState({
             priceValue: value
 
@@ -114,11 +114,12 @@ class HomeHeader extends Component {
         obj.idTypeHouse = roomSelected.id;
         obj.area = areaValue;
         obj.price = priceValue;
+        console.log(typeof obj.price);
 
         if (priceValue && areaValue && citiesSelected && roomSelected) {
 
             let res = await searchHouseByUserService(obj);
-            console.log('res', res);
+            this.props.listHouseFilerFunction(res.data);
 
         }
     }

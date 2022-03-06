@@ -21,6 +21,7 @@ class DropdownCity extends React.Component {
 
 
         this.props.getCityStart();
+
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
         if (prevProps.citiesRedux != this.props.citiesRedux) {
@@ -38,16 +39,19 @@ class DropdownCity extends React.Component {
         }));
     }
 
-    changeValue = (citiesSelected) => {
+    changeValue = (item) => {
+        console.log(item);
         this.setState({
-            citySelect: citiesSelected
-        })
+            citySelect: item
+        });
+        this.props.selectedCity(item);
 
-        this.props.selectedCity(citiesSelected);
+
     }
     render() {
         let cities = this.state.arrCity;
         let { citySelect } = this.state;
+
 
         return (
 
