@@ -10,17 +10,35 @@ import About from './Section/About';
 import HomeFooter from './HomeFooter';
 import './HomeHeader.scss'
 import Owner from './Section/Owner';
+import HouseListFilter from './Section/HouseListFilter';
 class HomePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSearch: false
+
+        }
+    }
+    isSearchCheck = (value) => {
+
+        this.setState({
+            isSearch: value
+        })
+
+    }
 
     render() {
+        let { isSearch } = this.state;
 
 
         return (
             <div>
                 <HomeHeader
-                    isOpenFinder={true} />
+                    isOpenFinder={true}
+                    isSearchCheck={this.isSearchCheck} />
                 <TypeHouse />
-                <HouseList />
+                {isSearch === false ? <HouseList /> : <HouseListFilter />}
+
                 <Owner />
                 <BodyHomePage />
                 <About />

@@ -13,7 +13,7 @@ class DropdownRoom extends React.Component {
         this.state = {
             dropdownOpen: false,
             arrRoom: [],
-            roomSelect: ''
+            roomSelect: {}
         };
     }
 
@@ -37,12 +37,12 @@ class DropdownRoom extends React.Component {
 
 
     }
-    changeValue = (e) => {
+    changeValue = (item) => {
         this.setState({
-            roomSelect: e.currentTarget.textContent
+            roomSelect: item
         })
 
-        this.props.selectedRoom(e.currentTarget.textContent);
+        this.props.selectedRoom(item);
     }
     render() {
         let rooms = this.state.arrRoom;
@@ -59,7 +59,7 @@ class DropdownRoom extends React.Component {
                     caret
                     className='bg-dropdown-toggle'>
                     <i className="fas fa-warehouse"></i>
-                    {roomSelect ? roomSelect : <FormattedMessage id="header.type" />}
+                    {roomSelect.name ? roomSelect.name : <FormattedMessage id="header.type" />}
 
                 </DropdownToggle>
 
@@ -70,7 +70,7 @@ class DropdownRoom extends React.Component {
 
 
                             <DropdownItem className=''>
-                                <div onClick={this.changeValue}>{languaguage === LANGUAGES.EN ? item.name : item.nameVi}</div>
+                                <div onClick={() => this.changeValue(item)}>{languaguage === LANGUAGES.EN ? item.name : item.nameVi}</div>
                             </DropdownItem>
                         )
                     })}

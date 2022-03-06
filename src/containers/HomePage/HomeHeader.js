@@ -9,7 +9,7 @@ import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions'
 import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
-import { getTypeHouseService } from '../../services/userService';
+import { searchHouseByUserService } from '../../services/userService';
 import * as actions from '../../store/actions';
 class HomeHeader extends Component {
     constructor(props) {
@@ -18,10 +18,11 @@ class HomeHeader extends Component {
             isOpenModalArea: false,
             isOpenModalPrice: false,
             typeHouse: [],
-            citiesSelected: '',
-            roomSelected: '',
+            citiesSelected: {},
+            roomSelected: {},
             areaValue: '',
-            priceValue: ''
+            priceValue: '',
+            isSearch: false,
 
 
         };
@@ -68,13 +69,15 @@ class HomeHeader extends Component {
 
         if (prevProps.typeHouses != this.props.typeHouses) {
             this.setState({
-                typeHouse: this.props.typeHouses
+                typeHouse: this.props.typeHouses,
+
             })
         }
 
 
     }
     onClickSelectedCity = (city) => {
+        console.log(city);
         this.setState({
             citiesSelected: city
         })
@@ -102,10 +105,21 @@ class HomeHeader extends Component {
         })
     }
 
-    searchHouseByUser = () => {
+    searchHouseByUser = async () => {
+        this.props.isSearchCheck(true);
+
         let { priceValue, areaValue, citiesSelected, roomSelected } = this.state;
+        let obj = {};
+        obj.idCity = citiesSelected.id;
+        obj.idTypeHouse = roomSelected.id;
+        obj.area = areaValue;
+        obj.price = priceValue;
+
         if (priceValue && areaValue && citiesSelected && roomSelected) {
-            console.log(this.state);
+
+            let res = await searchHouseByUserService(obj);
+            console.log('res', res);
+
         }
     }
     render() {
