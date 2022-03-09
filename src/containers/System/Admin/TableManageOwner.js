@@ -13,7 +13,7 @@ class TableManageOwner extends Component {
         }
     }
     componentDidMount() {
-        this.props.fetchUserRedux();
+        this.props.fetchUserRedux('1');
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
@@ -81,13 +81,13 @@ class TableManageOwner extends Component {
 
 const mapStateToProps = state => {
     return {
-        listusers: state.admin.owner
+        listusers: state.admin.users
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserRedux: () => dispatch(actions.fetchOwner()),
+        fetchUserRedux: (id) => dispatch(actions.fetchUserByTypeUser(id)),
         deleteAUserRedux: (id) => dispatch(actions.deleteAUser(id))
     };
 };

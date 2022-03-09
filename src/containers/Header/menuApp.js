@@ -19,6 +19,7 @@ export const adminMenu = [
             },
             {
                 name: 'menu.system.system-administrator.user-admin',
+                link: '/system/manage-admin'
 
             }
 
@@ -31,11 +32,6 @@ export const adminMenu = [
         menus: [
             {
                 name: 'menu.system.post',
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
-
-                // ]
                 link: '/system/post'
             },
 
@@ -49,11 +45,6 @@ export const adminMenu = [
         menus: [
             {
                 name: 'menu.system.system-administrator.owner-booking',
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
-
-                // ]
                 link: '/system/manage-booking'
             },
 

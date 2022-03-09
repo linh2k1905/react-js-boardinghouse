@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/UserManage';
 import UserRedux from '../containers/System/Admin/UserRedux';
 import TableManageOwner from '../containers/System/Admin/OwnerRedux';
+import TableManageAdmin from '../containers/System/Admin/AdminRedux';
 import PostManage from '../containers/System/Admin/PostManage';
 import Header from '../containers/Header/Header';
 import CityManage from '../containers/System/Admin/CityManage';
@@ -23,6 +24,7 @@ class System extends Component {
                             <Route path="/system/user-manage" component={UserManage} />
                             <Route path="/system/user-redux" component={UserRedux} />
                             <Route path="/system/manage-owner" component={TableManageOwner} />
+                            <Route path="/system/manage-admin" component={TableManageAdmin} />
                             <Route path="/system/post" component={PostManage} />
                             <Route path="/system/city" component={CityManage} />
                             <Route path="/system/manage-booking" component={ManageSchedule} />

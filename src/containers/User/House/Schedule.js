@@ -14,14 +14,26 @@ class Schedule extends Component {
         this.state = {
             allDays: [],
             availableTime: [],
+            curentDate: ''
         }
     }
 
     async componentDidMount() {
-        let { language } = this.props;
+        let { language, ownerIdFromParent } = this.props;
         this.setArray(language);
+        let today = moment(new Date()).add(0, 'days').startOf('day').valueOf();
+        if (this.props.ownerIdFromParent && this.props.ownerIdFromParent != 0) {
 
 
+            let res = await getScheduleOwnerFromDate(ownerIdFromParent, today);
+
+            if (res && res.data) {
+                this.setState({
+                    availableTime: res.data ? res.data : []
+                })
+            }
+
+        }
 
 
 
@@ -31,10 +43,26 @@ class Schedule extends Component {
         for (let i = 0; i <= 7; i++) {
             let obj = {};
             if (language === LANGUAGES.VI) {
-                obj.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+                    let today = `Hôm nay - ${ddMM}`;
+                    obj.label = today;
+
+                } else {
+                    obj.label = moment(new Date()).add(i, 'days').format('dddd - DD/MM');
+                }
+
             }
             else {
-                obj.label = moment(new Date()).add(i, 'days').locale('en').format('dddd - DD/MM');
+                if (i === 0) {
+                    let ddMM = moment(new Date()).format('DD/MM');
+
+                    let today2 = `Today - ${ddMM}`;
+
+                    obj.label = today2;
+
+                }
+                else obj.label = moment(new Date()).add(i, 'days').locale('en').format('dddd - DD/MM');
             }
             obj.value = moment(new Date()).add(i, 'days').startOf('day').valueOf();
             allDays.push(obj);
@@ -49,18 +77,20 @@ class Schedule extends Component {
         if (this.props.language !== prevProps.language) {
             this.setArray(this.props.language);
         }
+
+
     }
 
     handleSelectSchedule = async (event) => {
         if (this.props.ownerIdFromParent && this.props.ownerIdFromParent != 0) {
             let id = this.props.ownerIdFromParent;
             let date = event.target.value;
-            console.log('useer and date ', id, typeof date);
+            console.log('check data', date);
             let res = await getScheduleOwnerFromDate(id, date);
-            console.log(res);
+
             if (res && res.data) {
                 this.setState({
-                    availableTime: res.data
+                    availableTime: res.data ? res.data : []
                 })
             }
 
@@ -72,13 +102,16 @@ class Schedule extends Component {
     render() {
         let { allDays, availableTime } = this.state;
 
+
         return (
             <React.Fragment>
                 <div className='all-schedule'>
-                    <h3>Lịch hẹn chủ nhà</h3>
+                    <h3><FormattedMessage id="common.bookingsOwner" /> </h3>
 
                     <select
-                        onChange={(event) => this.handleSelectSchedule(event)}
+                        onChange={(event) => this.handleSelectSchedule(event)
+                        }
+
                     >
                         {allDays && allDays.length > 0 &&
                             allDays.map((item, index) => {
@@ -95,6 +128,7 @@ class Schedule extends Component {
 
                     </select>
 
+
                 </div>
 
 
@@ -109,6 +143,7 @@ class Schedule extends Component {
                         })
                     }
                 </div>
+                <div><FormattedMessage id="common.bookings" /> <i className="far fa-hand-pointer"></i></div>
             </React.Fragment>
         )
     }

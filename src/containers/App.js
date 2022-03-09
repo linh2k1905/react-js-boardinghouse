@@ -15,6 +15,7 @@ import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 import DetailHouse from './User/House/DetailHouse'
+import DetailTypeHouse from './User/House/DetailTypeHouse'
 
 
 import HomePage from './HomePage/HomePage.js'
@@ -56,6 +57,7 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_HOUSE} component={DetailHouse} />
+                                    <Route path={path.DETAIL_TYPE_HOUSE} component={DetailTypeHouse} />
                                     <Route path="/system/manage-booking" component={userIsAuthenticated(Owner)} />
 
                                 </Switch>

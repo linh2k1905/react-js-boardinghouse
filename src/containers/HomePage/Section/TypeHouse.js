@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils'
+
 class Section extends Component {
     constructor(props) {
         super(props);
@@ -55,6 +56,7 @@ class Section extends Component {
                                 return (
                                     <div className='Section-customize'>
                                         <div className='img-customize'
+                                            style={{ backgroundImage: `url(../../assets/typehouse/${item.image}")` }}
 
                                         ></div>
                                         <div className='type-house-name'>

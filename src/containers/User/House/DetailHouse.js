@@ -13,7 +13,9 @@ class DetailHouse extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            detailHouse: {}
+            detailHouse: {},
+            isOpenFinder: false,
+            listHouseFiler: []
 
         }
     }
@@ -36,7 +38,20 @@ class DetailHouse extends Component {
     componentDidUpdate(prevProps, prevState, snapsot) {
 
     }
+    isSearchCheck = (isOpenFinder) => {
+        this.setState({
+            isOpenFinder: isOpenFinder
+
+        })
+    }
+    listHouseFilerFunction = (value) => {
+        this.setState({
+            listHouseFiler: value
+        })
+        console.log('value check filter list house', value);
+    }
     render() {
+        let { isOpenFinder } = this.state;
 
         let imagebase64 = ''
         if (this.state.detailHouse.User && this.state.detailHouse.User.image)
@@ -60,7 +75,10 @@ class DetailHouse extends Component {
         return (
             <React.Fragment>
                 <HomeHeader
-                    isOpenFinder={false} />
+                    isOpenFinder={isOpenFinder}
+                    isSearchCheck={this.isSearchCheck}
+                    listHouseFilerFunction={this.listHouseFilerFunction}
+                />
                 <div className='house-detail-container'>
                     <div className='house-intro'>
                         <div className='contain-left'
@@ -108,7 +126,7 @@ class DetailHouse extends Component {
                         <div className='schedule-owner'>
 
 
-                            <h3>Thông tin chủ trọ</h3>
+                            <h3><FormattedMessage id="common.infoOwner" /> </h3>
                             <p><FormattedMessage id="system.user-manage.firstname" /> {User ? User.firstName : ''} {User ? User.lastName : ''}</p>
                             <p><FormattedMessage id="system.user-manage.mobile" /> {User ? User.tel : ''}</p>
                             <p><FormattedMessage id="system.user-manage.address" /> {User ? User.address : ''}</p>

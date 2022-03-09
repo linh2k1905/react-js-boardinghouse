@@ -45,7 +45,7 @@ class HomePage extends Component {
                     isSearchCheck={this.isSearchCheck}
                     listHouseFilerFunction={this.listHouseFilerFunction}
                 />
-                <TypeHouse />
+
                 {isSearch === false ? <HouseList /> : <HouseListFilter
                     listHouseFilers={this.state.listHouseFiler}
 

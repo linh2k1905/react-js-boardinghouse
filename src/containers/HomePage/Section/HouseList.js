@@ -33,7 +33,8 @@ class HouseList extends Component {
     }
     handleShowDetailHouse(item) {
 
-        this.props.history.push(`/detail-house/${item.id}`)
+        this.props.history.push(`/detail-house/${item.id}`);
+
     }
     render() {
 

@@ -9,8 +9,9 @@ import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions'
 import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
-import { searchHouseByUserService } from '../../services/userService';
+import { searchHouseByUserService, searchHouseByTypeHouse } from '../../services/userService';
 import * as actions from '../../store/actions';
+import { withRouter } from 'react-router'
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +24,7 @@ class HomeHeader extends Component {
             areaValue: '',
             priceValue: '',
             isSearch: false,
+            isOpenFinder: false
 
 
         };
@@ -73,6 +75,13 @@ class HomeHeader extends Component {
 
             })
         }
+        if (prevProps.isOpenFinder != this.props.isOpenFinder) {
+            this.setState({
+                isOpenFinder: this.props.isOpenFinder
+
+            })
+        }
+
 
 
     }
@@ -114,17 +123,32 @@ class HomeHeader extends Component {
         obj.idTypeHouse = roomSelected.id;
         obj.area = areaValue;
         obj.price = priceValue;
-        console.log(typeof obj.price);
+
 
         if (priceValue && areaValue && citiesSelected && roomSelected) {
 
             let res = await searchHouseByUserService(obj);
             this.props.listHouseFilerFunction(res.data);
+            console.log(res.data);
 
         }
     }
+    handleSelectByTypeHouse = async (id) => {
+
+
+        this.props.history.push(`/detail-type-house/${id}`);
+    }
+    handleClickBackHome = () => {
+        this.props.history.push('/home');
+
+    }
+    handleClickToLogin = () => {
+        this.props.history.push('/login');
+
+    }
     render() {
-        let { language } = this.props;
+        let { language, isOpenFinder } = this.props;
+
         let { typeHouse, citiesSelected, roomSelected, areaValue, priceValue } = this.state;
         return (
 
@@ -133,7 +157,9 @@ class HomeHeader extends Component {
                     <div className='home-header-content'>
                         <div className='left-content'>
 
-                            <div className='header-logo'>
+                            <div className='header-logo'
+                                onClick={() => this.handleClickBackHome()}
+                            >
                                 TimPhongTro.com
                             </div>
                         </div>
@@ -146,7 +172,9 @@ class HomeHeader extends Component {
 
                                 <a ><FormattedMessage id="header.signup" /></a>
                             </div>
-                            <div className='child-right-content'>
+                            <div className='child-right-content'
+                                onClick={() => this.handleClickToLogin()}
+                            >
                                 <a><FormattedMessage id="login.login" /></a>
                             </div>
                             <div className='child-right-content btn-post'>
@@ -167,7 +195,9 @@ class HomeHeader extends Component {
                             typeHouse.map((item, index) => {
                                 return (
 
-                                    <div className='banner-child'>
+                                    <div className='banner-child'
+                                        onClick={() => this.handleSelectByTypeHouse(item.id)}
+                                    >
                                         {
                                             language === LANGUAGES.VI ? item.nameVi : item.name}
                                     </div>
@@ -179,7 +209,7 @@ class HomeHeader extends Component {
 
                     </div>
                 </div>
-                {
+                {isOpenFinder &&
 
 
                     <div className='home-filter-header'>
@@ -265,4 +295,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

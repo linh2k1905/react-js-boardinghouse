@@ -9,7 +9,8 @@ import {
     getAllPost,
     editPostService,
     getAllHomeService,
-    deletePostService
+    deletePostService,
+    searchUserByTypeUser
 
 
 
@@ -277,6 +278,37 @@ export const fetchOwner = () => {
         } catch (error) {
             dispatch({
                 type: actionTypes.FETCH_OWNERS_FAILED
+            });
+        }
+    }
+
+}
+export const fetchUserByTypeUser = (id) => {
+
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await searchUserByTypeUser(id);
+
+            if (res && res.errorCode === 0) {
+
+                dispatch({
+                    type: actionTypes.FETCH_USER_SUCCESS,
+                    dataUser: res.users
+                });
+
+            }
+            else {
+
+                dispatch({
+                    type: actionTypes.FETCH_USERS_FAILED
+                });
+
+            }
+
+        } catch (error) {
+            dispatch({
+                type: actionTypes.FETCH_USERS_FAILED
             });
         }
     }

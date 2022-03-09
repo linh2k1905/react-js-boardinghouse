@@ -19,6 +19,12 @@ class HouseListFilter extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
+        if (this.props.listHouseFilers != prevProps.listHouseFilers) {
+
+            this.setState({
+                listHouseArr: this.props.listHouseFilers
+            })
+        }
 
 
 
@@ -35,10 +41,12 @@ class HouseListFilter extends Component {
     }
     handleShowDetailHouse(item) {
 
+        this.props.history.push(`/detail-house/${item.id}`)
 
     }
     render() {
         let { listHouseArr } = this.state;
+
 
         return (
             <div className='Owner-Owner'>

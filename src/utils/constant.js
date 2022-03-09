@@ -5,6 +5,7 @@ export const path = {
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     DETAIL_HOUSE: '/detail-house/:id',
+    DETAIL_TYPE_HOUSE: '/detail-type-house/:id',
 
 };
 

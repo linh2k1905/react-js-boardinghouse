@@ -13,7 +13,7 @@ class TableManageUser extends Component {
         }
     }
     componentDidMount() {
-        this.props.fetchUserRedux();
+        this.props.fetchUserByTypeUser('ALL');
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
@@ -87,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
+        fetchUserByTypeUser: (id) => dispatch(actions.fetchUserByTypeUser(id)),
         deleteAUserRedux: (id) => dispatch(actions.deleteAUser(id))
     };
 };

@@ -76,9 +76,18 @@ const getScheduleOwnerFromDate = (id, date) => {
 }
 
 const searchHouseByUserService = (data) => {
-    console.log("check service from react", data);
+
     return axios.get(`/api/get-filter-house-from-home?idTypeHouse=${data.idTypeHouse}&idCity=${data.idCity}&price=${data.price}&area=${data.area}`);
 }
+const searchHouseByTypeHouse = (data) => {
+
+    return axios.get(`api/get-all-type-house-by-id?id=${data}`);
+}
+const searchUserByTypeUser = (roleId) => {
+
+    return axios.get(`api/get-all-users-by-type-user?roleId=${roleId}`);
+}
+
 export {
     handelLoginAPI,
     getAllUser,
@@ -97,5 +106,7 @@ export {
     deletePostService,
     bulkCreateSchedulService,
     getScheduleOwnerFromDate,
-    searchHouseByUserService
+    searchHouseByUserService,
+    searchHouseByTypeHouse,
+    searchUserByTypeUser
 }

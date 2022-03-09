@@ -126,6 +126,12 @@ class ManageSchedule extends Component {
                     formatDate: formatDate.toString()
                 });
                 console.log('check res', res);
+                if (res && res.errorCode === 0) {
+                    toast.success("You update the new schedule");
+                }
+                else {
+                    toast.error("Error when ")
+                }
 
 
             }
@@ -139,7 +145,7 @@ class ManageSchedule extends Component {
     render() {
         const { isLoggedIn } = this.props;
         let time = this.state.rangeTime;
-
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
         return (
             <div className='manage-schedule-container'>
@@ -163,7 +169,7 @@ class ManageSchedule extends Component {
                             <DatePicker
                                 onChange={this.handleChangeDatePicker}
                                 className="form-control"
-                                minDate={new Date()}
+                                minDate={yesterday}
                             />
                         </div>
                     </div>
