@@ -6,7 +6,8 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import './Schedule.scss'
 import { getScheduleOwnerFromDate } from '../../../services/userService';
 import moment from 'moment';
-import localization from 'moment/locale/vi'
+import localization from 'moment/locale/vi';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class Schedule extends Component {
 
     constructor(props) {
@@ -14,7 +15,9 @@ class Schedule extends Component {
         this.state = {
             allDays: [],
             availableTime: [],
-            curentDate: ''
+            curentDate: '',
+            isOpen: false,
+            dateSelect: {}
         }
     }
 
@@ -87,6 +90,7 @@ class Schedule extends Component {
             let date = event.target.value;
             console.log('check data', date);
             let res = await getScheduleOwnerFromDate(id, date);
+            console.log(res)
 
             if (res && res.data) {
                 this.setState({
@@ -99,8 +103,22 @@ class Schedule extends Component {
     capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    toggle = () => {
+        this.setState({
+            isOpen: false
+        })
+    }
+    handleClickSchduleButton = (item) => {
+        console.log(item);
+
+        this.setState({
+            isOpen: true,
+            dateSelect: item
+        })
+    }
     render() {
-        let { allDays, availableTime } = this.state;
+        let { allDays, availableTime, dateSelect } = this.state;
+        console.log(dateSelect);
 
 
         return (
@@ -138,11 +156,37 @@ class Schedule extends Component {
                         availableTime.map((item, index) => {
                             return (
 
-                                <button className=''>{item.time}</button>
+                                <button className=''
+
+                                    onClick={() => this.handleClickSchduleButton(item)}
+                                >{item.time}</button>
                             )
                         })
                     }
                 </div>
+
+                <Modal
+                    //centered={true}
+                    size={'lg'}
+                    isOpen={this.state.isOpen}
+                    toggle={this.toggle}
+
+                >
+                    <ModalHeader >
+                        <div className='header-left'>Chọn diện tích</div>
+
+
+
+                    </ModalHeader>
+                    <ModalBody>
+
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={this.toggle}>Đã chọn xong</Button>{' '}
+                        <Button color="secondary" onClick={this.toggle}>Đóng</Button>
+                    </ModalFooter>
+                </Modal>
                 <div><FormattedMessage id="common.bookings" /> <i className="far fa-hand-pointer"></i></div>
             </React.Fragment>
         )

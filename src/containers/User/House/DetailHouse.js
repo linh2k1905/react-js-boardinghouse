@@ -7,7 +7,8 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
 import { getHouseServiceById } from '../../../services/userService';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import Schedule from './Schedule'
+import Schedule from './Schedule';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -15,7 +16,8 @@ class DetailHouse extends Component {
         this.state = {
             detailHouse: {},
             isOpenFinder: false,
-            listHouseFiler: []
+            listHouseFiler: [],
+            isOpenModel: false
 
         }
     }
@@ -50,6 +52,7 @@ class DetailHouse extends Component {
         })
         console.log('value check filter list house', value);
     }
+
     render() {
         let { isOpenFinder } = this.state;
 
@@ -84,15 +87,12 @@ class DetailHouse extends Component {
                         <div className='contain-left'
                             style={{ backgroundImage: `url(${this.state.detailHouse.image})`, width: '823px', height: '300px' }}
                         >
-
                         </div>
 
                         <div className='contain-right'
 
                             style={{ backgroundImage: `url(${imagebase64})` }}
                         >
-
-
                         </div>
                     </div>
 
@@ -134,8 +134,12 @@ class DetailHouse extends Component {
 
                             <Schedule
                                 ownerIdFromParent={User && User.id ? User.id : 0}
+                                isOpenModel={this.state.isOpenModel}
+                                handleOnClickSchedule={this.handleOnClickSchedule}
 
                             />
+
+
 
                         </div>
 

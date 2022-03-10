@@ -69,8 +69,8 @@ class DetailFlatmate extends Component {
                     isSearchCheck={this.isSearchCheck}
 
                 />
-                <div className='house-detail-container'>
-                    <div className='house-intro'>
+                <div className='flatmate-detail-container'>
+                    <div className='flatmate-intro'>
                         <div className='contain-left'
                             style={{ backgroundImage: `url(${imagebase64})`, width: '30%', height: '100%' }}
                         >

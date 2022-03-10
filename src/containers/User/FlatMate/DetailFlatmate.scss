@@ -1,9 +1,9 @@
-.house-detail-container{
+.flatmate-detail-container{
    height: 800px;
  
     margin: 0 50px;
     
-    .house-intro{
+    .flatmate-intro{
         display: flex;
         height: 300px;     
         .contain-left
@@ -32,27 +32,27 @@
         }
     }
 
-    .detail-house-info{
+    .detail-flatmate-info{
         width:70%;
        
         height: auto;
-        .address-house-infor {
+        .address-flatmate-infor {
             font-size: 18px;
             font-weight: 400;
             color: blue;
         }
-        .name-house-infor {
+        .name-flatmate-infor {
             font-size: 20px;
             font-weight: 600;
             color: red;
         }
-        .price-house-infor{
+        .price-flatmate-infor{
             font-size: 20px;
             font-weight: 600;
             color: orange;
 
         }
-        .price-house-area{
+        .price-flatmate-area{
             font-size: 20px;
             font-weight: 600;
             color: rgb(22, 11, 177);
@@ -63,7 +63,7 @@
           font-size: 20px;
           color: blue;
         }
-        .desc-house{
+        .desc-flatmate{
             font-size: 15px;
             color: blue;
         }
@@ -82,7 +82,7 @@
         }
       
     }
-    .map-detail-house{
+    .map-detail-flatmate{
       width: 100%;height: 500px;
     }
 }
