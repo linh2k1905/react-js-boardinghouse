@@ -6,6 +6,7 @@ export const path = {
     SYSTEM: '/system',
     DETAIL_HOUSE: '/detail-house/:id',
     DETAIL_TYPE_HOUSE: '/detail-type-house/:id',
+    DETAIL_FLATMATE: '/detail-flatmate/:id',
 
 };
 

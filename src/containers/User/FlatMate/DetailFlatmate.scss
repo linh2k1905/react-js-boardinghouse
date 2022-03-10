@@ -1,0 +1,88 @@
+.house-detail-container{
+   height: 800px;
+ 
+    margin: 0 50px;
+    
+    .house-intro{
+        display: flex;
+        height: 300px;     
+        .contain-left
+        {
+            width: 30%;
+        
+            margin-right: 25px;
+           
+        }
+      
+        .contain-right{
+            width: 70%;
+            
+            background-repeat:no-repeat ;
+            justify-content: center;
+            .name-flatmate{
+                font-size: 30px;
+                color: purple;
+                padding: 10px;
+            }
+            .title-info{
+                font-size: 40px;
+                font-weight: 400;
+                color: blue;
+            }
+        }
+    }
+
+    .detail-house-info{
+        width:70%;
+       
+        height: auto;
+        .address-house-infor {
+            font-size: 18px;
+            font-weight: 400;
+            color: blue;
+        }
+        .name-house-infor {
+            font-size: 20px;
+            font-weight: 600;
+            color: red;
+        }
+        .price-house-infor{
+            font-size: 20px;
+            font-weight: 600;
+            color: orange;
+
+        }
+        .price-house-area{
+            font-size: 20px;
+            font-weight: 600;
+            color: rgb(22, 11, 177);
+
+        }
+        .city-infor{
+          font-weight: 600px;
+          font-size: 20px;
+          color: blue;
+        }
+        .desc-house{
+            font-size: 15px;
+            color: blue;
+        }
+    }
+    .schedule-owner{
+        width: 30%;
+        height: 300px;
+        h3{
+            color: red;
+            
+            width: auto;
+        }
+        p{
+            color: blue;
+            font-size: 15px;
+        }
+      
+    }
+    .map-detail-house{
+      width: 100%;height: 500px;
+    }
+}

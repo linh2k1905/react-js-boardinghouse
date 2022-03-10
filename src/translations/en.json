@@ -36,7 +36,10 @@
         "date-range-invalid": "Date range invalid",
         "bookings": "Bookings for free",
         "bookingsOwner": "Bookings with owner",
-        "infoOwner": "Owner Infomation"
+        "infoOwner": "Owner Infomation",
+        "infoFlatmate": "Flatmate Infomation",
+        "find-flatmate": "Find Flatmate",
+        "fullname": "Fullname"
     },
     "login": {
         "login": "Login",

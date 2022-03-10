@@ -17,7 +17,7 @@ import System from '../routes/System';
 import DetailHouse from './User/House/DetailHouse'
 import DetailTypeHouse from './User/House/DetailTypeHouse'
 
-
+import DetailFlatmate from './User/FlatMate/DetailFlatmate';
 import HomePage from './HomePage/HomePage.js'
 import CustomScrollbars from '../components/CustomScrollbars.js';
 import Owner from '../routes/Owner';
@@ -58,6 +58,7 @@ class App extends Component {
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_HOUSE} component={DetailHouse} />
                                     <Route path={path.DETAIL_TYPE_HOUSE} component={DetailTypeHouse} />
+                                    <Route path={path.DETAIL_FLATMATE} component={DetailFlatmate} />
                                     <Route path="/system/manage-booking" component={userIsAuthenticated(Owner)} />
 
                                 </Switch>

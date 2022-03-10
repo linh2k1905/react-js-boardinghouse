@@ -36,7 +36,10 @@
         "date-range-invalid": "Khoảng thời gian không hợp lệ",
         "bookings": "Đặt lịch hẹn miễn phí",
         "bookingsOwner": "Đặt lịch hẹn chủ nhà",
-        "infoOwner": "Thông tin chủ trọ"
+        "infoOwner": "Thông tin chủ trọ",
+        "infoFlatmate": "Thông tin bạn cùng phòng",
+        "find-flatmate": "Tìm bạn chung phòng",
+        "fullname": "Tên đầy đủ"
     },
     "login": {
         "login": "Đăng nhập",

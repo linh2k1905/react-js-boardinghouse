@@ -8,6 +8,7 @@ import Slider from "react-slick";
 
 import { language } from '../../../utils';
 import * as actions from '../../../store/actions';
+import { withRouter } from 'react-router';
 class Owner extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +25,11 @@ class Owner extends Component {
         }
     }
     componentDidMount() {
-        this.props.loadTopOwner()
+        this.props.loadTopOwner('3');
+    }
+    handleShowTheFlateMate = (item) => {
+        console.log(item);
+        this.props.history.push(`/detail-flatmate/${item.id}`);
     }
     render() {
         let arrOwner = this.state.arrOwner;
@@ -34,7 +39,7 @@ class Owner extends Component {
             <div className='Owner-Owner'>
                 <div className='Owner-container'>
                     <div className='Owner-header'>
-                        <span className='title-owner'>Chủ trọ uy tín</span>
+                        <span className='title-owner'><FormattedMessage id='common.find-flatmate' /></span>
 
                     </div>
                     <div className='Owner-body'>
@@ -47,14 +52,17 @@ class Owner extends Component {
                                 if (item.image) {
                                     imagebase64 = new Buffer(item.image, 'base64').toString('binary');
                                 }
-                                let nameVi = `${item.firstName} ${item.lastName}`;
+
                                 let nameEn = `${item.firstName} ${item.lastName}`;
                                 return (
-                                    <div className='Owner-customize'>
+                                    <div className='Owner-customize'
+                                        onClick={() => this.handleShowTheFlateMate(item)}
+
+                                    >
                                         <div className='img-customize image-avatar'
                                             style={{ backgroundImage: `url(${imagebase64})` }}
                                         ></div>
-                                        <div>{nameEn}</div>
+                                        <div className='name-owner'>{nameEn}</div>
                                     </div>
                                 )
                             })
@@ -80,19 +88,19 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         languaguage: state.app.language,
-        ownerRedux: state.admin.owner
+        ownerRedux: state.admin.users
 
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadTopOwner: () => dispatch(
+        loadTopOwner: (id) => dispatch(
 
-            actions.fetchOwner()
+            actions.fetchUserByTypeUser(id)
         )
 
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Owner);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Owner));
