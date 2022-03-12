@@ -7,7 +7,6 @@ import './Schedule.scss'
 import { getScheduleOwnerFromDate } from '../../../services/userService';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
-import _ from 'lodash';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class Schedule extends Component {
 
@@ -19,8 +18,8 @@ class Schedule extends Component {
             curentDate: '',
             isOpen: false,
             dateSelect: {},
-            detailHouse: {},
-            ownerState: {}
+            owner: {},
+            detailHouse: {}
         }
     }
 
@@ -32,7 +31,6 @@ class Schedule extends Component {
 
 
             let res = await getScheduleOwnerFromDate(ownerIdFromParent, today);
-
             if (res && res.data) {
                 this.setState({
                     availableTime: res.data ? res.data : []
@@ -43,13 +41,11 @@ class Schedule extends Component {
 
         }
         if (this.props.owner) {
-
-
             this.setState({
-                ownerState: this.props.owner
+                owner: this.props.owner ? this.props.owner : ''
             })
-        }
 
+        }
 
 
 
@@ -98,8 +94,9 @@ class Schedule extends Component {
 
 
             this.setState({
-                ownerState: this.props.owner
+                owner: this.props.owner
             })
+            console.log(this.state.owner);
         }
 
 
@@ -138,18 +135,9 @@ class Schedule extends Component {
             dateSelect: item
         })
     }
-    handleShowDateFromString = (str) => {
-        let date = moment(Date(str)).format('dddd - DD/MM/YYYY');
-        return (
-            <>{this.capitalizeFirstLetter(date)}</>
-        );
-        return <></>
-
-    }
     render() {
-        let { allDays, availableTime, dateSelect, detailHouse, ownerState } = this.state;
-        let { language } = this.props;
-        console.log('check render state dateSelct', dateSelect);
+        let { allDays, availableTime, dateSelect, detailHouse } = this.state;
+        let { language, owner } = this.props;
 
         return (
             <React.Fragment>
@@ -210,40 +198,25 @@ class Schedule extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <div className='row'>
-
-                            {ownerState && ownerState.User ?
-                                <div className='col-6'>
-                                    <h3>Thông tin Chủ trọ</h3>
-                                    <p>Họ và tên :  {ownerState.User.firstName}</p>
-                                    <p>Địa chỉ:{ownerState.User.address}</p>
-                                    <p>Địa chỉ:{ownerState.User.email}</p>
-                                    <p>Tel:{ownerState.User.tel}</p>
-                                    <p>{dateSelect.time}</p>
-                                    <p>{this.handleShowDateFromString(dateSelect.date)}</p>
-
-                                </div> : ""
-
-                            }
-
-                            {ownerState && ownerState.HouseType ?
-                                <div className='col-6'>
-                                    <h3>Thông tin Căn trọ</h3>
-                                    <p>Tên nhà trọ :  {ownerState.name}</p>
-                                    <p>Địa chỉ:{ownerState.address}</p>
-                                    <p>Giá:{ownerState.price} VND</p>
-                                    <p>Diện tích:{ownerState.area}m2</p>
-                                    <p>Loại nhà:{
-                                        ownerState.HouseType.name}</p>
-                                </div>
-                                : ""}
-
-
+                            <div className='col-6'>
+                                <h3>Thông tin Chủ trọ</h3>
+                                <p>Họ và tên :  {owner && owner.User ? owner.User.firstName : ''}</p>
+                                <p>Địa chỉ:{owner ? owner.User.address : ''}</p>
+                                <p>Địa chỉ:{owner ? owner.User.email : ''}</p>
+                                <p>Tel:{owner ? owner.User.tel : ''}</p>
+                            </div>
+                            <div className='col-6'>
+                                <h3>Thông tin Căn trọ</h3>
+                                <p>Tên nhà trọ :  {owner ? owner.name : ''}</p>
+                                <p>Địa chỉ:{owner ? owner.address : ''}</p>
+                                <p>Giá:{owner ? owner.price : ''} VND</p>
+                                <p>Diện tích:{owner ? owner.area : ''}m2</p>
+                                <p>Loại nhà:{owner
+                                    && owner.HouseType.name && owner.HouseType ? owner.HouseType.nameVi : ''}</p>
+                            </div>
                             <form>
                                 <label>Email</label>
                                 <input className='form-control'></input>
-                                <label>Lời nhắn gửi</label>
-                                <input type='textarea' className='form-control'></input>
-
                             </form>
                         </div>
 

@@ -414,8 +414,12 @@
            
             .image-avatar{
                 vertical-align: middle;
-    width: 150px;
-    height: 150px;
+
+                width: 150px;
+                height: 150px;
+                background: no-repeat;
+                background-position:center ;
+                background-size: cover;
    
             }
         }
@@ -445,6 +449,9 @@
                     vertical-align: middle;
                     width: 250px;
                     height: 200px;
+                    background: no-repeat;
+                    background-position:center ;
+                    background-size: cover;
                     
                             }
                         }

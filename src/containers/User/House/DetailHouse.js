@@ -5,7 +5,7 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
-import { getHouseServiceById } from '../../../services/userService';
+import { getHouseServiceById, getAllUser, handleGetInfoBooking } from '../../../services/userService';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import Schedule from './Schedule';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -17,7 +17,8 @@ class DetailHouse extends Component {
             detailHouse: {},
             isOpenFinder: false,
             listHouseFiler: [],
-            isOpenModel: false
+            isOpenModel: false,
+            owner: {}
 
         }
     }
@@ -31,6 +32,17 @@ class DetailHouse extends Component {
                     detailHouse: res.data
                 })
             }
+            console.log('check state', this.state)
+            if (this.state.detailHouse && this.state.detailHouse.User.id) {
+                let user = await handleGetInfoBooking(this.state.detailHouse.id, this.state.detailHouse.User.id);
+                if (user && user) {
+                    console.log('check res', user);
+                    this.setState({
+                        owner: user ? user.users : ''
+                    })
+                }
+            }
+
         }
 
 
@@ -54,7 +66,8 @@ class DetailHouse extends Component {
     }
 
     render() {
-        let { isOpenFinder } = this.state;
+        let { isOpenFinder, owner } = this.state;
+
 
         let imagebase64 = ''
         if (this.state.detailHouse.User && this.state.detailHouse.User.image)
@@ -136,6 +149,8 @@ class DetailHouse extends Component {
                                 ownerIdFromParent={User && User.id ? User.id : 0}
                                 isOpenModel={this.state.isOpenModel}
                                 handleOnClickSchedule={this.handleOnClickSchedule}
+                                detailHouse={this.state.detailHouse}
+                                owner={owner}
 
                             />
 

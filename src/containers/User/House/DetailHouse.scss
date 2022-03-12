@@ -11,13 +11,18 @@
             width: 70%;
         
             margin-right: 25px;
+            background: no-repeat;
+            background-position:center ;
+            background-size: cover;
            
         }
       
         .contain-right{
             width: 30%;
             
-            background-repeat:no-repeat ;
+            background: no-repeat;
+            background-position:center ;
+            background-size: cover;
             justify-content: center;
         }
     }

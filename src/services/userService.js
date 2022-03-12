@@ -87,6 +87,10 @@ const searchUserByTypeUser = (roleId) => {
 
     return axios.get(`api/get-all-users-by-type-user?roleId=${roleId}`);
 }
+const handleGetInfoBooking = (idHouse, idOwner) => {
+
+    return axios.get(`api/get-info-booking?idHouse=${idHouse}&idOwner=${idOwner}`);
+}
 
 export {
     handelLoginAPI,
@@ -108,5 +112,6 @@ export {
     getScheduleOwnerFromDate,
     searchHouseByUserService,
     searchHouseByTypeHouse,
-    searchUserByTypeUser
+    searchUserByTypeUser,
+    handleGetInfoBooking
 }
