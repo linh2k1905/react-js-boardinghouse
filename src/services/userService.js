@@ -91,6 +91,10 @@ const handleGetInfoBooking = (idHouse, idOwner) => {
 
     return axios.get(`api/get-info-booking?idHouse=${idHouse}&idOwner=${idOwner}`);
 }
+const handlePostBooking = (data) => {
+
+    return axios.post('api/user-booking', data);
+}
 
 export {
     handelLoginAPI,
@@ -113,5 +117,7 @@ export {
     searchHouseByUserService,
     searchHouseByTypeHouse,
     searchUserByTypeUser,
-    handleGetInfoBooking
+    handleGetInfoBooking,
+    handlePostBooking
+
 }

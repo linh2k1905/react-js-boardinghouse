@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 
 import './Schedule.scss'
-import { getScheduleOwnerFromDate } from '../../../services/userService';
+import { getScheduleOwnerFromDate, handlePostBooking } from '../../../services/userService';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import _ from 'lodash';
@@ -16,11 +16,15 @@ class Schedule extends Component {
         this.state = {
             allDays: [],
             availableTime: [],
-            curentDate: '',
+
             isOpen: false,
             dateSelect: {},
             detailHouse: {},
-            ownerState: {}
+            ownerState: {},
+            email: '',
+            desc: '',
+            tel: ''
+
         }
     }
 
@@ -130,6 +134,21 @@ class Schedule extends Component {
             isOpen: false
         })
     }
+    handleClickBookingButton = async () => {
+        let res = await handlePostBooking({
+            email: this.state.email,
+            idHouse: this.state.ownerState.id,
+            time: this.state.dateSelect.time,
+            date: this.state.dateSelect.date,
+            tel: this.state.tel ? this.state.tel : '',
+            desc: this.state.desc ? this.state.desc : ''
+        });
+        console.log('kiem tra thu coi', res.data.users[1]);
+
+
+
+
+    }
     handleClickSchduleButton = (item) => {
 
 
@@ -145,6 +164,14 @@ class Schedule extends Component {
         );
         return <></>
 
+    }
+    handleInputBooking = (event, id) => {
+        let copyState = { ...this.state };
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        })
+        console.log(copyState);
     }
     render() {
         let { allDays, availableTime, dateSelect, detailHouse, ownerState } = this.state;
@@ -240,9 +267,26 @@ class Schedule extends Component {
 
                             <form>
                                 <label>Email</label>
-                                <input className='form-control'></input>
+                                <input type="text" className='form-control'
+
+                                    onChange={(event) => this.handleInputBooking(event, 'email')}
+                                    value={this.state.email}
+
+                                ></input>
+                                <label>Tel</label>
+                                <input type="text"
+                                    className='form-control'
+
+                                    onChange={(event) => this.handleInputBooking(event, 'tel')}
+                                    value={this.state.tel}
+
+                                ></input>
                                 <label>Lời nhắn gửi</label>
-                                <input type='textarea' className='form-control'></input>
+                                <input type='textarea' className='form-control'
+                                    value={this.state.desc}
+                                    onChange={(event) => this.handleInputBooking(event, 'desc')}
+
+                                ></input>
 
                             </form>
                         </div>
@@ -250,7 +294,7 @@ class Schedule extends Component {
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Đặt lịch</Button>{' '}
+                        <Button color="primary" onClick={this.handleClickBookingButton}>Đặt lịch</Button>{' '}
                         <Button color="secondary" onClick={this.toggle}>Đã chọn xong</Button>
                     </ModalFooter>
                 </Modal>
