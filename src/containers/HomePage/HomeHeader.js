@@ -9,6 +9,7 @@ import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions'
 import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
+import ModalPost from './ModalPost';
 import { searchHouseByUserService, searchHouseByTypeHouse } from '../../services/userService';
 import * as actions from '../../store/actions';
 import { withRouter } from 'react-router'
@@ -24,7 +25,8 @@ class HomeHeader extends Component {
             areaValue: '',
             priceValue: '',
             isSearch: false,
-            isOpenFinder: false
+            isOpenFinder: false,
+            isOpenModalPost: false
 
 
         };
@@ -60,6 +62,12 @@ class HomeHeader extends Component {
             isOpenModalPrice: !this.state.isOpenModalPrice
         })
 
+    }
+    toggleModalPost = () => {
+
+        this.setState({
+            isOpenModalPost: !this.state.isOpenModalPost
+        })
     }
 
     componentDidMount() {
@@ -146,8 +154,13 @@ class HomeHeader extends Component {
         this.props.history.push('/login');
 
     }
+    handleClickPost = () => {
+        this.setState({
+            isOpenModalPost: true
+        })
+    }
     render() {
-        let { language, isOpenFinder } = this.props;
+        let { language, isOpenFinder, isLoggedIn, userInfo, processLogout } = this.props;
 
         let { typeHouse, citiesSelected, roomSelected, areaValue, priceValue } = this.state;
         return (
@@ -168,22 +181,47 @@ class HomeHeader extends Component {
                         </div>
                         <div className='right-content'>
                             <div className='welcome-text'><FormattedMessage id="header.welcome" /> TimPhongTro </div>
-                            <div className='child-right-content'>
 
-                                <a ><FormattedMessage id="header.signup" /></a>
-                            </div>
-                            <div className='child-right-content'
-                                onClick={() => this.handleClickToLogin()}
+                            {isLoggedIn && userInfo ?
+                                <div className='user-info'>
+                                    {userInfo.firstName && userInfo.lastName ? "Hello, " + userInfo.firstName + " " + userInfo.lastName : userInfo.email}
+
+                                </div> :
+                                <>
+                                    <div className='child-right-content'
+                                        onClick={() => this.handleClickToLogin()}
+                                    >
+                                        <a><FormattedMessage id="login.login" /></a>
+                                    </div>
+                                    <div className='child-right-content'>
+
+                                        <a ><FormattedMessage id="header.signup" /></a>
+                                    </div>
+                                </>
+                            }
+
+                            <div
+
+                                className='child-right-content btn-post'
+                                onClick={() => this.handleClickPost()}
                             >
-                                <a><FormattedMessage id="login.login" /></a>
-                            </div>
-                            <div className='child-right-content btn-post'>
                                 <a><FormattedMessage id="header.post" /> <i className="fas fa-plus-circle"></i> </a>
                             </div>
                             <div className='language'>
                                 <div onClick={() => { this.changeLanguage(LANGUAGES.EN) }} className={this.props.language === LANGUAGES.EN ? 'language-en action' : 'language-en'}><span >EN</span></div>
                                 <div onClick={() => { this.changeLanguage(LANGUAGES.VI) }} className={this.props.language === LANGUAGES.VI ? 'language-vi action' : 'language-vi'}><span >VI</span></div>
+
                             </div>
+                            <ModalPost
+                                isOpen={this.state.isOpenModalPost}
+                                toggleModalPost={this.toggleModalPost}
+                            />
+                            {userInfo &&
+                                <div className="btn btn-logout" onClick={processLogout}>
+                                    {language === LANGUAGES.VI ? 'THOÁT' : 'EXIT'}
+                                </div>
+                            }
+
                         </div>
                     </div>
 
@@ -283,6 +321,7 @@ class HomeHeader extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
         language: state.app.language,
         typeHouses: state.admin.typeHouses
     };
@@ -292,6 +331,7 @@ const mapDispatchToProps = dispatch => {
     return {
         changeLanguageRedux: (language) => dispatch(changeLanguageApp(language)),
         getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
+        processLogout: () => dispatch(actions.processLogout()),
     };
 };
 

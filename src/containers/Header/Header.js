@@ -8,6 +8,7 @@ import './Header.scss';
 import { LANGUAGES, USER_ROLE } from '../../utils'
 import { FormattedMessage } from 'react-intl'
 import _ from 'lodash';
+import { withRouter } from 'react-router';
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +30,11 @@ class Header extends Component {
             }
             if (role == USER_ROLE.OWNER) {
                 menu = ownerMenu;
+            }
+            if (role === USER_ROLE.FLATMATE || role === USER_ROLE.USER) {
+                this.props.history.push('/home')
+
+
             }
         }
         this.setState({
@@ -89,4 +95,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

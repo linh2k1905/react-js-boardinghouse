@@ -23,7 +23,9 @@ class Schedule extends Component {
             ownerState: {},
             email: '',
             desc: '',
-            tel: ''
+            tel: '',
+            password: '',
+            created: false
 
         }
     }
@@ -131,12 +133,18 @@ class Schedule extends Component {
     }
     toggle = () => {
         this.setState({
-            isOpen: false
+            isOpen: false,
+            email: '',
+            desc: '',
+            tel: '',
+            password: '',
+
         })
     }
     handleClickBookingButton = async () => {
         let res = await handlePostBooking({
             email: this.state.email,
+            password: this.state.password,
             idHouse: this.state.ownerState.id,
             time: this.state.dateSelect.time,
             date: this.state.dateSelect.date,
@@ -144,6 +152,12 @@ class Schedule extends Component {
             desc: this.state.desc ? this.state.desc : ''
         });
         console.log('kiem tra thu coi', res.data.users[1]);
+        if (res.data.users[1]) {
+            this.setState({
+                created: true
+            })
+        }
+
 
 
 
@@ -170,8 +184,8 @@ class Schedule extends Component {
         copyState[id] = event.target.value;
         this.setState({
             ...copyState
-        })
-        console.log(copyState);
+        });
+
     }
     render() {
         let { allDays, availableTime, dateSelect, detailHouse, ownerState } = this.state;
@@ -243,7 +257,7 @@ class Schedule extends Component {
                                     <h3>Thông tin Chủ trọ</h3>
                                     <p>Họ và tên :  {ownerState.User.firstName}</p>
                                     <p>Địa chỉ:{ownerState.User.address}</p>
-                                    <p>Địa chỉ:{ownerState.User.email}</p>
+                                    <p>Địa chỉ mail:{ownerState.User.email}</p>
                                     <p>Tel:{ownerState.User.tel}</p>
                                     <p>{dateSelect.time}</p>
                                     <p>{this.handleShowDateFromString(dateSelect.date)}</p>
@@ -273,16 +287,25 @@ class Schedule extends Component {
                                     value={this.state.email}
 
                                 ></input>
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    className='form-control'
+                                    onChange={(event) => this.handleInputBooking(event, 'password')}
+                                    value={this.state.password}
+
+                                ></input>
                                 <label>Tel</label>
                                 <input type="text"
                                     className='form-control'
-
                                     onChange={(event) => this.handleInputBooking(event, 'tel')}
                                     value={this.state.tel}
 
                                 ></input>
                                 <label>Lời nhắn gửi</label>
-                                <input type='textarea' className='form-control'
+                                <input
+                                    type='textarea'
+                                    className='form-control'
                                     value={this.state.desc}
                                     onChange={(event) => this.handleInputBooking(event, 'desc')}
 

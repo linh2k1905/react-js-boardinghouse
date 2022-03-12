@@ -38,6 +38,6 @@ export const CRUD_ACTIONS = {
 export const USER_ROLE = {
     ADMIN: "1",
     OWNER: "2",
-    USER: "3",
-    FLATMATE: "4"
+    FLATMATE: "3",
+    USER: "4",
 }

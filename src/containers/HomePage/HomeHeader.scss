@@ -48,6 +48,17 @@
             align-items: center;
             .welcome-text{
                 color: blue;
+             
+            }
+            .user-info{
+                
+                gap: 23px;
+                padding: 5px;
+                color: blue;
+                font-weight: 600;
+                background: gainsboro;
+                border: none;
+                border-radius: 3px;
             }
 
             .child-right-content{
