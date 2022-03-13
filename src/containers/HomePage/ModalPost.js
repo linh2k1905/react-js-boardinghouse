@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from 'react-intl';
 import { CRUD_ACTIONS, LANGUAGES, CommonUtils } from '../../utils';
 import * as actions from '../../store/actions';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 class ModalPost extends React.Component {
     constructor(props) {
@@ -106,10 +107,11 @@ class ModalPost extends React.Component {
 
     }
     checkValidInput = () => {
+
         let isValid = true;
         let arrCheck = [
             'name',
-            'userId',
+
             'cityId',
             'typeHouseId',
             'price',
@@ -120,6 +122,14 @@ class ModalPost extends React.Component {
             'descVi',
             'descEn'
         ]
+        if (!this.state.userId) {
+            isValid = false;
+
+            alert('Please login to post the infomation');
+            this.props.history.push('/login');
+
+
+        }
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
@@ -413,4 +423,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalPost);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ModalPost));

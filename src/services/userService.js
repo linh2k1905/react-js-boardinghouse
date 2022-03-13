@@ -96,6 +96,10 @@ const handlePostBooking = (data) => {
     return axios.post('api/user-booking', data);
 }
 
+const handlePostComment = (data) => {
+
+    return axios.post('/api/create-new-comment', data);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -118,6 +122,7 @@ export {
     searchHouseByTypeHouse,
     searchUserByTypeUser,
     handleGetInfoBooking,
-    handlePostBooking
+    handlePostBooking,
+    handlePostComment
 
 }

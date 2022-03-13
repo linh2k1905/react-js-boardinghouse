@@ -38,7 +38,7 @@ class Header extends Component {
             }
         }
         if (!userInfo) {
-            this.props.history.push('/home')
+            this.props.history.push('/login')
 
         }
         this.setState({

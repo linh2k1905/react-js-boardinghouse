@@ -5,10 +5,11 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
-import { getHouseServiceById, getAllUser, handleGetInfoBooking } from '../../../services/userService';
+import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostComment } from '../../../services/userService';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import Schedule from './Schedule';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import HomeFooter from '../../HomePage/HomeFooter';
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -18,7 +19,8 @@ class DetailHouse extends Component {
             isOpenFinder: false,
             listHouseFiler: [],
             isOpenModel: false,
-            owner: {}
+            owner: {},
+            comment: ''
 
         }
     }
@@ -64,9 +66,30 @@ class DetailHouse extends Component {
         })
         console.log('value check filter list house', value);
     }
+    handleComment = (event) => {
+        this.setState({
+            comment: event.target.value
+        })
 
+    }
+    handleCommentPost = async () => {
+        let { userInfo } = this.props;
+        let house = this.state.detailHouse
+        let content = this.state.comment
+        let res = await handlePostComment({
+            userId: userInfo.id,
+            houseId: house.id,
+            content: content
+
+
+        })
+        console.log('check cmmt', res);
+
+
+    }
     render() {
-        let { isOpenFinder, owner } = this.state;
+        let { isOpenFinder, owner, comment } = this.state;
+        console.log(comment);
 
 
         let imagebase64 = ''
@@ -187,9 +210,35 @@ class DetailHouse extends Component {
 
                         </MapContainer>
                     </div>
-                    <div className='comment-house'></div>
+                    <div></div>
+                    <div className='comment-house'>
+                        <div className='title-comment'><p>Comments about post</p></div>
+                        <form>
+                            <div className='row'>
+                                <div className='col-8'>
+                                    <input
+                                        type='text'
+                                        className='form-control '
+                                        placeholder='Please comment about your thinking'
+                                        onChange={(event) => this.handleComment(event)}
+                                    ></input>
+                                </div>
+                                <button
 
+                                    className='btn btn-primary col-1'
+                                    onClick={() => this.handleCommentPost()}
+                                >Post</button>
+                            </div>
+                        </form>
+                        <div>
+
+                        </div>
+                    </div>
+
+                    <div><HomeFooter /></div>
                 </div>
+
+
             </React.Fragment>
         )
     }
@@ -198,6 +247,7 @@ class DetailHouse extends Component {
 
 const mapStateToProps = state => {
     return {
+        userInfo: state.user.userInfo
 
     };
 };
