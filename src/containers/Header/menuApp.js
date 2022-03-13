@@ -93,6 +93,20 @@ export const ownerMenu = [
         ]
 
     },
+    { //hệ thống
+        name: 'menu.system.post',
+
+        menus: [
+            {
+                name: 'menu.system.post',
+                link: '/system/post'
+            },
+
+
+        ]
+
+
+    },
 
 
 

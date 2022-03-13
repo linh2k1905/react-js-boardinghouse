@@ -319,6 +319,7 @@ export const fetchAllPost = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllPost();
+            console.log('check res', res);
 
             if (res && res.errorCode === 0) {
 

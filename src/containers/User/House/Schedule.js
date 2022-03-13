@@ -189,7 +189,7 @@ class Schedule extends Component {
     }
     render() {
         let { allDays, availableTime, dateSelect, detailHouse, ownerState } = this.state;
-        let { language } = this.props;
+        let { language, userInfo } = this.props;
         console.log('check render state dateSelct', dateSelect);
 
         return (
@@ -281,6 +281,7 @@ class Schedule extends Component {
 
                             <form>
                                 <label>Email</label>
+                                { }
                                 <input type="text" className='form-control'
 
                                     onChange={(event) => this.handleInputBooking(event, 'email')}
@@ -330,7 +331,8 @@ class Schedule extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        userInfo: state.user.userInfo
     };
 };
 

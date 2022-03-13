@@ -13,7 +13,7 @@ class TableManageOwner extends Component {
         }
     }
     componentDidMount() {
-        this.props.fetchUserRedux('1');
+        this.props.fetchUserRedux('2');
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {

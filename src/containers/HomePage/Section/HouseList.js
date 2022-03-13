@@ -18,6 +18,13 @@ class HouseList extends Component {
 
         }
     }
+    componentDidMount() {
+        this.props.loadTopHouse();
+        this.setState({
+            listHouseArr: this.props.houseListRedux ? this.props.houseListRedux : []
+        })
+
+    }
     componentDidUpdate(prevProps, prevState, snapsot) {
         if (prevProps.houseListRedux != this.props.houseListRedux) {
             this.setState({
@@ -27,10 +34,7 @@ class HouseList extends Component {
 
 
     }
-    componentDidMount() {
-        this.props.loadTopHouse();
 
-    }
     handleShowDetailHouse(item) {
 
         this.props.history.push(`/detail-house/${item.id}`);
@@ -42,7 +46,8 @@ class HouseList extends Component {
         return (
             <div className='Owner-Owner'>
                 <div className='Owner-container-left'>
-                    {listhouse.map((item, index) => {
+                    {listhouse && listhouse.length > 0 && listhouse.map((item, index) => {
+
                         let imagebase64 = '';
                         if (item.image) {
                             imagebase64 = new Buffer(item.image, 'base64').toString('binary');
