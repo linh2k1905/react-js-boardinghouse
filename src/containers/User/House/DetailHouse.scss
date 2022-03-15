@@ -78,16 +78,28 @@
       
     }
     .map-detail-house{
-      width: 100%;height: 500px;
+      width: 100%;height: 100%;
     }
     .comment-house{
-        border: 1px solid red;
+        border: 1px solid rgb(238, 229, 229);
         height: 500px;
         margin-top: 10px;
+        position: relative;
         .title-comment{
             padding: 10px;
             font-size: 16px;
             font-weight: 400px;
         }
-    }
+        .all-comments{
+          
+                .name-commenter {
+                    padding: 10px;
+                    color: blue;
+                    font-size: 18px;
+                    font-weight: 400;
+            }
+
+            
+        }
+       }
 }

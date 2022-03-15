@@ -104,10 +104,10 @@ export const fetchCitySuccess = (data) => ({
     data: data
 
 })
-export const fetchAllUserStart = () => {
+export const fetchAllUserStart = (id) => {
     return async (dispatch, getState) => {
         try {
-            let res = await getAllUser('ALL');
+            let res = await getAllUser(id);
 
             if (res && res.errorCode === 0) {
 

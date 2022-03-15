@@ -8,6 +8,7 @@ import TableManageAdmin from '../containers/System/Admin/AdminRedux';
 import PostManage from '../containers/System/Admin/PostManage';
 import Header from '../containers/Header/Header';
 import CityManage from '../containers/System/Admin/CityManage';
+import BookingManage from '../containers/System/Admin/BookingManage';
 import Owner from './Owner';
 import ManageSchedule from '../containers/System/Owner/ManageSchedule'
 class System extends Component {
@@ -28,6 +29,7 @@ class System extends Component {
                             <Route path="/system/post" component={PostManage} />
                             <Route path="/system/city" component={CityManage} />
                             <Route path="/system/manage-booking" component={ManageSchedule} />
+                            <Route path="/system/manage-schedule" component={BookingManage} />
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>

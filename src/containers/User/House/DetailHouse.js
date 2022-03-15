@@ -5,7 +5,7 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
-import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostComment } from '../../../services/userService';
+import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostComment, handelGetAllCommentByHouseId } from '../../../services/userService';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import Schedule from './Schedule';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -20,7 +20,9 @@ class DetailHouse extends Component {
             listHouseFiler: [],
             isOpenModel: false,
             owner: {},
-            comment: ''
+            comment: '',
+            allcomments: [],
+
 
         }
     }
@@ -34,11 +36,10 @@ class DetailHouse extends Component {
                     detailHouse: res.data
                 })
             }
-            console.log('check state', this.state)
             if (this.state.detailHouse && this.state.detailHouse.User.id) {
                 let user = await handleGetInfoBooking(this.state.detailHouse.id, this.state.detailHouse.User.id);
-                if (user && user) {
-                    console.log('check res', user);
+                if (user && user.users) {
+
                     this.setState({
                         owner: user ? user.users : ''
                     })
@@ -47,7 +48,14 @@ class DetailHouse extends Component {
 
         }
 
+        let allcomments = await handelGetAllCommentByHouseId(this.state.detailHouse.id);
+        console.log('>>>>>', allcomments);
+        if (allcomments) {
+            this.setState({
+                allcomments: allcomments.comments
 
+            })
+        }
 
 
     }
@@ -64,7 +72,7 @@ class DetailHouse extends Component {
         this.setState({
             listHouseFiler: value
         })
-        console.log('value check filter list house', value);
+
     }
     handleComment = (event) => {
         this.setState({
@@ -83,14 +91,13 @@ class DetailHouse extends Component {
 
 
         })
-        console.log('check cmmt', res);
+
 
 
     }
     render() {
         let { isOpenFinder, owner, comment } = this.state;
-        console.log(comment);
-
+        let { allcomments } = this.state;
 
         let imagebase64 = ''
         if (this.state.detailHouse.User && this.state.detailHouse.User.image)
@@ -210,10 +217,9 @@ class DetailHouse extends Component {
 
                         </MapContainer>
                     </div>
-                    <div></div>
                     <div className='comment-house'>
                         <div className='title-comment'><p>Comments about post</p></div>
-                        <form>
+                        <div className='form-group'> <form>
                             <div className='row'>
                                 <div className='col-8'>
                                     <input
@@ -230,7 +236,30 @@ class DetailHouse extends Component {
                                 >Post</button>
                             </div>
                         </form>
-                        <div>
+                        </div>
+                        <div className='all-comments'>
+                            <div className='title'>Tất cả bình luận</div>
+
+                            {allcomments && allcomments.length > 0 &&
+                                allcomments.map((item, index) => {
+
+
+
+                                    return (
+
+                                        <div>
+                                            <div className='name-commenter'>
+                                                {item.User.firstName + " " + item.User.lastName}: {item.content}
+                                            </div>
+
+
+                                        </div>
+
+                                    )
+                                })
+
+                            }
+
 
                         </div>
                     </div>

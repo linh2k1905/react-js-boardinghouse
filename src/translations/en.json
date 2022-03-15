@@ -56,7 +56,8 @@
             "system-administrator": {
                 "user-manage": "Manage User",
                 "user-owner": "Manage Owner",
-                "owner-booking": "Manage Booking",
+                "owner-booking": "Manage Schedule",
+                "owner-schedule": "Manage Booking",
                 "user-admin": "Manage Admin"
             },
             "system-parameter": {
@@ -109,6 +110,14 @@
             "lang": "Longitude",
             "descEn": "English Description",
             "descVi": "Vietnamese Description"
+        },
+        "booking-manage": {
+            "booking-manage": "Booking manangement",
+            "house": "House ",
+            "users": "Booking User ",
+            "desc": "Notice",
+            "date": "Date",
+            "time": "Time"
         }
     }
 }

@@ -6,7 +6,7 @@ const handelLoginAPI = (email, password) => {
     });
 }
 const getAllUser = (idUser) => {
-    return axios.get(`/api/get-all-users?id=${idUser}`);
+    return axios.get(`/api/get-all-users-by-type-user?roleId=${idUser}`);
 }
 const getAllPost = () => {
     return axios.get('/api/get-all-house');
@@ -100,6 +100,18 @@ const handlePostComment = (data) => {
 
     return axios.post('/api/create-new-comment', data);
 }
+const handelGetAllCommentByHouseId = (data) => {
+
+    return axios.get(`/api/get-all-comment-by-houseId?idHouse=${data}`);
+}
+const handelGetAllBooking = (data) => {
+
+    return axios.get(`api/admin-booking?id=${data}`);
+}
+const handelDeleteBooking = (id) => {
+    return axios.delete(`api/delete-booking-by-id?id=${id}`
+    );
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -123,6 +135,9 @@ export {
     searchUserByTypeUser,
     handleGetInfoBooking,
     handlePostBooking,
-    handlePostComment
+    handlePostComment,
+    handelGetAllCommentByHouseId,
+    handelGetAllBooking,
+    handelDeleteBooking
 
 }

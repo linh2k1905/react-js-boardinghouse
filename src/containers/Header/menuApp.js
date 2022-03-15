@@ -47,6 +47,10 @@ export const adminMenu = [
                 name: 'menu.system.system-administrator.owner-booking',
                 link: '/system/manage-booking'
             },
+            {
+                name: 'menu.system.system-administrator.owner-schedule',
+                link: '/system/manage-schedule'
+            },
 
 
         ]

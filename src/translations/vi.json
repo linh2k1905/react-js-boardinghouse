@@ -56,7 +56,8 @@
             "system-administrator": {
                 "user-manage": "Quản lý người dùng",
                 "user-owner": "Quản lý chủ trọ",
-                "owner-booking": "Quản lý  lịch hẹn",
+                "owner-booking": "Quản lý  lịch trình",
+                "owner-schedule": "Quản lý lịch hẹn",
                 "user-admin": "Quản lý admin"
             },
             "system-parameter": {
@@ -108,6 +109,14 @@
             "lang": "Kinh độ",
             "descEn": "Mô tả Tiếng Anh",
             "descVi": "Mô tả Tiếng Việt"
+        },
+        "booking-manage": {
+            "booking-manage": "Quản lý lịch hẹn",
+            "house": "Tên nhà ",
+            "users": "Người dùng ",
+            "desc": "Lời nhắn",
+            "date": "Ngày",
+            "time": "Thời gian"
         }
     }
 }
