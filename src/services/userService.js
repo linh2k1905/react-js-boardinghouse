@@ -112,6 +112,10 @@ const handelDeleteBooking = (id) => {
     return axios.delete(`api/delete-booking-by-id?id=${id}`
     );
 }
+const editBooKingService = (data) => {
+
+    return axios.put('/api/edit-booking-by-id', data);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -138,6 +142,7 @@ export {
     handlePostComment,
     handelGetAllCommentByHouseId,
     handelGetAllBooking,
-    handelDeleteBooking
+    handelDeleteBooking,
+    editBooKingService
 
 }

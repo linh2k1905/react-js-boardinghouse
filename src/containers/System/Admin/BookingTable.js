@@ -6,16 +6,8 @@ import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import { handelGetAllBooking, handelDeleteBooking } from '../../../services/userService'
 import { toast } from 'react-toastify';
-let rangeTime = [{ value: "7am-8am", isSelect: false },
-{ value: "8am-9am", isSelect: false },
-{ value: "9am-10am", isSelect: false },
-{ value: "10am-11am", isSelect: false },
-{ value: "11am-12am", isSelect: false },
-{ value: "1pm-2pm", isSelect: false },
-{ value: "2pm-3pm", isSelect: false },
-{ value: "3pm-4pm", isSelect: false },
-{ value: "4pm-5pm", isSelect: false },
-];
+import moment from 'moment';
+import localization from 'moment/locale/vi';
 class BookingTable extends Component {
 
     constructor(props) {
@@ -36,7 +28,6 @@ class BookingTable extends Component {
 
     async componentDidMount() {
         let res = await handelGetAllBooking('ALL');
-        console.log(res);
         if (res && res.data) {
             this.setState({
                 listBookings: res.data
@@ -45,22 +36,31 @@ class BookingTable extends Component {
 
 
     }
-    async componentDidUpdate(prevProps, prevState, snapsot) {
-        let res = await handelGetAllBooking('ALL');
-        if (res.data != this.state.listBookings) {
+    componentDidUpdate(prevProps, prevState, snapsot) {
 
 
-            if (res && res.data) {
-                this.setState({
-                    listBookings: res.data
-                })
-            }
+    }
+    changeMillisecondIntoUTC = (str) => {
+        str = parseInt(str);
+        let dateURTC = new Date(str);
+        let datePicker = [];
+        datePicker[0] = dateURTC;
+        datePicker[1] = dateURTC;
+        console.log(typeof datePicker, datePicker);
+        return datePicker;
+    }
+    handleEditStatus = () => {
+        this.setState({
 
-        }
-
+        })
     }
 
     handleEditBooking = (booking) => {
+        this.props.handleActionBooking(CRUD_ACTIONS.EDIT);
+
+        let date = parseInt(booking.date);
+        let datePicker = this.changeMillisecondIntoUTC(date);
+        this.props.handleEditBookingFromParent(booking, datePicker);
 
 
     }
@@ -70,9 +70,15 @@ class BookingTable extends Component {
             listBookings: this.state.listBookings
         })
     }
-
+    changeMillisecondInto = (str) => {
+        str = parseInt(str);
+        let dateURTC = moment(new Date(str)).format('DD/MM/YYYY');
+        console.log(dateURTC);
+        return dateURTC;
+    }
     render() {
         let bookings = this.state.listBookings;
+        console.log('check', bookings);
         return (
             <div className='col-12 mb5'>
                 <table className="TableManage">
@@ -88,14 +94,10 @@ class BookingTable extends Component {
                     {bookings && bookings.length > 0 &&
                         bookings.map((item, index) => {
                             return (
-
-
-
-
                                 <tr key={index}>
 
                                     <td>{item.time}</td>
-                                    <td>{item.date}</td>
+                                    <td>{this.changeMillisecondInto(item.date)}</td>
                                     <td>{item.House.name}</td>
                                     <td>{item.User.email}</td>
                                     <td>

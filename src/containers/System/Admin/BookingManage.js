@@ -5,7 +5,21 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import BookingTable from './BookingTable';
-import Select from 'react-select'
+import Select from 'react-select';
+import { handlePostBooking, editBooKingService } from '../../../services/userService';
+import moment, { months } from 'moment';
+import localization from 'moment/locale/vi';
+import DatePicker from "../../../components/Input/DatePicker";
+const rangeTime = [{ value: "7am-8am", isSelect: false },
+{ value: "8am-9am", isSelect: false },
+{ value: "9am-10am", isSelect: false },
+{ value: "10am-11am", isSelect: false },
+{ value: "11am-12am", isSelect: false },
+{ value: "1pm-2pm", isSelect: false },
+{ value: "2pm-3pm", isSelect: false },
+{ value: "3pm-4pm", isSelect: false },
+{ value: "4pm-5pm", isSelect: false },
+];
 class PostManage extends Component {
 
     constructor(props) {
@@ -13,11 +27,18 @@ class PostManage extends Component {
         this.state = {
             listHouse: [],
             listUser: [],
-            userSelected: '',
+            userList: [],
+            email: '',
             houseSelected: '',
             desc: '',
-            date: '',
             time: '',
+            action: CRUD_ACTIONS.CREATE,
+            currentDate: '',
+            password: '',
+            datePickerEdit: [],
+            datePicker: [],
+            editBookingId: '',
+            date: []
 
 
         }
@@ -38,21 +59,30 @@ class PostManage extends Component {
             this.setState({
                 listHouse: this.buidDataSelectHouse(this.props.postRedux),
 
+
             })
         }
         if (prevProps.userRedux != this.props.userRedux) {
             this.setState({
 
-                listUser: this.buidDataSelect(this.props.userRedux)
+                listUser: this.buidDataSelect(this.props.userRedux),
+                userList: this.props.postRedux
             })
         }
 
 
 
     }
+    handleChangeDatePicker = (date) => {
+
+        this.setState({
+            currentDate: date[0],
+        })
+
+    }
     checkValidInput = () => {
         let isValid = true;
-        let arrCheck = [
+        let arrCheck = ['time', 'currentDate', 'email', 'houseSelected', 'desc'
 
         ]
         for (let i = 0; i < arrCheck.length; i++) {
@@ -71,36 +101,25 @@ class PostManage extends Component {
 
     onChangeInput = (event, inputId) => {
 
-        let copyState = { ...this.state }
-        copyState[inputId] = event.target.value
+        let copyState = { ...this.state };
+        copyState[inputId] = event.target.value;
         this.setState({
             ...copyState
 
         })
-        console.log(this.state);
-
-
-
-    }
-    handleEditBooking = (house) => {
-
 
 
 
 
     }
-    handleSaveBooking = () => {
 
 
-
-
-    }
     buidDataSelect = (data) => {
         let result = [];
         if (data && data.length > 0) {
             data.map((item, index) => {
                 let obj = {};
-                obj.value = item.id;
+                obj.value = item.email;
                 obj.label = `${item.email}`
                 result.push(obj);
             })
@@ -124,20 +143,73 @@ class PostManage extends Component {
 
     }
     handleOnChange = (selectedOption) => {
-
-        console.log(selectedOption);
         this.setState({
-            userSelected: selectedOption
+            email: selectedOption
         })
     }
-    handleOnChangeHouse = (value) => {
+    handleOnChangeHouse = (option) => {
         this.setState({
-            houseSelected: value
+            houseSelected: option
         })
+    }
+    handleSaveBooking = async () => {
+        let check = this.checkValidInput();
+        let { desc, time, email, houseSelected, currentDate, password, action, editBookingId } = this.state;
+        if (check) {
+            if (action === CRUD_ACTIONS.CREATE) {
+                let formatDate = new Date(currentDate).getTime().toString();
+                let res = await handlePostBooking({
+                    email: email.value,
+                    desc: desc,
+                    time: time,
+                    idHouse: houseSelected.value,
+                    date: formatDate,
+                    password: password
+                });
+
+            }
+            if (action === CRUD_ACTIONS.EDIT) {
+                let formatDate = new Date(currentDate).getTime().toString();
+                let res = await editBooKingService({
+                    email: email.value,
+                    desc: desc,
+                    time: time,
+                    idHouse: houseSelected.value,
+                    date: formatDate,
+                    password: password,
+                    id: editBookingId
+                });
+
+            }
+
+        }
+
+    }
+    handleActionBooking = (action) => {
+        this.setState({
+            action: action
+        })
+    }
+
+    handleEditBooking = (booking, datePicker) => {
+
+        this.setState({
+            editBookingId: booking.id,
+            email: { value: booking.User.email, label: booking.User.email },
+            desc: booking.description,
+            time: booking.time,
+            houseSelected: { value: booking.idHouse, label: booking.House.name },
+            date: datePicker,
+        })
+
+
+
+
     }
     render() {
-        let { listHouse, listUser } = this.state;
+        let { listHouse, listUser, action, time, currentDate, desc, email, houseSelected, date } = this.state;
 
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
         return (
             <div className='container'>
@@ -148,7 +220,7 @@ class PostManage extends Component {
                         <div className='col-6 input-user'>
                             <label><FormattedMessage id='system.booking-manage.users' /></label>
                             <Select
-                                value={this.state.userSelected}
+                                value={email}
                                 onChange={this.handleOnChange}
                                 options={listUser}
                             />
@@ -158,7 +230,7 @@ class PostManage extends Component {
                             <label><FormattedMessage id='system.booking-manage.house' /></label>
 
                             <Select
-                                value={this.state.houseSelected}
+                                value={houseSelected}
                                 onChange={this.handleOnChangeHouse}
                                 options={listHouse}
                             />
@@ -172,34 +244,48 @@ class PostManage extends Component {
                                 type='textarea'
                                 className='form-control'
                                 onChange={(event) => this.onChangeInput(event, 'desc')}
+                                value={desc}
 
 
                             />
                         </div>
-                        <div className='col-6 input-user'>
+                        <div className='col-4 input-user'>
                             <label><FormattedMessage id='system.booking-manage.time' /></label>
-                            <input
-                                type='text'
+                            <select className='form-control'
 
-                                className='form-control'
                                 onChange={(event) => this.onChangeInput(event, 'time')}
-
-
-                            />
+                                value={time}
+                            >
+                                <option selected>Choose a option</option>
+                                {rangeTime && rangeTime.map((item, index) => {
+                                    return (
+                                        <option
+                                            key={index}
+                                        >{item.value}</option>
+                                    )
+                                })
+                                }
+                            </select>
 
                         </div>
 
-                        <div className='col-6 input-user'>
+                        <div className='col-4 input-user'>
                             <label><FormattedMessage id='system.booking-manage.date' /></label>
-                            <input
-                                type='text'
-
-                                className='form-control'
-                                onChange={(event) => this.onChangeInput(event, 'date')}
-
-
-
+                            <DatePicker
+                                onChange={this.handleChangeDatePicker}
+                                className="form-control"
+                                minDate={yesterday}
+                                value={date ? date[0] : date[1]}
                             />
+
+                        </div>
+                        <div className='col-4 input-user'>
+                            <label>Password</label>
+                            <input
+                                className='form-control'
+                                type='password'
+                                onChange={(event) => this.onChangeInput(event, 'password')}
+                            ></input>
 
                         </div>
                     </div>
@@ -207,7 +293,7 @@ class PostManage extends Component {
 
                         <button
                             className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning col-1 ' : 'btn btn-primary col-1 btn-save'}
-                            onClick={() => this.handleSavePost()}
+                            onClick={() => this.handleSaveBooking()}
 
 
                         ><FormattedMessage id='system.user-manage.save' /> </button>
@@ -215,7 +301,10 @@ class PostManage extends Component {
 
                 </form>
 
-                <BookingTable />
+                <BookingTable
+                    handleEditBookingFromParent={this.handleEditBooking}
+                    handleActionBooking={this.handleActionBooking}
+                />
 
 
             </div >
