@@ -104,18 +104,7 @@ class CityTable extends Component {
                             }
                         </select>
                     </div>
-                    <div className='col-3'>
-                        <label className=''> Tình trạng phòng </label>
-                        <select>
 
-
-                            <option value='Y'>Trống</option>
-                            <option value='Y'>Đã thuê</option>
-
-
-
-                        </select>
-                    </div>
                     <div className='col-3'>
                         <button>Thống kê</button>
 

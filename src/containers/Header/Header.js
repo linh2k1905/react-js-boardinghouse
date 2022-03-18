@@ -31,7 +31,7 @@ class Header extends Component {
             if (role == USER_ROLE.OWNER) {
                 menu = ownerMenu;
             }
-            if (role === USER_ROLE.FLATMATE || role === USER_ROLE.USER || !role) {
+            if (role === USER_ROLE.FLATMATE || role === USER_ROLE.USER) {
                 this.props.history.push('/home')
 
 

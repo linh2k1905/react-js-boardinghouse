@@ -25,7 +25,10 @@ class Schedule extends Component {
             desc: '',
             tel: '',
             password: '',
-            created: false
+            created: false,
+            name: '',
+            nameOwner: '',
+            address: ''
 
         }
     }
@@ -149,9 +152,11 @@ class Schedule extends Component {
             time: this.state.dateSelect.time,
             date: this.state.dateSelect.date,
             tel: this.state.tel ? this.state.tel : '',
-            desc: this.state.desc ? this.state.desc : ''
+            desc: this.state.desc ? this.state.desc : '',
+            name: this.state.ownerState.name ? this.state.ownerState.name : '',
+            address: this.state.ownerState.address ? this.state.ownerState.address : '',
+            nameOwner: this.state.ownerState.User && this.state.ownerState.User.firstName && this.state.ownerState.User.lastName ? this.state.ownerState.User.firstName + " " + this.state.ownerState.User.lastName : ' '
         });
-        console.log('kiem tra thu coi', res.data.users[1]);
         if (res.data.users[1]) {
             this.setState({
                 created: true
@@ -255,7 +260,7 @@ class Schedule extends Component {
                             {ownerState && ownerState.User ?
                                 <div className='col-6'>
                                     <h3>Thông tin Chủ trọ</h3>
-                                    <p>Họ và tên :  {ownerState.User.firstName}</p>
+                                    <p>Họ và tên :  {ownerState.User.firstName} {ownerState.User.lastName}</p>
                                     <p>Địa chỉ:{ownerState.User.address}</p>
                                     <p>Địa chỉ mail:{ownerState.User.email}</p>
                                     <p>Tel:{ownerState.User.tel}</p>

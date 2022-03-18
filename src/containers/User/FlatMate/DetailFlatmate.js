@@ -5,7 +5,7 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailFlatmate.scss'
-import { getAllUser } from '../../../services/userService';
+import { getAllUserById } from '../../../services/userService';
 
 class DetailFlatmate extends Component {
 
@@ -21,9 +21,7 @@ class DetailFlatmate extends Component {
 
     async componentDidMount() {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
-            let res = await getAllUser(this.props.match.params.id);
-            console.log("check ", res);
-
+            let res = await getAllUserById(this.props.match.params.id);
             if (res && res.errorCode === 0) {
                 this.setState({
                     detailUser: res.users
@@ -93,6 +91,8 @@ class DetailFlatmate extends Component {
 
 
                     <div className='list-post'>
+                        <div className='title'>{this.props.language === LANGUAGES.VI ? 'Danh sách bài đăng' : ' List posts'}</div>
+                        <div className='a-post-of-user'></div>
                     </div>
 
                 </div>
@@ -104,7 +104,7 @@ class DetailFlatmate extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        language: state.app.language
     };
 };
 

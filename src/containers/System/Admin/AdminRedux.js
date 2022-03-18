@@ -5,7 +5,7 @@ import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import { toast } from 'react-toastify';
-import TableManageOwner from './TableManageOwner';
+import TableManageAdmin from './TableManageAdmin';
 import Lightbox from 'react-image-lightbox';
 
 class AdminRedux extends Component {
@@ -248,7 +248,7 @@ class AdminRedux extends Component {
                                 }}
                                 value={roleId}
                             >
-                                <option value="" selected disabled hidden>Choose here</option>
+                                <option value="" selected >Choose here</option>
                                 {roles && roles.length > 0 &&
                                     roles.map((item, index) => {
 
@@ -318,7 +318,7 @@ class AdminRedux extends Component {
 
                 </form>
                 <div className='col-12 mb-5'>
-                    <TableManageOwner
+                    <TableManageAdmin
                         handleEditUserFromParentKey={this.handleEditUserFromParent}
                         action={this.state.action}
                     />

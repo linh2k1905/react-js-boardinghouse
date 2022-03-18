@@ -8,6 +8,9 @@ const handelLoginAPI = (email, password) => {
 const getAllUser = (idUser) => {
     return axios.get(`/api/get-all-users-by-type-user?roleId=${idUser}`);
 }
+const getAllUserById = (idUser) => {
+    return axios.get(`/api/get-user-by-id?id=${idUser}`);
+}
 const getAllPost = () => {
     return axios.get('/api/get-all-house');
 }
@@ -143,6 +146,7 @@ export {
     handelGetAllCommentByHouseId,
     handelGetAllBooking,
     handelDeleteBooking,
-    editBooKingService
+    editBooKingService,
+    getAllUserById
 
 }
