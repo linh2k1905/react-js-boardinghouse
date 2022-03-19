@@ -46,7 +46,7 @@ class PostManage extends Component {
 
     async componentDidMount() {
         this.props.getAllPost();
-        this.props.getUser(4);
+        this.props.getUser(2);
 
 
 
@@ -329,7 +329,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
         getCityStart: () => dispatch(actions.fetchCitiesStart()),
-        getUser: () => dispatch(actions.fetchAllUserStart(4)),
+        getUser: (id) => dispatch(actions.fetchAllUserStart(id)),
         createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
         getAllPost: () => dispatch(actions.fetchAllPost()),
         editPostRedux: (data) => dispatch(actions.fetchEditPost(data))

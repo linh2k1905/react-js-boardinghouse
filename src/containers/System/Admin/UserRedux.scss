@@ -124,5 +124,24 @@
   .filter-houses{
     width: 100%;
     height: 35px;
+    justify-items: center;
+    .btn-thongke{
+      border: none;
+      color: whitesmoke;
+      background-color: blue;
+      height: 33px;
+      border-radius: 3px;
+      margin-top: 22px;
+      
+    }
+    .city-table{
+      margin: 10px 10px;
+      padding: 10px 10px;
+
+    }
   }
+}
+.city-manage{
+  margin: 10px 10px;
+  
 }

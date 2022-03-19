@@ -119,6 +119,16 @@ const editBooKingService = (data) => {
 
     return axios.put('/api/edit-booking-by-id', data);
 }
+
+const handleVerifyBooking = (data) => {
+
+    return axios.post('/api/verify-book-appoinment', data);
+}
+
+const getFilterHouseService = (data) => {
+
+    return axios.get(`/api/get-filter-house?idUser=${data.idUser}&idCity=${data.idCity}`);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -147,6 +157,8 @@ export {
     handelGetAllBooking,
     handelDeleteBooking,
     editBooKingService,
-    getAllUserById
+    getAllUserById,
+    handleVerifyBooking,
+    getFilterHouseService
 
 }

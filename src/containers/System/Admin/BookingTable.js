@@ -84,6 +84,7 @@ class BookingTable extends Component {
                 <table className="TableManage">
                     <tr>
                         <th>Time</th>
+                        <th>Status</th>
                         <th>Date</th>
                         <th>Name House</th>
                         <th>Email user booking</th>
@@ -97,6 +98,7 @@ class BookingTable extends Component {
                                 <tr key={index}>
 
                                     <td>{item.time}</td>
+                                    <td>{item.status}</td>
                                     <td>{this.changeMillisecondInto(item.date)}</td>
                                     <td>{item.House.name}</td>
                                     <td>{item.User.email}</td>

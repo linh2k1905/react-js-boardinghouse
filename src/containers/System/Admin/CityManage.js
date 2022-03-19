@@ -46,8 +46,10 @@ class CityManage extends Component {
 
 
         return (
-            <div className='container'>
-                <CityTable />
+            <div className='container city-manage'>
+                <div className='container'>
+                    <CityTable />
+                </div>
             </div >
         )
     }

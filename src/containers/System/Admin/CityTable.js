@@ -4,9 +4,17 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { editPostService } from '../../../services/userService'
-
-
+import { getFilterHouseService } from '../../../services/userService'
+import moment from 'moment';
+import Select from 'react-select';
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        borderBottom: '1px dotted pink',
+        color: state.isSelected ? 'red' : 'blue',
+        padding: 20,
+    })
+}
 class CityTable extends Component {
 
     constructor(props) {
@@ -15,6 +23,11 @@ class CityTable extends Component {
             citiesArr: [],
             ownerArr: [],
             allpostsArray: [],
+            idUser: '',
+            city: '',
+            allpostsFilter: [],
+            userselected: {},
+            citySelected: {}
 
 
 
@@ -29,22 +42,51 @@ class CityTable extends Component {
 
 
     }
+    buidDataSelect = (data) => {
+        let result = [{ value: '', lable: 'Chọn một người dùng' }];
+        if (data && data.length > 0) {
+            data.map((item, index) => {
+                let obj = {};
+                obj.value = item.id;
+                obj.label = `${item.email}`
+                result.push(obj);
+            })
+
+        }
+        return result;
+
+    }
+    buidDataSelectCity = (data) => {
+        let result = [{ value: '', lable: 'Chọn một thành phố' }];
+        if (data && data.length > 0) {
+            data.map((item, index) => {
+                let obj = {};
+                obj.value = item.id;
+                obj.label = `${item.name}`
+                result.push(obj);
+            })
+
+        }
+        return result;
+
+    }
     componentDidUpdate(prevProps, prevState, snapsot) {
         if (prevProps.cities != this.props.cities) {
 
             this.setState({
-                citiesArr: this.props.cities
+                citiesArr: this.buidDataSelectCity(this.props.cities)
 
             })
         }
         if (prevProps.owner != this.props.owner) {
 
             this.setState({
-                ownerArr: this.props.owner
+                ownerArr: this.buidDataSelect(this.props.owner)
 
             })
         }
         if (prevProps.allposts != this.props.allposts) {
+
 
             this.setState({
                 allpostsArray: this.props.allposts
@@ -56,101 +98,128 @@ class CityTable extends Component {
 
 
 
+
+
+
     }
 
 
+    handleOnChangeSelect = (ownerselected) => {
+        this.setState({
+            userselected: ownerselected
+        })
 
+    }
+    handleOnChangeSelectCity = (cityselected) => {
+        this.setState({
+            citySelected: cityselected
+        })
+
+    }
+    handleOnClick = async () => {
+        let res = await getFilterHouseService({
+            idUser: this.state.userselected.value,
+            idCity: this.state.citySelected.value
+        })
+
+        if (res && res.data) {
+            this.setState({
+                allpostsArray: res.data
+
+            })
+        }
+    }
+    handleTime = (date) => {
+        let time = moment(new Date(date)).format('MM/DD/YYYY');
+        return time;
+    }
     render() {
 
 
-        let cities = this.state.citiesArr;
-        let owner = this.state.ownerArr;
         let house = this.state.allpostsArray;
-        console.log(house);
+        let { ownerArr, userselected, citySelected, citiesArr } = this.state
         return (
             <div className='container-listhouse-filter'>
-                <div className='filter-houses row mt-3 col-12'>
-                    <div className='col-3'>
-                        <label> Chọn thành phố </label>
-                        <select>
-                            {cities && cities.length > 0 &&
+                <div className='filter-houses row col-12 mb-5'>
 
-                                cities.map((item, index) => {
+                    <div className='col-5'>
+                        <label>Chọn thành phố</label>
 
-                                    return (
+                        <Select
 
-                                        <option value={item.id}>{item.name}</option>
+                            onChange={this.handleOnChangeSelectCity}
+                            options={citiesArr}
+                            value={citySelected}
 
-
-                                    )
-                                })
-                            }
-                        </select>
+                        />
                     </div>
-                    <div className='col-3'>
-                        <label className=''> Tên </label>
-                        <select>
-                            {owner && owner.length > 0 &&
+                    <div className='col-5'>
+                        <label>Chọn email </label>
 
-                                owner.map((item, index) => {
+                        <Select
 
-                                    return (
+                            onChange={this.handleOnChangeSelect}
+                            options={ownerArr}
+                            value={userselected}
+                            styles={customStyles}
 
-                                        <option value={item.id}>{item.firstName} {item.lastName}</option>
-
-
-                                    )
-                                })
-                            }
-                        </select>
+                        />
                     </div>
 
-                    <div className='col-3'>
-                        <button>Thống kê</button>
+                    <div className='col-2'>
+                        <button
+                            onClick={() => this.handleOnClick()}
+                            className='btn-thongke'
+                        >Thống kê</button>
 
                     </div>
                 </div>
 
-                <React.Fragment>
-
-                    <div className='col-12 mb5'>
-                        <table className="TableManage">
-                            <tr>
-                                <th>User</th>
-                                <th>Adrress</th>
-                                <th>Owner</th>
-                                <th>CreateDate</th>
-
-                            </tr>
-                            {house && house.length > 0 &&
-                                house.map((item, index) => {
-                                    return (
-
-                                        <>
 
 
-                                            <tr id={index}>
-                                                <td>{item.name}</td>
-                                                <td>{item.address}</td>
-                                                <td>{item.User.firstName}</td>
-                                                <td>{item.createdAt}</td>
+                <div className='col-12 mb5'>
+                    <table className="TableManage">
+                        <tr>
+                            <th>Name House</th>
+                            <th>City</th>
+                            <th>Adrress</th>
+                            <th>Owner</th>
+                            <th>Created Date</th>
 
 
-                                            </tr>
+                        </tr>
+
+                        {house && house.length > 0 &&
+                            house.map((item, index) => {
+                                return (
+
+                                    <>
 
 
-
-                                        </>
-                                    )
-                                })
-                            }
-
-                        </table>
+                                        <tr id={index}>
+                                            <td>{item.name}</td>
+                                            <td>{item.City.name}</td>
+                                            <td>{item.address}</td>
+                                            <td>{item.User.firstName} {item.User.lastName}</td>
+                                            <td>{this.handleTime(item.createdAt)}</td>
 
 
 
-                    </div>
-                </React.Fragment>
+                                        </tr>
+
+
+
+                                    </>
+                                )
+                            })
+                        }
+
+                    </table>
+
+
+
+                </div>
+
 
 
 

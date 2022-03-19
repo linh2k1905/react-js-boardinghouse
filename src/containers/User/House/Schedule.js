@@ -9,6 +9,8 @@ import moment from 'moment';
 import localization from 'moment/locale/vi';
 import _ from 'lodash';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 class Schedule extends Component {
 
     constructor(props) {
@@ -159,14 +161,18 @@ class Schedule extends Component {
         });
         if (res.data.users[1]) {
             this.setState({
-                created: true
+                created: true,
+
+
             })
+
         }
-
-
-
-
-
+        if (!this.state.created) {
+            this.toggle();
+        }
+        else {
+            this.props.history.push('/home')
+        }
     }
     handleClickSchduleButton = (item) => {
 
@@ -187,6 +193,7 @@ class Schedule extends Component {
     handleInputBooking = (event, id) => {
         let copyState = { ...this.state };
         copyState[id] = event.target.value;
+        console.log(event.target.value);
         this.setState({
             ...copyState
         });
@@ -324,7 +331,7 @@ class Schedule extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.handleClickBookingButton}>Đặt lịch</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Đã chọn xong</Button>
+                        <Button color="secondary" onClick={this.toggle}>Đóng</Button>
                     </ModalFooter>
                 </Modal>
                 <div><FormattedMessage id="common.bookings" /> <i className="far fa-hand-pointer"></i></div>
@@ -347,4 +354,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Schedule));

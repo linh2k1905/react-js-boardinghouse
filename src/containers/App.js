@@ -21,6 +21,7 @@ import DetailFlatmate from './User/FlatMate/DetailFlatmate';
 import HomePage from './HomePage/HomePage.js'
 import CustomScrollbars from '../components/CustomScrollbars.js';
 import Owner from '../routes/Owner';
+import VerifyEmail from './User/House/VerifyEmail';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -59,6 +60,7 @@ class App extends Component {
                                     <Route path={path.DETAIL_HOUSE} component={DetailHouse} />
                                     <Route path={path.DETAIL_TYPE_HOUSE} component={DetailTypeHouse} />
                                     <Route path={path.DETAIL_FLATMATE} component={DetailFlatmate} />
+                                    <Route path={path.VERIFY_MAIL} component={VerifyEmail} />
                                     <Route path="/system/manage-booking" component={userIsAuthenticated(Owner)} />
 
                                 </Switch>
