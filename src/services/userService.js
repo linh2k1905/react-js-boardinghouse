@@ -132,6 +132,9 @@ const getFilterHouseService = (data) => {
 const getAllComment = () => {
     return axios.get('/api/get-all-comment');
 }
+const deleteCommentById = (data) => {
+    return axios.get('/api/delete-comment', data);
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -163,6 +166,7 @@ export {
     getAllUserById,
     handleVerifyBooking,
     getFilterHouseService,
-    getAllComment
+    getAllComment,
+    deleteCommentById
 
 }

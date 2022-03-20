@@ -7,7 +7,7 @@ import './UserRedux.scss';
 import { getFilterHouseService } from '../../../services/userService'
 import moment from 'moment';
 import Select from 'react-select';
-import { getAllComment } from '../../../services/userService'
+import { getAllComment, deleteCommentById } from '../../../services/userService'
 
 class CommentManage extends Component {
 
@@ -34,27 +34,39 @@ class CommentManage extends Component {
         this.props.getAllHouse();
         let res = await getAllComment();
         console.log('check res', res);
+        if (res && res.comments) {
+            this.setState({
+                allCommentsArray: res.comments
+            })
+        }
 
 
 
     }
-
+    handleTime = (date) => {
+        let time = moment(new Date(date)).format('MM/DD/YYYY');
+        return time;
+    }
 
     componentDidUpdate(prevProps, prevState, snapsot) {
 
 
 
 
-
-
-
-
-
+    }
+    handleEditComment = (item) => {
+        console.log('handle check', item);
+    }
+    handleDeleteComment = async (id) => {
+        await deleteCommentById({
+            id: id
+        })
     }
 
 
 
     render() {
+        let { allCommentsArray } = this.state;
 
 
 
@@ -91,14 +103,44 @@ class CommentManage extends Component {
                 <div className='col-12 mb5'>
                     <table className="TableManage">
                         <tr>
-                            <th>Name House</th>
-                            <th>User</th>
+                            <th>User Comment</th>
+                            <th>Content</th>
+                            <th>Status</th>
                             <th>Comment content</th>
-                            <th>Action</th>
+                            <th>Date Comments</th>
+                            <th className='action-special'>Actions</th>
 
 
 
                         </tr>
+                        {allCommentsArray && allCommentsArray.length > 0 &&
+                            allCommentsArray.map((item) => {
+                                return (
+                                    <tr>
+
+                                        <td>{item.User.firstName + item.User.lastName}</td>
+                                        <td>{item.content}</td>
+                                        <td>{item.status}</td>
+                                        <td>{item.House.name}</td>
+                                        <td>{this.handleTime(item.createdAt)}</td>
+                                        <td className='action-special'>   <button
+                                            className='btn-edit'
+                                            onClick={() => this.handleEditComment(item)}
+                                        >
+                                            <i className="fas fa-edit"></i> </button>
+                                            <button className='btn-delete'
+                                                onClick={() => this.handleDeleteComment(item.id)}
+                                            >
+                                                <i className="fas fa-trash-alt"></i></button>
+                                            <button
+                                                className='btn-edit'
+                                                onClick={() => this.handleHideComment(item)}
+                                            >
+                                                <i class="fa fa-lock"></i> </button>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
 
 
 
