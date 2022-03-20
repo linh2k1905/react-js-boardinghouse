@@ -66,8 +66,13 @@ export const adminMenu = [
                 //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
 
                 // ]
-                link: '/system/city'
+                link: '/system/list'
             },
+            {
+                name: 'menu.system.system-administrator.user-admin',
+                link: '/system/manage-comment'
+
+            }
 
 
         ]

@@ -82,16 +82,18 @@ class DetailHouse extends Component {
     }
     handleCommentPost = async () => {
         let { userInfo } = this.props;
-        let house = this.state.detailHouse
-        let content = this.state.comment
-        let res = await handlePostComment({
-            userId: userInfo.id,
-            houseId: house.id,
-            content: content
+        let house = this.state.detailHouse;
+        let content = this.state.comment;
+        if (userInfo.id) {
+            let res = await handlePostComment({
+                userId: userInfo.id,
+                houseId: house.id,
+                content: content
 
 
-        })
-
+            })
+        }
+        alert('Vui lòng đăng nhập để bình luận');
 
 
     }

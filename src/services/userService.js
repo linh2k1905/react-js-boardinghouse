@@ -129,6 +129,9 @@ const getFilterHouseService = (data) => {
 
     return axios.get(`/api/get-filter-house?idUser=${data.idUser}&idCity=${data.idCity}`);
 }
+const getAllComment = () => {
+    return axios.get('/api/get-all-comment');
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -159,6 +162,7 @@ export {
     editBooKingService,
     getAllUserById,
     handleVerifyBooking,
-    getFilterHouseService
+    getFilterHouseService,
+    getAllComment
 
 }
