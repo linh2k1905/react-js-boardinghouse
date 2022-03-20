@@ -54,11 +54,12 @@
             "booking": "Bookings Management",
             "list": "List Management",
             "system-administrator": {
-                "user-manage": "Manage User",
-                "user-owner": "Manage Owner",
-                "owner-booking": "Manage Schedule",
-                "owner-schedule": "Manage Booking",
-                "user-admin": "Manage Admin"
+                "user-manage": "Management All User",
+                "user-owner": "Management Owner",
+                "owner-booking": "Management Schedule",
+                "owner-schedule": "Management Booking",
+                "user-admin": "Management Admin",
+                "admin-comment": "Management Comment"
             },
             "system-parameter": {
                 "header": "System-parameter"

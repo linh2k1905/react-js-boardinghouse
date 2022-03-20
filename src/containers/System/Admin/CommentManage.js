@@ -7,7 +7,7 @@ import './UserRedux.scss';
 import { getFilterHouseService } from '../../../services/userService'
 import moment from 'moment';
 import Select from 'react-select';
-import { getAllComment, deleteCommentById } from '../../../services/userService'
+import { getAllComment, deleteCommentById, editCommentService } from '../../../services/userService'
 
 class CommentManage extends Component {
 
@@ -15,7 +15,8 @@ class CommentManage extends Component {
         super(props);
         this.state = {
 
-            ownerArr: [],
+            usersArr: [],
+            allHouses: [],
             allCommentsArray: [],
             idUser: '',
             idHouse: '',
@@ -27,10 +28,12 @@ class CommentManage extends Component {
 
         }
     }
-
+    refresh = () => {
+        window.location.reload();
+    }
     async componentDidMount() {
 
-        this.props.getAllOwner();
+        this.props.getAllOwner(4);
         this.props.getAllHouse();
         let res = await getAllComment();
         console.log('check res', res);
@@ -49,24 +52,67 @@ class CommentManage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapsot) {
+        if (prevProps.users != this.props.users) {
+            this.setState(
+                { usersArr: this.buidDataSelect(this.props.users) })
+
+        }
+        if (prevProps.allposts != this.props.allposts) {
+            this.setState(
+                { allHouses: this.buidDataSelectHouse(this.props.allposts) })
+
+        }
+
 
 
 
 
     }
-    handleEditComment = (item) => {
-        console.log('handle check', item);
-    }
-    handleDeleteComment = async (id) => {
-        await deleteCommentById({
-            id: id
+    handleHideComment = async (item) => {
+        await editCommentService({
+            id: item.id
         })
+    }
+    handleDeleteComment = async (item) => {
+        await deleteCommentById(item.id);
+        this.refresh();
+    }
+    buidDataSelect = (data) => {
+        let result = [];
+
+        if (data && data.length > 0) {
+            data.map((item, index) => {
+                let obj = {};
+                obj.value = item.id;
+                obj.label = `${item.email}`
+                result.push(obj);
+            })
+
+        }
+        return result;
+
+    }
+    buidDataSelectHouse = (data) => {
+        let result = [];
+
+        if (data && data.length > 0) {
+            data.map((item, index) => {
+                let obj = {};
+                obj.value = item.id;
+                obj.label = `${item.name} ${item.address}`
+                result.push(obj);
+            })
+
+        }
+        return result;
+
     }
 
 
 
     render() {
-        let { allCommentsArray } = this.state;
+        let { allCommentsArray, usersArr, allHouses } = this.state;
+
 
 
 
@@ -74,18 +120,19 @@ class CommentManage extends Component {
             <div className='container-listhouse-filter'>
                 <div className='filter-houses row col-12 mb-5'>
 
-                    <div className='col-5'>
-                        <label>Chọn thành phố</label>
+                    <div className='col-4 mt-2'>
+                        <label>Lọc người bình luận</label>
 
                         <Select
+                            options={usersArr}
 
                         />
                     </div>
-                    <div className='col-5'>
-                        <label>Chọn email </label>
+                    <div className='col-6 mt-2'>
+                        <label>Lọc theo nhà trọ </label>
 
                         <Select
-
+                            options={allHouses}
                         />
                     </div>
 
@@ -123,13 +170,9 @@ class CommentManage extends Component {
                                         <td>{item.status}</td>
                                         <td>{item.House.name}</td>
                                         <td>{this.handleTime(item.createdAt)}</td>
-                                        <td className='action-special'>   <button
-                                            className='btn-edit'
-                                            onClick={() => this.handleEditComment(item)}
-                                        >
-                                            <i className="fas fa-edit"></i> </button>
+                                        <td className='action-special'>
                                             <button className='btn-delete'
-                                                onClick={() => this.handleDeleteComment(item.id)}
+                                                onClick={() => this.handleDeleteComment(item)}
                                             >
                                                 <i className="fas fa-trash-alt"></i></button>
                                             <button
@@ -162,7 +205,7 @@ class CommentManage extends Component {
 const mapStateToProps = state => {
     return {
 
-        owner: state.admin.owner,
+        users: state.admin.users,
         allposts: state.admin.allposts
 
     };

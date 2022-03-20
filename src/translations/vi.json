@@ -54,11 +54,12 @@
             "booking": "Quản lý lịch đặt",
             "list": "Quản lý thống kê",
             "system-administrator": {
-                "user-manage": "Quản lý người dùng",
+                "user-manage": "Quản lý tất cả",
                 "user-owner": "Quản lý chủ trọ",
                 "owner-booking": "Quản lý  lịch trình",
                 "owner-schedule": "Quản lý lịch hẹn",
-                "user-admin": "Quản lý admin"
+                "user-admin": "Quản lý admin",
+                "admin-comment": "Quản lý bình luận"
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"

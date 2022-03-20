@@ -69,7 +69,7 @@ export const adminMenu = [
                 link: '/system/list'
             },
             {
-                name: 'menu.system.system-administrator.user-admin',
+                name: 'menu.system.system-administrator.admin-comment',
                 link: '/system/manage-comment'
 
             }
