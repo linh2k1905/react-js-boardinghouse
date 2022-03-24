@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
+import Select from 'react-select';
 import PostTable from './PostTable';
 
 class PostManage extends Component {
@@ -30,10 +31,24 @@ class PostManage extends Component {
             descVi: '',
             descEn: '',
             action: CRUD_ACTIONS.CREATE,
-            idHouseEdit: ''
+            idHouseEdit: '',
+            selectedOption: ''
         }
     }
+    buidDataSelect = (data) => {
+        let result = [];
+        if (data && data.length > 0) {
+            data.map((item, index) => {
+                let obj = {};
+                obj.value = item.id;
+                obj.label = `${item.email}`
+                result.push(obj);
+            })
 
+        }
+        return result;
+
+    }
     async componentDidMount() {
 
 
@@ -41,6 +56,16 @@ class PostManage extends Component {
         this.props.getCityStart();
         this.props.getOwner();
         this.props.getAllPost();
+        if (this.props.userInfo && this.props.userInfo.roleId === 2) {
+            console.log(this.props.userInfo);
+            this.setState({
+                selectedOption: {
+                    value: this.props.userInfo.id,
+                    label: this.props.userInfo.email,
+                },
+                userId: this.props.userInfo.id
+            })
+        }
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
@@ -59,7 +84,7 @@ class PostManage extends Component {
         if (prevProps.ownerRedux != this.props.ownerRedux) {
 
             this.setState({
-                userArray: this.props.ownerRedux
+                userArray: this.buidDataSelect(this.props.ownerRedux)
 
             })
         }
@@ -175,7 +200,7 @@ class PostManage extends Component {
 
         let isValid = this.checkValidInput();
         if (isValid === false) return;
-        let { action, name, userId, cityId, typeHouseId, price, address, image, area, lat, lang, descVi, descEn, idHouseEdit } = this.state;
+        let { action, name, userId, cityId, typeHouseId, price, address, image, area, lat, lang, descVi, descEn, idHouseEdit, selectedOption } = this.state;
 
         if (action === CRUD_ACTIONS.CREATE) {
             this.props.createNewPostRedux({
@@ -221,6 +246,12 @@ class PostManage extends Component {
         }
 
     }
+    handleOnChange = (selectedOption) => {
+        this.setState({
+            selectedOption: selectedOption,
+            userId: selectedOption.value
+        })
+    }
     render() {
 
         let language = this.props.language;
@@ -228,7 +259,7 @@ class PostManage extends Component {
         let cities = this.state.cityArray;
         let users = this.state.userArray;
         let houses = this.state.listHouses;
-        let { name, userId, cityId, typeHouseId, address, price, area, lat, lang, descVi, descEn, action } = this.state;
+        let { name, userId, cityId, typeHouseId, address, price, area, lat, lang, descVi, descEn, action, selectedOption } = this.state;
         return (
             <div className='container'>
                 <div className="title" ><FormattedMessage id='system.post-manage.post-manage' /></div>
@@ -248,35 +279,12 @@ class PostManage extends Component {
                         <div className='col-3 input-user'>
                             <label><FormattedMessage id='system.post-manage.users' /></label>
 
-                            <select
-
-                                className="form-control"
-                                onChange={(event) => {
-                                    this.onChangeInput(event, "userId")
-                                }}
-                                value={userId}
-                                disabled={action === CRUD_ACTIONS.EDIT ? true : false}
-
-                            >
-
-                                <option value="" selected disabled hidden>Choose here</option>
-                                {users && users.length > 0 &&
-                                    users.map((item, index) => {
-
-                                        return (
-
-
-                                            <option
-                                                value={item.id}
-                                            >{item.firstName}</option>
-
-                                        )
-
-
-                                    })
-                                }
-
-                            </select>
+                            <Select
+                                options={users}
+                                value={selectedOption}
+                                onChange={this.handleOnChange}
+                                isDisabled={this.props.userInfo.roleId === 2 ? true : false}
+                            />
 
                         </div>
                         <div className='col-3 input-user'>
@@ -478,7 +486,8 @@ const mapStateToProps = state => {
         typeHouseRedux: state.admin.typeHouses,
         citiesRedux: state.admin.cities,
         ownerRedux: state.admin.owner,
-        postRedux: state.admin.posts
+        postRedux: state.admin.posts,
+        userInfo: state.user.userInfo
 
 
     };

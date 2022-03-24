@@ -25,6 +25,7 @@ class ModalPost extends React.Component {
             lang: '',
             descVi: '',
             descEn: '',
+
             action: CRUD_ACTIONS.CREATE,
             cityArray: [],
             typeHouseArray: [],
@@ -158,7 +159,8 @@ class ModalPost extends React.Component {
                 image: image,
                 area: area,
                 descEn: descEn,
-                descVi: descVi
+                descVi: descVi,
+
 
             })
         }
@@ -209,11 +211,7 @@ class ModalPost extends React.Component {
 
                     </div>
                 </ModalHeader>
-                <ModalBody><div className='row'>
-                    <span><FormattedMessage id='common.aim' /></span>
-                    <span className='col-3 btn btn-project'><FormattedMessage id='common.find-flatmate' /></span>
-                    <span className='col-3 btn btn-project'><FormattedMessage id='header.post' /></span>
-                </div>
+                <ModalBody>
                     <form>
                         <div className='row'>
                             <div className='col-12 input-user'>

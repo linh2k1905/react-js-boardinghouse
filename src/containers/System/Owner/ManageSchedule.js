@@ -25,7 +25,6 @@ class ManageSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedOption: null,
             listOwner: [],
             selectedOption: {},
             currentDate: '',
@@ -36,6 +35,15 @@ class ManageSchedule extends Component {
     }
     componentDidMount() {
         this.props.fetchUserRedux();
+        if (this.props.userInfo && this.props.userInfo.roleId) {
+            this.setState({
+                selectedOption: {
+                    value: this.props.userInfo.id,
+                    label: this.props.userInfo.email
+
+                }
+            })
+        }
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
 
@@ -161,6 +169,7 @@ class ManageSchedule extends Component {
                                 value={this.state.selectedOption}
                                 onChange={this.handleChange}
                                 options={this.state.listOwner}
+                                isDisabled={this.props.userInfo.roleId === 2 ? true : false}
 
                             />
                         </div>
@@ -214,7 +223,9 @@ const mapStateToProps = state => {
     return {
 
         isLoggedIn: state.user.isLoggedIn,
-        owners: state.admin.owner
+        owners: state.admin.owner,
+        userInfo: state.user.userInfo
+
 
     };
 };
