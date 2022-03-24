@@ -10,9 +10,11 @@ import { changeLanguageApp } from '../../store/actions'
 import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
 import ModalPost from './ModalPost';
+import ModalUpdateUser from './ModalUpdateUser';
 import { searchHouseByUserService, searchHouseByTypeHouse } from '../../services/userService';
 import * as actions from '../../store/actions';
 import { withRouter } from 'react-router'
+import { update } from 'lodash';
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,8 @@ class HomeHeader extends Component {
             priceValue: '',
             isSearch: false,
             isOpenFinder: false,
-            isOpenModalPost: false
+            isOpenModalPost: false,
+            isModalUpdateUserInfo: false
 
 
         };
@@ -67,6 +70,11 @@ class HomeHeader extends Component {
 
         this.setState({
             isOpenModalPost: !this.state.isOpenModalPost
+        })
+    }
+    toggleModalUser = () => {
+        this.setState({
+            isModalUpdateUserInfo: !this.state.isModalUpdateUserInfo
         })
     }
 
@@ -159,6 +167,13 @@ class HomeHeader extends Component {
             isOpenModalPost: true
         })
     }
+    handleClickToUpdateInfomation = () => {
+        this.setState({
+            isModalUpdateUserInfo: true
+        })
+
+        console.log(this.props.userInfo);
+    }
     render() {
         let { language, isOpenFinder, isLoggedIn, userInfo, processLogout } = this.props;
         console.log(userInfo);
@@ -184,9 +199,15 @@ class HomeHeader extends Component {
                             <div className='welcome-text'><FormattedMessage id="header.welcome" /> TimPhongTro </div>
 
                             {isLoggedIn && userInfo ?
-                                <div className='user-info'>
-                                    {userInfo.firstName && userInfo.lastName ? "Hello, " + userInfo.firstName + " " + userInfo.lastName : userInfo.email}
+                                <div className='user-info'
 
+                                    onClick={() => this.handleClickToUpdateInfomation()}
+                                >
+                                    {userInfo.firstName && userInfo.lastName ? "Hello, " + userInfo.firstName + " " + userInfo.lastName : userInfo.email}
+                                    {/* <ModalUpdateUser
+                                        isOpen={this.state.isModalUpdateUserInfo}
+                                        toggleModalUser={this.toggleModalUser}
+                                    /> */}
                                 </div> :
                                 <>
                                     <div className='child-right-content'

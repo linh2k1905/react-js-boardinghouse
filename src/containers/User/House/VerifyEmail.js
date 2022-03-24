@@ -28,6 +28,7 @@ class VerifyEmail extends Component {
             let urlparam = new URLSearchParams(this.props.location.search);
             let token = urlparam.get('token');
             let booking = urlparam.get('bookingId');
+            console.log(typeof booking, typeof token);
             let res = await handleVerifyBooking({
                 token: token,
                 idBooking: booking
