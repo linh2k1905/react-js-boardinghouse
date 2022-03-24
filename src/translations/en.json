@@ -39,7 +39,8 @@
         "infoOwner": "Owner Infomation",
         "infoFlatmate": "Flatmate Infomation",
         "find-flatmate": "Find Flatmate",
-        "fullname": "Fullname"
+        "fullname": "Fullname",
+        "aim": "Choose a content"
     },
     "login": {
         "login": "Login",

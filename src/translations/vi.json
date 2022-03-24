@@ -39,7 +39,8 @@
         "infoOwner": "Thông tin chủ trọ",
         "infoFlatmate": "Thông tin bạn cùng phòng",
         "find-flatmate": "Tìm bạn chung phòng",
-        "fullname": "Tên đầy đủ"
+        "fullname": "Tên đầy đủ",
+        "aim": "Mục đích bài đăng"
     },
     "login": {
         "login": "Đăng nhập",

@@ -201,8 +201,19 @@ class ModalPost extends React.Component {
                 isOpen={this.props.isOpen}
                 toggle={() => this.toggle()}
             >
+                <ModalHeader className='header-post'>
 
-                <ModalBody>
+                    <div className='right'> <button className='btn btn-close-post'
+                        onClick={() => this.toggle()}
+                    ><FormattedMessage id='common.close' /></button>
+
+                    </div>
+                </ModalHeader>
+                <ModalBody><div className='row'>
+                    <span><FormattedMessage id='common.aim' /></span>
+                    <span className='col-3 btn btn-project'><FormattedMessage id='common.find-flatmate' /></span>
+                    <span className='col-3 btn btn-project'><FormattedMessage id='header.post' /></span>
+                </div>
                     <form>
                         <div className='row'>
                             <div className='col-12 input-user'>
@@ -331,8 +342,8 @@ class ModalPost extends React.Component {
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1"><FormattedMessage id='system.post-manage.descEn' /></label>
                                 <textarea
-                                    class="form-control"
-                                    rows="3"
+                                    className="form-control"
+                                    rows="2"
                                     onChange={(event) => this.onChangeInput(event, 'descEn')}
                                     value={descEn}
 
@@ -342,7 +353,7 @@ class ModalPost extends React.Component {
                                 <label for="exampleFormControlTextarea1"><FormattedMessage id='system.post-manage.descVi' /></label>
                                 <textarea
                                     class="form-control"
-                                    rows="3"
+                                    rows="2"
                                     onChange={(event) => this.onChangeInput(event, 'descVi')}
                                     value={descVi}
                                 ></textarea>
@@ -388,7 +399,10 @@ class ModalPost extends React.Component {
 
                 </ModalBody>
 
-            </Modal>
+
+
+
+            </Modal >
 
         );
     }

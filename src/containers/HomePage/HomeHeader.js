@@ -11,7 +11,7 @@ import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
 import ModalPost from './ModalPost';
 import ModalUpdateUser from './ModalUpdateUser';
-import { searchHouseByUserService, searchHouseByTypeHouse } from '../../services/userService';
+import { searchHouseByUserService, searchHouseByTypeHouse, editUserService } from '../../services/userService';
 import * as actions from '../../store/actions';
 import { withRouter } from 'react-router'
 import { update } from 'lodash';
@@ -174,6 +174,17 @@ class HomeHeader extends Component {
 
         console.log(this.props.userInfo);
     }
+    handleUpdateUserFromParent = async (user) => {
+        try {
+            let res = await editUserService(user);
+            console.log(res);
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+    }
     render() {
         let { language, isOpenFinder, isLoggedIn, userInfo, processLogout } = this.props;
         console.log(userInfo);
@@ -204,10 +215,11 @@ class HomeHeader extends Component {
                                     onClick={() => this.handleClickToUpdateInfomation()}
                                 >
                                     {userInfo.firstName && userInfo.lastName ? "Hello, " + userInfo.firstName + " " + userInfo.lastName : userInfo.email}
-                                    {/* <ModalUpdateUser
+                                    <ModalUpdateUser
                                         isOpen={this.state.isModalUpdateUserInfo}
                                         toggleModalUser={this.toggleModalUser}
-                                    /> */}
+                                        handleUpdateUserFromParent={this.handleUpdateUserFromParent}
+                                    />
                                 </div> :
                                 <>
                                     <div className='child-right-content'

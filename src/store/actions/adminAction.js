@@ -206,7 +206,7 @@ export const createNewPost = (data) => {
             let res = await createNewPostService(data);
 
             if (res && res.errorCode === 0) {
-                console.log('res create service', res);
+
                 toast.success("Create a new post success!!!");
                 dispatch(savePostSuccess());
 

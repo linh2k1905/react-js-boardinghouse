@@ -7,7 +7,6 @@ import { CRUD_ACTIONS, LANGUAGES, CommonUtils } from '../../utils';
 import * as actions from '../../store/actions';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { editUserService } from '../../services/userService'
 import { add } from 'lodash';
 class ModalUpdateUser extends React.Component {
     constructor(props) {
@@ -24,7 +23,7 @@ class ModalUpdateUser extends React.Component {
             previewImageURL: '',
 
             action: CRUD_ACTIONS.CREATE,
-            userInfo: {}
+            userInfoState: {}
 
 
 
@@ -38,15 +37,25 @@ class ModalUpdateUser extends React.Component {
         let { userInfo } = this.props;
         if (userInfo) {
             this.setState({
-                userInfo: userInfo,
+                userInfoState: userInfo,
                 userId: userInfo.id,
-                roleId: userInfo.roleId
+                roleId: userInfo.roleId,
+                firstName: userInfo.firstName ? userInfo.firstName : ' ',
+                lastName: userInfo.lastName ? userInfo.lastName : ' ',
+                address: userInfo.address ? userInfo.address : ' ',
+                tel: userInfo.tel ? userInfo.tel : ' ',
+                image: userInfo.image ? userInfo.image : ' ',
             })
 
         };
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
+        if (prevProps.userInfo != this.props.userInfo) {
+            this.setState({
+                userInfoState: this.props.userInfo
+            })
+        }
 
 
 
@@ -79,6 +88,7 @@ class ModalUpdateUser extends React.Component {
             'address',
             'image',
             'tel',
+            'roleId'
 
         ]
         if (!this.state.userId) {
@@ -104,19 +114,18 @@ class ModalUpdateUser extends React.Component {
 
         let isValid = this.checkValidInput();
         if (isValid === false) return;
-        let { firstName, userId, lastName, address, image, tel, roleId } = this.state;
-        console.log(this.state);
-        let res = await editUserService({
+        let { firstName, userId, lastName, address, image, tel, roleId, userInfoState } = this.state;
+        this.props.handleUpdateUserFromParent({
             id: userId,
-            roleId: roleId,
             lastName: lastName,
             firstName: firstName,
+            email: userInfoState.email,
+            roleId: roleId,
             tel: tel,
+            address: address,
             image: image,
-            address: address
 
-        });
-        console.log(res);
+        })
 
 
 
@@ -275,10 +284,6 @@ class ModalUpdateUser extends React.Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        typeHouseRedux: state.admin.typeHouses,
-        citiesRedux: state.admin.cities,
-        ownerRedux: state.admin.owner,
-        postRedux: state.admin.posts,
         userInfo: state.user.userInfo
 
 
@@ -287,12 +292,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
-        getCityStart: () => dispatch(actions.fetchCitiesStart()),
-        getOwner: () => dispatch(actions.fetchOwner()),
-        createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
-        getAllPost: () => dispatch(actions.fetchAllPost()),
-        editPostRedux: (data) => dispatch(actions.fetchEditPost(data))
+
 
 
 
