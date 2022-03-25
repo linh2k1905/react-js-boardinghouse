@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { editPostService } from '../../../services/userService'
+import { editPostService } from '../../../services/userService';
+import moment from 'moment';
 
 
 class PostTable extends Component {
@@ -61,11 +62,19 @@ class PostTable extends Component {
 
 
     }
+    handleDate = (date) => {
+        let dateDDMMYY = new Date(date);
+        console.log(moment(dateDDMMYY).format('MM/DD/YYYY'));
+        let rlt = moment(dateDDMMYY).format('MM/DD/YYYY');
+        return rlt;
+
+    }
 
     render() {
 
 
         let houses = this.state.listHouses;
+
         return (
             <div className='col-12 mb5'>
                 <table className="TableManage">
@@ -88,7 +97,7 @@ class PostTable extends Component {
                                         <td>{item.name}</td>
                                         <td>{item.address}</td>
                                         <td>{item.User.firstName}</td>
-                                        <td>{item.createdAt}</td>
+                                        <td>{this.handleDate(item.createdAt)}</td>
                                         <td>
                                             <button
                                                 className='btn-edit'

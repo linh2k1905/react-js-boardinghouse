@@ -6,10 +6,11 @@ import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
 import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostComment, handelGetAllCommentByHouseId } from '../../../services/userService';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
 import Schedule from './Schedule';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import HomeFooter from '../../HomePage/HomeFooter';
+
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -22,6 +23,8 @@ class DetailHouse extends Component {
             owner: {},
             comment: '',
             allcomments: [],
+            position: [51.505, -0.09],
+            bound: {}
 
 
         }
@@ -38,18 +41,12 @@ class DetailHouse extends Component {
             }
             if (this.state.detailHouse && this.state.detailHouse.User.id) {
                 let user = await handleGetInfoBooking(this.state.detailHouse.id, this.state.detailHouse.User.id);
-                if (user && user.users) {
 
-                    this.setState({
-                        owner: user ? user.users : ''
-                    })
-                }
             }
 
         }
 
         let allcomments = await handelGetAllCommentByHouseId(this.state.detailHouse.id);
-        console.log('>>>>>', allcomments);
         if (allcomments) {
             this.setState({
                 allcomments: allcomments.comments
@@ -97,8 +94,9 @@ class DetailHouse extends Component {
 
 
     }
+
     render() {
-        let { isOpenFinder, owner, comment } = this.state;
+        let { isOpenFinder, owner } = this.state;
         let { allcomments } = this.state;
 
         let imagebase64 = ''
@@ -107,19 +105,8 @@ class DetailHouse extends Component {
         else {
             imagebase64 = ''
         };
-        let position = [];
-        let { City, name, HouseType, User, address, area, descriptionEn, descriptionVi, id, lang, lat, price } = this.state.detailHouse;
-
-
-        if (lat && lang) {
-            position = [lat, lang];
-        }
-        else {
-            position = [10.0243192, 105.7727087];
-        }
-
-
-
+        let { City, name, User, address, area, descriptionEn, descriptionVi, price } = this.state.detailHouse;
+        let { position } = this.state;
         return (
             <React.Fragment>
                 <HomeHeader
@@ -198,12 +185,10 @@ class DetailHouse extends Component {
                     <div className='title md-20'>Xem vị trí nhà trọ trên bản đồ </div>
                     <div className='map-detail-house'>
                         <MapContainer
-                            center={position}
+                            center={this.state.position}
                             zoom={13} scrollWheelZoom={false}
                             style={{ width: '100%', height: '99vh' }}
-
-
-
+                            bounds={''}
                         >
 
                             <TileLayer
@@ -211,7 +196,7 @@ class DetailHouse extends Component {
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
                             />
-                            <Marker position={position}>
+                            <Marker position={this.state.position}>
                                 <Popup>
                                     {address}
                                 </Popup>
