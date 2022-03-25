@@ -187,8 +187,6 @@ class HomeHeader extends Component {
     }
     render() {
         let { language, isOpenFinder, isLoggedIn, userInfo, processLogout } = this.props;
-        console.log(userInfo);
-
         let { typeHouse, citiesSelected, roomSelected, areaValue, priceValue } = this.state;
         return (
 

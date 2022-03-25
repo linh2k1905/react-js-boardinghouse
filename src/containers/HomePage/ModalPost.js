@@ -46,7 +46,6 @@ class ModalPost extends React.Component {
         this.props.getOwner();
         this.props.getAllPost();
         let { userInfo } = this.props;
-        console.log(userInfo)
         if (userInfo) {
             this.setState({
                 userId: userInfo.id
@@ -193,8 +192,6 @@ class ModalPost extends React.Component {
         let cities = this.state.cityArray;
 
         let { name, userId, typeHouseId, address, price, area, descVi, descEn, action } = this.state;
-
-        console.log(this.state)
         return (
 
             <Modal

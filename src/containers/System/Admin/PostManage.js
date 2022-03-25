@@ -162,7 +162,6 @@ class PostManage extends Component {
             ...copyState
 
         })
-        console.log(this.state);
 
 
 

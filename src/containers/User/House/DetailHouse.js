@@ -10,6 +10,7 @@ import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
 import Schedule from './Schedule';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import HomeFooter from '../../HomePage/HomeFooter';
+import { lang } from 'moment';
 
 class DetailHouse extends Component {
 
@@ -23,9 +24,7 @@ class DetailHouse extends Component {
             owner: {},
             comment: '',
             allcomments: [],
-            position: [51.505, -0.09],
-            bound: {}
-
+            position: {}
 
         }
     }
@@ -39,8 +38,21 @@ class DetailHouse extends Component {
                     detailHouse: res.data
                 })
             }
-            if (this.state.detailHouse && this.state.detailHouse.User.id) {
+            let { detailHouse } = this.state;
+            if (detailHouse && detailHouse.User.id) {
                 let user = await handleGetInfoBooking(this.state.detailHouse.id, this.state.detailHouse.User.id);
+                let latFloat = parseFloat(detailHouse.lat);
+                let langFloat = parseFloat(detailHouse.lang);
+                this.setState({
+                    owner: user.users,
+                    position: {
+                        langFloat: langFloat,
+                        latFloat: latFloat
+                    }
+
+                })
+
+
 
             }
 
@@ -55,8 +67,14 @@ class DetailHouse extends Component {
         }
 
 
+
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
+        if (prevState.detailHouse != this.state.detailHouse) {
+            this.setState({
+                detailHouse: this.state.detailHouse,
+            })
+        }
 
     }
     isSearchCheck = (isOpenFinder) => {
@@ -96,17 +114,15 @@ class DetailHouse extends Component {
     }
 
     render() {
-        let { isOpenFinder, owner } = this.state;
-        let { allcomments } = this.state;
-
+        let { isOpenFinder, owner, allcomments, detailHouse, position } = this.state;
+        console.log('position', position);
         let imagebase64 = ''
         if (this.state.detailHouse.User && this.state.detailHouse.User.image)
-            imagebase64 = new Buffer(this.state.detailHouse.User.image, 'base64').toString('binary');
+            imagebase64 = new Buffer(detailHouse.User.image, 'base64').toString('binary');
         else {
             imagebase64 = ''
         };
         let { City, name, User, address, area, descriptionEn, descriptionVi, price } = this.state.detailHouse;
-        let { position } = this.state;
         return (
             <React.Fragment>
                 <HomeHeader
@@ -183,27 +199,31 @@ class DetailHouse extends Component {
                     </div>
 
                     <div className='title md-20'>Xem vị trí nhà trọ trên bản đồ </div>
-                    <div className='map-detail-house'>
-                        <MapContainer
-                            center={this.state.position}
-                            zoom={13} scrollWheelZoom={false}
-                            style={{ width: '100%', height: '99vh' }}
-                            bounds={''}
-                        >
+                    {position.latFloat && position.langFloat &&
+                        <div className='map-detail-house'>
+                            <MapContainer
+                                center={[position.latFloat, position.langFloat]}
+                                zoom={13} scrollWheelZoom={false}
+                                style={{ width: '100%', height: '99vh' }}
+                                bounds={''}
+                            >
 
-                            <TileLayer
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 
-                            />
-                            <Marker position={this.state.position}>
-                                <Popup>
-                                    {address}
-                                </Popup>
-                            </Marker>
+                                />
+                                <Marker position={[position.latFloat, position.langFloat]}>
+                                    <Popup>
+                                        {address}
+                                    </Popup>
+                                </Marker>
 
-                        </MapContainer>
-                    </div>
+                            </MapContainer>
+                        </div>
+
+                    }
+
                     <div className='comment-house'>
                         <div className='title-comment'><p>Comments about post</p></div>
                         <div className='form-group'> <form>

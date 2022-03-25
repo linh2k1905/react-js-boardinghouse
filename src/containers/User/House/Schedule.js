@@ -193,7 +193,6 @@ class Schedule extends Component {
     handleInputBooking = (event, id) => {
         let copyState = { ...this.state };
         copyState[id] = event.target.value;
-        console.log(event.target.value);
         this.setState({
             ...copyState
         });
@@ -202,7 +201,6 @@ class Schedule extends Component {
     render() {
         let { allDays, availableTime, dateSelect, detailHouse, ownerState } = this.state;
         let { language, userInfo } = this.props;
-        console.log('check render state dateSelct', dateSelect);
 
         return (
             <React.Fragment>

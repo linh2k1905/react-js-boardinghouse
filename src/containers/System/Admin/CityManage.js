@@ -36,7 +36,6 @@ class CityManage extends Component {
             ...copyState
 
         })
-        console.log(this.state);
 
 
 

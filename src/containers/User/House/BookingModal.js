@@ -96,7 +96,6 @@ class Schedule extends Component {
             this.setState({
                 owner: this.props.owner
             })
-            console.log(this.state.owner);
         }
 
 

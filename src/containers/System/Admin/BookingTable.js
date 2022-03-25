@@ -73,12 +73,10 @@ class BookingTable extends Component {
     changeMillisecondInto = (str) => {
         str = parseInt(str);
         let dateURTC = moment(new Date(str)).format('DD/MM/YYYY');
-        console.log(dateURTC);
         return dateURTC;
     }
     render() {
         let bookings = this.state.listBookings;
-        console.log('check', bookings);
         return (
             <div className='col-12 mb5'>
                 <table className="TableManage">
