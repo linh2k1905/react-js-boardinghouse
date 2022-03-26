@@ -205,7 +205,7 @@ class DetailHouse extends Component {
                                 center={[position.latFloat, position.langFloat]}
                                 zoom={13} scrollWheelZoom={false}
                                 style={{ width: '100%', height: '99vh' }}
-                                bounds={''}
+
                             >
 
                                 <TileLayer

@@ -6,7 +6,7 @@ import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import BookingTable from './BookingTable';
 import Select from 'react-select';
-import { handlePostBooking, editBooKingService } from '../../../services/userService';
+import { handlePostBooking, editBooKingService, getHouseByEmailUser } from '../../../services/userService';
 import moment, { months } from 'moment';
 import localization from 'moment/locale/vi';
 import DatePicker from "../../../components/Input/DatePicker";
@@ -142,10 +142,17 @@ class PostManage extends Component {
         return result;
 
     }
-    handleOnChange = (selectedOption) => {
+    handleOnChange = async (selectedOption) => {
+
         this.setState({
             email: selectedOption
         })
+        let res = await getHouseByEmailUser(selectedOption.value);
+        console.log('check', res);
+        this.setState({
+            listHouse: this.buidDataSelectHouse(res.houses)
+        })
+
     }
     handleOnChangeHouse = (option) => {
         this.setState({

@@ -143,6 +143,11 @@ const editCommentService = (data) => {
 
     return axios.put('/api/edit-comment-by-id', data);
 }
+const getHouseByEmailUser = (email) => {
+    console.log(email);
+
+    return axios.get(`/api/get-house-by-mail-user?email=${email}`)
+}
 export {
     handelLoginAPI,
     getAllUser,
@@ -176,7 +181,8 @@ export {
     getFilterHouseService,
     getAllComment,
     deleteCommentById,
-    editCommentService
+    editCommentService,
+    getHouseByEmailUser
 
 
 

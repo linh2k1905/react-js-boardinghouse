@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { editPostService } from '../../../services/userService';
+import { getHouseByEmailUser } from '../../../services/userService';
 import moment from 'moment';
 
 
@@ -35,12 +35,24 @@ class PostTable extends Component {
     }
 
     async componentDidMount() {
-        this.props.getAllPost()
+        let { userInfo } = this.props
+        if (userInfo.roleId === 1) {
+            this.props.getAllPost();
+
+        }
+        else {
+
+            let res = await getHouseByEmailUser(userInfo.email);
+            this.setState({
+                listHouses: res.houses
+            })
+        }
+
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
 
-        if (prevProps.postRedux != this.props.postRedux) {
+        if (prevProps.postRedux != this.props.postRedux && this.props.userInfo.roleId === 1) {
 
             this.setState({
                 listHouses: this.props.postRedux
@@ -83,7 +95,7 @@ class PostTable extends Component {
                         <th>Adrress</th>
                         <th>Owner</th>
                         <th>CreateDate</th>
-                        <th>Action</th>
+                        <th className='action-special'>Action</th>
 
                     </tr>
                     {houses && houses.length > 0 &&
@@ -98,7 +110,7 @@ class PostTable extends Component {
                                         <td>{item.address}</td>
                                         <td>{item.User.firstName}</td>
                                         <td>{this.handleDate(item.createdAt)}</td>
-                                        <td>
+                                        <td className='action-special'>
                                             <button
                                                 className='btn-edit'
                                                 onClick={() => this.handleEditPost(item)}
@@ -136,7 +148,8 @@ const mapStateToProps = state => {
         typeHouseRedux: state.admin.typeHouses,
         citiesRedux: state.admin.cities,
         ownerRedux: state.admin.owner,
-        postRedux: state.admin.allposts
+        postRedux: state.admin.allposts,
+        userInfo: state.user.userInfo
 
 
     };
@@ -145,9 +158,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllPost: () => dispatch(actions.fetchAllHome()),
-        deleteAPost: (id) => dispatch(actions.deleteAPost(id))
-
-
+        deleteAPost: (id) => dispatch(actions.deleteAPost(id)),
     };
 };
 

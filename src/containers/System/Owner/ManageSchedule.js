@@ -76,7 +76,7 @@ class ManageSchedule extends Component {
             data.map((item, index) => {
                 let obj = {};
                 obj.value = item.id;
-                obj.label = `${item.firstName} ${item.lastName}`
+                obj.label = `${item.email}`
                 result.push(obj);
             })
 
