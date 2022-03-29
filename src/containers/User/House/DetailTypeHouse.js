@@ -38,7 +38,15 @@ class DetailTypeHouse extends Component {
     }
     async componentDidMount() {
 
+        if ((this.props.match) && (this.props.match.params) && (this.props.match.params.id)) {
+            let res = await searchHouseByTypeHouse(this.props.match.params.id);
 
+            if (res && res.errorCode === 0) {
+                this.setState({
+                    listHouseArr: res.data
+                })
+            }
+        }
 
 
 

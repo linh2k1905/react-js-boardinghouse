@@ -11,7 +11,8 @@ import ModalArea from './ModalArea.js';
 import ModalPrice from './ModalPrice';
 import ModalPost from './ModalPost';
 import ModalUpdateUser from './ModalUpdateUser';
-import { searchHouseByUserService, searchHouseByTypeHouse, editUserService } from '../../services/userService';
+import ModalUser from '../System/ModalUser';
+import { searchHouseByUserService, editUserService } from '../../services/userService';
 import * as actions from '../../store/actions';
 import { withRouter } from 'react-router'
 import { update } from 'lodash';
@@ -29,7 +30,8 @@ class HomeHeader extends Component {
             isSearch: false,
             isOpenFinder: false,
             isOpenModalPost: false,
-            isModalUpdateUserInfo: false
+            isModalUpdateUserInfo: false,
+            isOpenSignUp: false
 
 
         };
@@ -150,8 +152,6 @@ class HomeHeader extends Component {
         }
     }
     handleSelectByTypeHouse = async (id) => {
-
-
         this.props.history.push(`/detail-type-house/${id}`);
     }
     handleClickBackHome = () => {
@@ -185,6 +185,16 @@ class HomeHeader extends Component {
         }
 
     }
+    handleSignUp = () => {
+        this.setState({
+            isOpenSignUp: true
+        })
+    }
+    toggleFromParent = () => {
+        this.setState({
+            isOpenSignUp: !this.state.isOpenSignUp
+        })
+    }
     render() {
         let { language, isOpenFinder, isLoggedIn, userInfo, processLogout } = this.props;
         let { typeHouse, citiesSelected, roomSelected, areaValue, priceValue } = this.state;
@@ -198,7 +208,7 @@ class HomeHeader extends Component {
                             <div className='header-logo'
                                 onClick={() => this.handleClickBackHome()}
                             >
-                                TimPhongTro.com
+                                <i className="fas fa-home icon-homepage"></i> TimPhongTro.com
                             </div>
                         </div>
                         <div className='center-content'>
@@ -225,9 +235,15 @@ class HomeHeader extends Component {
                                     >
                                         <a><FormattedMessage id="login.login" /></a>
                                     </div>
-                                    <div className='child-right-content'>
+                                    <div className='child-right-content'
+                                        onClick={() => this.handleSignUp()}
+                                    >
 
                                         <a ><FormattedMessage id="header.signup" /></a>
+                                        <ModalUser
+                                            isOpen={this.state.isOpenSignUp}
+                                            toggleParent={this.toggleFromParent}
+                                        />
                                     </div>
                                 </>
                             }

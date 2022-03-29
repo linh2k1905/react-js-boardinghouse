@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
-import * as actions from '../../../store/actions';
-import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
-import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostComment, handelGetAllCommentByHouseId } from '../../../services/userService';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import Schedule from './Schedule';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import HomeFooter from '../../HomePage/HomeFooter';
-import { handleVerifyBooking } from '../../../services/userService'
-class VerifyEmail extends Component {
+import { handleVerifyBookingCancle } from '../../../services/userService'
+class VerifyEmailCancel extends Component {
 
     constructor(props) {
         super(props);
@@ -29,7 +21,7 @@ class VerifyEmail extends Component {
             let token = urlparam.get('token');
             let booking = urlparam.get('bookingId');
             console.log(typeof booking, typeof token);
-            let res = await handleVerifyBooking({
+            let res = await handleVerifyBookingCancle({
                 token: token,
                 idBooking: booking
             })
@@ -53,7 +45,7 @@ class VerifyEmail extends Component {
 
         return (
             <React.Fragment>
-                <p>Verify Email Success</p>
+                <p>Verify Email Cancel Success</p>
 
 
             </React.Fragment>
@@ -75,4 +67,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyEmail);
+export default connect(mapStateToProps, mapDispatchToProps)(VerifyEmailCancel);

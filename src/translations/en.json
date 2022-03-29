@@ -40,7 +40,8 @@
         "infoFlatmate": "Flatmate Infomation",
         "find-flatmate": "Find Flatmate",
         "fullname": "Fullname",
-        "aim": "Choose a content"
+        "aim": "Choose a content",
+        "avatar": "Change Image"
     },
     "login": {
         "login": "Login",

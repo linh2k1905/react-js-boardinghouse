@@ -97,6 +97,11 @@ export const ownerMenu = [
                 // ]
                 link: '/system/manage-booking'
             },
+            {
+                name: 'menu.system.system-administrator.owner-schedule',
+                link: '/system/manage-schedule'
+            },
+
 
 
         ]

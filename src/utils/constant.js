@@ -7,7 +7,8 @@ export const path = {
     DETAIL_HOUSE: '/detail-house/:id',
     DETAIL_TYPE_HOUSE: '/detail-type-house/:id',
     DETAIL_FLATMATE: '/detail-flatmate/:id',
-    VERIFY_MAIL: '/verify-booking'
+    VERIFY_MAIL: '/verify-booking',
+    VERIFY_MAIL_CANCEL: '/verify-cancel-booking'
 
 };
 

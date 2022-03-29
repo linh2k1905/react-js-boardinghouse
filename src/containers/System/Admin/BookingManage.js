@@ -46,7 +46,7 @@ class PostManage extends Component {
 
     async componentDidMount() {
         this.props.getAllPost();
-        this.props.getUser(2);
+        this.props.getUser('ALL');
 
 
 
@@ -147,11 +147,7 @@ class PostManage extends Component {
         this.setState({
             email: selectedOption
         })
-        let res = await getHouseByEmailUser(selectedOption.value);
-        console.log('check', res);
-        this.setState({
-            listHouse: this.buidDataSelectHouse(res.houses)
-        })
+
 
     }
     handleOnChangeHouse = (option) => {
@@ -326,9 +322,8 @@ const mapStateToProps = state => {
         typeHouseRedux: state.admin.typeHouses,
         citiesRedux: state.admin.cities,
         userRedux: state.admin.users,
-        postRedux: state.admin.posts
-
-
+        postRedux: state.admin.allposts,
+        userInfo: state.user.userInfo
     };
 };
 
@@ -338,7 +333,7 @@ const mapDispatchToProps = dispatch => {
         getCityStart: () => dispatch(actions.fetchCitiesStart()),
         getUser: (id) => dispatch(actions.fetchAllUserStart(id)),
         createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
-        getAllPost: () => dispatch(actions.fetchAllPost()),
+        getAllPost: () => dispatch(actions.fetchAllHome()),
         editPostRedux: (data) => dispatch(actions.fetchEditPost(data))
 
 

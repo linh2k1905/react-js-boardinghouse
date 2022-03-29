@@ -124,6 +124,10 @@ const handleVerifyBooking = (data) => {
 
     return axios.post('/api/verify-book-appoinment', data);
 }
+const handleVerifyBookingCancle = (data) => {
+
+    return axios.post('/api/verify-cancel-book-appoinment', data);
+}
 
 const getFilterHouseService = (data) => {
 
@@ -182,7 +186,8 @@ export {
     getAllComment,
     deleteCommentById,
     editCommentService,
-    getHouseByEmailUser
+    getHouseByEmailUser,
+    handleVerifyBookingCancle
 
 
 
