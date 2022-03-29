@@ -124,6 +124,10 @@ const handleVerifyBooking = (data) => {
 
     return axios.post('/api/verify-book-appoinment', data);
 }
+const handleVerifyBookingFromOwner = (data) => {
+
+    return axios.post('/api/verify-book-appoinment-from-owner', data);
+}
 const handleVerifyBookingCancle = (data) => {
 
     return axios.post('/api/verify-cancel-book-appoinment', data);
@@ -151,6 +155,10 @@ const getHouseByEmailUser = (email) => {
     console.log(email);
 
     return axios.get(`/api/get-house-by-mail-user?email=${email}`)
+}
+const getBookingByUserId = (id) => {
+
+    return axios.get(`/api/get-all-booking-by-user-id?id=${id}`)
 }
 export {
     handelLoginAPI,
@@ -187,8 +195,7 @@ export {
     deleteCommentById,
     editCommentService,
     getHouseByEmailUser,
-    handleVerifyBookingCancle
-
-
-
+    handleVerifyBookingCancle,
+    handleVerifyBookingFromOwner,
+    getBookingByUserId
 }

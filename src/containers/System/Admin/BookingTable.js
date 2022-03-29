@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { handelGetAllBooking, handelDeleteBooking } from '../../../services/userService'
+import { handelGetAllBooking, handelDeleteBooking, handleVerifyBookingCancle, handleVerifyBookingFromOwner, getBookingByUserId } from '../../../services/userService'
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
+
 class BookingTable extends Component {
 
     constructor(props) {
@@ -28,11 +29,19 @@ class BookingTable extends Component {
 
     async componentDidMount() {
         let res = await handelGetAllBooking('ALL');
-        if (res && res.data) {
+        let { userInfo } = this.props;
+        if (res && res.data && userInfo.roleId === 1) {
             this.setState({
                 listBookings: res.data
             })
         }
+
+        let response = await getBookingByUserId(this.props.userInfo.id);
+        console.log(response.bookings);
+        this.setState({
+            listBookings: response.bookings
+
+        })
 
 
     }
@@ -75,6 +84,22 @@ class BookingTable extends Component {
         let dateURTC = moment(new Date(str)).format('DD/MM/YYYY');
         return dateURTC;
     }
+    handleAceptBooking = async (item) => {
+        let res = await handleVerifyBookingFromOwner({
+            token: item.token,
+            idBooking: item.idHouse
+        })
+        window.location.reload();
+
+    }
+    handleCancelBooking = async (item) => {
+        let res = await handleVerifyBookingCancle({
+            token: item.token,
+            idBooking: item.idHouse
+        })
+        window.location.reload();
+
+    }
     render() {
         let bookings = this.state.listBookings;
         return (
@@ -84,10 +109,11 @@ class BookingTable extends Component {
                         <th>Time</th>
                         <th>Status</th>
                         <th>Date</th>
-                        <th>Name House</th>
+
                         <th>Email user booking</th>
 
                         <th>Action</th>
+                        <th>Deny or Accept</th>
 
                     </tr>
                     {bookings && bookings.length > 0 &&
@@ -98,7 +124,6 @@ class BookingTable extends Component {
                                     <td>{item.time}</td>
                                     <td>{item.status}</td>
                                     <td>{this.changeMillisecondInto(item.date)}</td>
-                                    <td>{item.House.name}</td>
                                     <td>{item.User.email}</td>
                                     <td>
                                         <button
@@ -111,6 +136,19 @@ class BookingTable extends Component {
                                         >
                                             <i className="fas fa-trash-alt"></i></button>
                                     </td>
+                                    <td>
+                                        <button
+                                            className='btn-edit'
+                                            onClick={() => this.handleAceptBooking(item)}
+                                        >
+                                            Nhận </button>
+                                        <button className='btn-delete'
+                                            onClick={() => this.handleCancelBooking(item)}
+                                        >
+                                            Hủy</button>
+
+
+                                    </td>
 
 
                                 </tr>
@@ -122,11 +160,11 @@ class BookingTable extends Component {
                         })
                     }
 
-                </table>
+                </table >
 
 
 
-            </div>
+            </div >
         )
     }
 
@@ -134,6 +172,7 @@ class BookingTable extends Component {
 
 const mapStateToProps = state => {
     return {
+        userInfo: state.user.userInfo
 
 
 

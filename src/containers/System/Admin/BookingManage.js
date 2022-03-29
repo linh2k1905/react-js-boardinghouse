@@ -53,6 +53,7 @@ class PostManage extends Component {
 
 
 
+
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
         if (prevProps.postRedux != this.props.postRedux) {
