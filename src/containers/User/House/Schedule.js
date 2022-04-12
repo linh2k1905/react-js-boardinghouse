@@ -45,8 +45,9 @@ class Schedule extends Component {
             let res = await getScheduleOwnerFromDate(ownerIdFromParent, today);
 
             if (res && res.data) {
+                console.log('check time by res.dât', res.data);
                 this.setState({
-                    availableTime: res.data ? res.data : []
+                    availableTime: res.data
                 })
             }
 
@@ -127,7 +128,7 @@ class Schedule extends Component {
 
             if (res && res.data) {
                 this.setState({
-                    availableTime: res.data ? res.data : []
+                    availableTime: res.data
                 })
             }
 
@@ -233,11 +234,11 @@ class Schedule extends Component {
 
                 <div className='available-time'>
                     {
-                        availableTime && availableTime.length > 0 &&
-                        availableTime.map((item, index) => {
+                        availableTime &&
+                        availableTime.map((item) => {
                             return (
 
-                                <button className=''
+                                <button
 
                                     onClick={() => this.handleClickSchduleButton(item)}
                                 >{item.time}</button>
