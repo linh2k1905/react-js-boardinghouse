@@ -86,14 +86,8 @@ class HouseList extends Component {
                                         </div>
                                         <div
                                             className='area-house'>
-                                            <FormattedMessage id='system.post-manage.descEn'
-                                            />: {item.descriptionEn}
-
-                                        </div>
-                                        <div
-                                            className='area-house'>
-                                            <FormattedMessage id='system.post-manage.descVi'
-                                            />: {item.descriptionVi}
+                                            <FormattedMessage id='system.user-manage.email'
+                                            />: {item.User.email}
 
                                         </div>
                                         <div

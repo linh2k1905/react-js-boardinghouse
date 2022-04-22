@@ -18,7 +18,6 @@ class Schedule extends Component {
         this.state = {
             allDays: [],
             availableTime: [],
-
             isOpen: false,
             dateSelect: {},
             detailHouse: {},

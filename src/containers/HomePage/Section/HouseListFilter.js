@@ -79,7 +79,7 @@ class HouseListFilter extends Component {
                                         <div
                                             className='price-house'>
                                             <FormattedMessage id='system.post-manage.price'
-                                            />: {item.price}
+                                            />: {item.price / 1000000} Tr
 
                                         </div>
                                         <div
@@ -88,18 +88,7 @@ class HouseListFilter extends Component {
                                             />: {item.area} m2
 
                                         </div>
-                                        <div
-                                            className='area-house'>
-                                            <FormattedMessage id='system.post-manage.descEn'
-                                            />: {item.descriptionEn}
 
-                                        </div>
-                                        <div
-                                            className='area-house'>
-                                            <FormattedMessage id='system.post-manage.descVi'
-                                            />: {item.descriptionVi}
-
-                                        </div>
                                         <div
                                             className='area-house'>
                                             <FormattedMessage id='system.user-manage.mobile'

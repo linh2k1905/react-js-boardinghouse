@@ -23,7 +23,7 @@ class UserRedux extends Component {
             roleId: '',
             image: '',
             previewImageURL: '',
-            action: '',
+            action: CRUD_ACTIONS.CREATE,
             userEditId: '',
             isOpen: false
         }
@@ -173,7 +173,7 @@ class UserRedux extends Component {
 
         return (
             <div className='container'>
-                <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-manage' /></div>
+                <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-owner' /></div>
 
                 <form>
                     <div className='row'>
