@@ -38,14 +38,10 @@ class ModalPost extends React.Component {
 
 
     }
-    async componentDidMount() {
-
-
-        this.props.getTypeHouseStart();
+    componentDidMount() {
         this.props.getCityStart();
-        this.props.getOwner();
-        this.props.getAllPost();
-        let { userInfo } = this.props;
+
+        let { userInfo, typeHouse, citiesRedux } = this.props;
         if (userInfo) {
             this.setState({
                 userId: userInfo.id
@@ -53,39 +49,15 @@ class ModalPost extends React.Component {
 
         };
 
+        this.setState({
+            typeHouseArray: typeHouse,
+            cityArray: citiesRedux,
+
+
+        });
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
-        if (prevProps.typeHouseRedux != this.props.typeHouseRedux) {
-            this.setState({
-                typeHouseArray: this.props.typeHouseRedux
 
-            })
-        }
-        if (prevProps.citiesRedux != this.props.citiesRedux) {
-            this.setState({
-                cityArray: this.props.citiesRedux
-
-            })
-        }
-        if (prevProps.ownerRedux != this.props.ownerRedux) {
-
-            this.setState({
-                userArray: this.props.ownerRedux
-
-            })
-        }
-        if (prevProps.postRedux != this.props.postRedux) {
-
-            this.setState({
-                listHouses: this.props.postRedux
-
-            })
-        }
-        if (prevState.idHouseEdit != this.state.idHouseEdit) {
-            this.setState({
-                idHouseEdit: this.state.idHouseEdit
-            })
-        }
 
 
 
@@ -99,8 +71,10 @@ class ModalPost extends React.Component {
 
 
     onChangeInput = (event, id) => {
+
         let copyState = { ...this.state }
         copyState[id] = event.target.value;
+        console.log(copyState[id]);
         this.setState({
             ...copyState
         })
@@ -122,7 +96,7 @@ class ModalPost extends React.Component {
             'descVi',
             'descEn'
         ]
-        if (!this.state.userId) {
+        if (!this.props.userInfo) {
             isValid = false;
 
             alert('Please login to post the infomation');
@@ -140,7 +114,7 @@ class ModalPost extends React.Component {
         return isValid;
 
     }
-    handleSavePost = () => {
+    handleSavePost = async () => {
 
 
         let isValid = this.checkValidInput();
@@ -148,12 +122,12 @@ class ModalPost extends React.Component {
         let { action, name, userId, cityId, typeHouseId, price, address, image, area, descVi, descEn } = this.state;
 
         if (action === CRUD_ACTIONS.CREATE) {
-            this.props.createNewPostRedux({
+            await this.props.createNewPostRedux({
                 name: name,
-                userId: userId,
-                cityId: cityId,
-                typeHouseId: typeHouseId,
-                price: price,
+                userId: parseInt(userId),
+                cityId: parseInt(cityId),
+                typeHouseId: parseInt(typeHouseId),
+                price: parseFloat(price),
                 address: address,
                 image: image,
                 area: area,
@@ -407,10 +381,7 @@ class ModalPost extends React.Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        typeHouseRedux: state.admin.typeHouses,
         citiesRedux: state.admin.cities,
-        ownerRedux: state.admin.owner,
-        postRedux: state.admin.posts,
         userInfo: state.user.userInfo
 
 
@@ -419,12 +390,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
-        getCityStart: () => dispatch(actions.fetchCitiesStart()),
-        getOwner: () => dispatch(actions.fetchOwner()),
         createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
-        getAllPost: () => dispatch(actions.fetchAllPost()),
-        editPostRedux: (data) => dispatch(actions.fetchEditPost(data))
+        getCityStart: () => dispatch(actions.fetchCitiesStart()),
+
 
 
 

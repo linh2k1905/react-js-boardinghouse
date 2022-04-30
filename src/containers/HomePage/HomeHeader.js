@@ -263,6 +263,7 @@ class HomeHeader extends Component {
                             <ModalPost
                                 isOpen={this.state.isOpenModalPost}
                                 toggleModalPost={this.toggleModalPost}
+                                typeHouse={this.props.typeHouses}
                             />
                             {userInfo &&
                                 <div className="btn btn-logout" onClick={processLogout}>

@@ -20,6 +20,7 @@ class HouseList extends Component {
     }
     componentDidMount() {
         this.props.loadTopHouse();
+        console.log('check house list', this.props.houseListRedux);
         this.setState({
             listHouseArr: this.props.houseListRedux ? this.props.houseListRedux : []
         })

@@ -16,11 +16,12 @@ const getAllPost = () => {
 }
 const createNewUserService = (data) => {
 
-    return axios.post('/api/create-new-user', data);
+    return axios.post('/api/create-new-user', data, { timeout: 10000 });
 }
 const createNewPostService = (data) => {
 
     return axios.post('/api/create-new-post', data);
+
 }
 const deleteUserService = (idUser) => {
     return axios.delete('/api/delete-user', {
