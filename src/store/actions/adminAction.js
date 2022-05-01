@@ -204,23 +204,18 @@ export const createNewPost = (data) => {
 
     return async (dispatch, getState) => {
         try {
-            console.log(data);
+
 
             let res = await createNewPostService(data);
             console.log(res);
-
-
             if (res && res.errorCode === 0) {
 
                 toast.success("Create a new post success!!!");
                 dispatch(savePostSuccess());
-                window.location.reload();
+
 
             }
             else {
-                setTimeout(() => {
-
-                }, 6000);
                 toast.error("Tạo không thành công vì có lỗi xảy ra");
                 dispatch(savePostFail());
 

@@ -40,8 +40,8 @@ class ModalPost extends React.Component {
     }
     componentDidMount() {
         this.props.getCityStart();
-
-        let { userInfo, typeHouse, citiesRedux } = this.props;
+        this.props.getTypeHouseStart();
+        let { userInfo, citiesRedux } = this.props;
         if (userInfo) {
             this.setState({
                 userId: userInfo.id
@@ -50,14 +50,44 @@ class ModalPost extends React.Component {
         };
 
         this.setState({
-            typeHouseArray: typeHouse,
+            typeHouseArray: this.props.typeHouseRedux,
             cityArray: citiesRedux,
 
 
         });
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
+        if (prevProps.typeHouseRedux != this.props.typeHouseRedux) {
+            this.setState({
+                typeHouseArray: this.props.typeHouseRedux
 
+            })
+        }
+        if (prevProps.citiesRedux != this.props.citiesRedux) {
+            this.setState({
+                cityArray: this.props.citiesRedux
+
+            })
+        }
+        if (prevProps.ownerRedux != this.props.ownerRedux) {
+
+            this.setState({
+                userArray: this.buidDataSelect(this.props.ownerRedux)
+
+            })
+        }
+        if (prevProps.postRedux != this.props.postRedux) {
+
+            this.setState({
+                listHouses: this.props.postRedux
+
+            })
+        }
+        if (prevState.idHouseEdit != this.state.idHouseEdit) {
+            this.setState({
+                idHouseEdit: this.state.idHouseEdit
+            })
+        }
 
 
 
@@ -114,7 +144,7 @@ class ModalPost extends React.Component {
         return isValid;
 
     }
-    handleSavePost = async () => {
+    handleSavePost = () => {
 
 
         let isValid = this.checkValidInput();
@@ -122,7 +152,7 @@ class ModalPost extends React.Component {
         let { action, name, userId, cityId, typeHouseId, price, address, image, area, descVi, descEn } = this.state;
 
         if (action === CRUD_ACTIONS.CREATE) {
-            await this.props.createNewPostRedux({
+            this.props.createNewPostRedux({
                 name: name,
                 userId: parseInt(userId),
                 cityId: parseInt(cityId),
@@ -382,7 +412,8 @@ const mapStateToProps = state => {
     return {
         language: state.app.language,
         citiesRedux: state.admin.cities,
-        userInfo: state.user.userInfo
+        userInfo: state.user.userInfo,
+        typeHouseRedux: state.admin.typeHouses
 
 
     };
@@ -392,8 +423,7 @@ const mapDispatchToProps = dispatch => {
     return {
         createNewPostRedux: (data) => dispatch(actions.createNewPost(data)),
         getCityStart: () => dispatch(actions.fetchCitiesStart()),
-
-
+        getTypeHouseStart: () => dispatch(actions.fetchTypeHouseStart()),
 
 
     };

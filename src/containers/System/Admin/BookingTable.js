@@ -31,17 +31,21 @@ class BookingTable extends Component {
         let res = await handelGetAllBooking('ALL');
         let { userInfo } = this.props;
         if (res && res.data && userInfo.roleId === 1) {
+            console.log("check booking", res, this.props.userInfo.id);
             this.setState({
                 listBookings: res.data
             })
         }
+        if (userInfo.roleId === 2) {
+            let response = await getBookingByUserId(this.props.userInfo.id);
+            console.log("check booking", response.bookings, this.props.userInfo.id);
+            this.setState({
+                listBookings: response.bookings
 
-        let response = await getBookingByUserId(this.props.userInfo.id);
-        console.log(response.bookings);
-        this.setState({
-            listBookings: response.bookings
+            })
+        }
 
-        })
+
 
 
     }

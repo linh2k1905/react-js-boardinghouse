@@ -26,8 +26,7 @@ class PostManage extends Component {
             isOpen: false,
             area: 0,
             previewImageURL: '',
-            lat: '',
-            lang: '',
+
             descVi: '',
             descEn: '',
             action: CRUD_ACTIONS.CREATE,
@@ -55,7 +54,6 @@ class PostManage extends Component {
         this.props.getTypeHouseStart();
         this.props.getCityStart();
         this.props.getOwner();
-        this.props.getAllPost();
         if (this.props.userInfo && this.props.userInfo.roleId === 2) {
             console.log(this.props.userInfo);
             this.setState({
@@ -116,8 +114,6 @@ class PostManage extends Component {
             'image',
             'area',
             'previewImageURL',
-            'lat',
-            'lang',
             'descVi',
             'descEn'
         ]
@@ -170,7 +166,7 @@ class PostManage extends Component {
 
         let imagebase64 = '';
         if (house.image) {
-            imagebase64 = new Buffer(house.image, 'base64').toString('binary');
+            imagebase64 = new Buffer.from(house.image, 'base64').toString('binary');
 
         }
         this.setState({
@@ -183,8 +179,7 @@ class PostManage extends Component {
             address: house.address,
             image: house.image,
             area: house.area,
-            lat: house.lat,
-            lang: house.lang,
+
             descEn: house.descriptionEn,
             descVi: house.descriptionVi,
             action: CRUD_ACTIONS.EDIT,
@@ -199,7 +194,7 @@ class PostManage extends Component {
 
         let isValid = this.checkValidInput();
         if (isValid === false) return;
-        let { action, name, userId, cityId, typeHouseId, price, address, image, area, lat, lang, descVi, descEn, idHouseEdit, selectedOption } = this.state;
+        let { action, name, userId, cityId, typeHouseId, price, address, image, area, descVi, descEn, idHouseEdit, selectedOption } = this.state;
 
         if (action === CRUD_ACTIONS.CREATE) {
             this.props.createNewPostRedux({
@@ -211,8 +206,7 @@ class PostManage extends Component {
                 address: address,
                 image: image,
                 area: parseInt(area),
-                lat: lat,
-                lang: lang,
+
                 descEn: descEn,
                 descVi: descVi
 
@@ -228,8 +222,7 @@ class PostManage extends Component {
                 price: this.state.price,
                 address: this.state.address,
                 area: this.state.area,
-                lat: this.state.lat,
-                lang: this.state.lang,
+
                 descEn: this.state.descEn,
                 descVi: this.state.descVi,
                 id: this.state.idHouseEdit
@@ -258,7 +251,7 @@ class PostManage extends Component {
         let cities = this.state.cityArray;
         let users = this.state.userArray;
         let houses = this.state.listHouses;
-        let { name, userId, cityId, typeHouseId, address, price, area, lat, lang, descVi, descEn, action, selectedOption } = this.state;
+        let { name, userId, cityId, typeHouseId, address, price, area, descVi, descEn, action, selectedOption } = this.state;
         return (
             <div className='container'>
                 <div className="title" ><FormattedMessage id='system.post-manage.post-manage' /></div>
@@ -390,26 +383,7 @@ class PostManage extends Component {
                             />
 
                         </div>
-                        <div className='col-3 input-user'>
-                            <label><FormattedMessage id='system.post-manage.lat' /></label>
-                            <input type='text'
-                                className='form-control'
-                                onChange={(event) => this.onChangeInput(event, 'lat')}
-                                value={lat}
 
-                            />
-
-                        </div>
-                        <div className='col-3 input-user'>
-                            <label><FormattedMessage id='system.post-manage.lang' /></label>
-                            <input type='text'
-                                className='form-control'
-                                onChange={(event) => this.onChangeInput(event, 'lang')}
-                                value={lang}
-
-                            />
-
-                        </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1"><FormattedMessage id='system.post-manage.descEn' /></label>
                             <textarea

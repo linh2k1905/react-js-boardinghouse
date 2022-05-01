@@ -16,7 +16,7 @@ const getAllPost = () => {
 }
 const createNewUserService = (data) => {
 
-    return axios.post('/api/create-new-user', data, { timeout: 10000 });
+    return axios.post('/api/create-new-user', data);
 }
 const createNewPostService = (data) => {
 

@@ -6,7 +6,7 @@ import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import BookingTable from './BookingTable';
 import Select from 'react-select';
-import { handlePostBooking, editBooKingService, getHouseByEmailUser } from '../../../services/userService';
+import { handlePostBooking, editBooKingService, getHouseByEmailUser, getHouseServiceById } from '../../../services/userService';
 import moment, { months } from 'moment';
 import localization from 'moment/locale/vi';
 import DatePicker from "../../../components/Input/DatePicker";
@@ -45,7 +45,22 @@ class PostManage extends Component {
     }
 
     async componentDidMount() {
-        this.props.getAllPost();
+        if (this.props.userInfo && this.props.userInfo.roleId === 1) {
+            this.props.getAllPost();
+            this.setState({
+                listHouse: this.buidDataSelectHouse(this.props.postRedux),
+
+
+            })
+        }
+
+        if (this.props.userInfo && this.props.userInfo.roleId === 2) {
+            let res = await getHouseByEmailUser(this.props.userInfo.email);
+            this.setState({
+                listHouse: this.buidDataSelectHouse(res.houses)
+            })
+        }
+
         this.props.getUser('ALL');
 
 
@@ -56,13 +71,7 @@ class PostManage extends Component {
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
-        if (prevProps.postRedux != this.props.postRedux) {
-            this.setState({
-                listHouse: this.buidDataSelectHouse(this.props.postRedux),
 
-
-            })
-        }
         if (prevProps.userRedux != this.props.userRedux) {
             this.setState({
 
@@ -162,13 +171,17 @@ class PostManage extends Component {
         if (check) {
             if (action === CRUD_ACTIONS.CREATE) {
                 let formatDate = new Date(currentDate).getTime().toString();
+                let houseChoosen = await getHouseServiceById(houseSelected.value);
+                console.log(houseChoosen);
                 let res = await handlePostBooking({
                     email: email.value,
                     desc: desc,
                     time: time,
                     idHouse: houseSelected.value,
                     date: formatDate,
-                    password: password
+                    password: password,
+                    name: houseChoosen.name,
+                    address: houseChoosen.address
                 });
 
             }
