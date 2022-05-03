@@ -44,7 +44,8 @@ class PostTable extends Component {
 
             let res = await getHouseByEmailUser(userInfo.email);
             this.setState({
-                listHouses: res.houses
+                listHouses: res.houses,
+                listHouses: this.props.postRedux
             })
         }
 

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
-import * as actions from '../../../store/actions';
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailHouse.scss'
 import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostComment, handelGetAllCommentByHouseId } from '../../../services/userService';
 import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
 import Schedule from './Schedule';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import HomeFooter from '../../HomePage/HomeFooter';
-import { lang } from 'moment';
-
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -151,8 +146,8 @@ class DetailHouse extends Component {
                         <div className='detail-house-info'>
 
                             <p className='name-house-infor'><FormattedMessage id="system.post-manage.name" />: {name}</p>
-                            <p className='price-house-infor'><FormattedMessage id="system.post-manage.price" />: {price / 1000000}Triệu</p>
-                            <p className='price-house-area'><FormattedMessage id="system.post-manage.area" />: {area} M2</p>
+                            <p className='price-house-infor'><FormattedMessage id="system.post-manage.price" />: {price / 1000000}  Triệu</p>
+                            <p className='price-house-area'><FormattedMessage id="system.post-manage.area" />: {area} m2</p>
                             <div className='city-infor'><FormattedMessage id="system.post-manage.cities" />: {City ? City.name : 'Chưa xác định'} </div>
 
                             <p className='address-house-infor'><FormattedMessage id="system.post-manage.address" />: {address}</p>
@@ -175,9 +170,9 @@ class DetailHouse extends Component {
 
 
                             <h3><FormattedMessage id="common.infoOwner" /> </h3>
-                            <p><FormattedMessage id="system.user-manage.firstname" /> {User ? User.firstName : ''} {User ? User.lastName : ''}</p>
-                            <p><FormattedMessage id="system.user-manage.mobile" /> {User ? User.tel : ''}</p>
-                            <p><FormattedMessage id="system.user-manage.address" /> {User ? User.address : ''}</p>
+                            <p><FormattedMessage id="system.user-manage.firstname" />: {User ? User.lastName : ''} {User ? User.firstName : ''} </p>
+                            <p><FormattedMessage id="system.user-manage.mobile" />: {User ? User.tel : ''}</p>
+                            <p><FormattedMessage id="system.user-manage.address" />: {User ? User.address : ''}</p>
 
 
                             <Schedule
@@ -198,7 +193,7 @@ class DetailHouse extends Component {
 
                     </div>
 
-                    <div className='title md-20'>Xem vị trí nhà trọ trên bản đồ </div>
+                    <div className='title-map md-20'>Xem vị trí nhà trọ trên bản đồ </div>
                     {position.latFloat && position.langFloat &&
                         <div className='map-detail-house'>
                             <MapContainer
@@ -231,21 +226,21 @@ class DetailHouse extends Component {
                                 <div className='col-8'>
                                     <input
                                         type='text'
-                                        className='form-control '
+                                        className='form-control comment-input '
                                         placeholder='Please comment about your thinking'
                                         onChange={(event) => this.handleComment(event)}
                                     ></input>
                                 </div>
                                 <button
 
-                                    className='btn btn-primary col-1'
+                                    className='btn  btn-post-comment'
                                     onClick={() => this.handleCommentPost()}
                                 >Post</button>
                             </div>
                         </form>
                         </div>
                         <div className='all-comments'>
-                            <div className='title'>Tất cả bình luận</div>
+                            <div className='title-comment'>Tất cả bình luận</div>
 
                             {allcomments && allcomments.length > 0 &&
                                 allcomments.map((item, index) => {

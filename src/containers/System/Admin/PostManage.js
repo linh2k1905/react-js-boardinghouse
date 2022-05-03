@@ -31,7 +31,8 @@ class PostManage extends Component {
             descEn: '',
             action: CRUD_ACTIONS.CREATE,
             idHouseEdit: '',
-            selectedOption: ''
+            selectedOption: '',
+            idUserEdit: ''
         }
     }
     buidDataSelect = (data) => {
@@ -51,9 +52,9 @@ class PostManage extends Component {
     async componentDidMount() {
 
 
-        this.props.getTypeHouseStart();
-        this.props.getCityStart();
-        this.props.getOwner();
+        await this.props.getTypeHouseStart();
+        await this.props.getCityStart();
+        await this.props.getOwner();
         if (this.props.userInfo && this.props.userInfo.roleId === 2) {
             console.log(this.props.userInfo);
             this.setState({
@@ -64,35 +65,18 @@ class PostManage extends Component {
                 userId: this.props.userInfo.id
             })
         }
+        console.log(this.props.typeHouseRedux);
+        this.setState({
+            typeHouseArray: this.props.typeHouseRedux,
+            cityArray: this.props.citiesRedux,
+            userArray: this.buidDataSelect(this.props.ownerRedux),
+            listHouses: this.props.postRedux
+
+        })
+
 
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
-        if (prevProps.typeHouseRedux != this.props.typeHouseRedux) {
-            this.setState({
-                typeHouseArray: this.props.typeHouseRedux
-
-            })
-        }
-        if (prevProps.citiesRedux != this.props.citiesRedux) {
-            this.setState({
-                cityArray: this.props.citiesRedux
-
-            })
-        }
-        if (prevProps.ownerRedux != this.props.ownerRedux) {
-
-            this.setState({
-                userArray: this.buidDataSelect(this.props.ownerRedux)
-
-            })
-        }
-        if (prevProps.postRedux != this.props.postRedux) {
-
-            this.setState({
-                listHouses: this.props.postRedux
-
-            })
-        }
         if (prevState.idHouseEdit != this.state.idHouseEdit) {
             this.setState({
                 idHouseEdit: this.state.idHouseEdit
@@ -179,11 +163,14 @@ class PostManage extends Component {
             address: house.address,
             image: house.image,
             area: house.area,
-
             descEn: house.descriptionEn,
             descVi: house.descriptionVi,
             action: CRUD_ACTIONS.EDIT,
             previewImageURL: imagebase64,
+            selectedOption: {
+                value: house.idUser,
+                label: house.User.email,
+            },
         })
 
 
@@ -275,7 +262,7 @@ class PostManage extends Component {
                                 options={users}
                                 value={selectedOption}
                                 onChange={this.handleOnChange}
-                                isDisabled={this.props.userInfo.roleId === 2 ? true : false}
+                                isDisabled={this.props.userInfo.roleId === 2 || action === CRUD_ACTIONS.EDIT ? true : false}
                             />
 
                         </div>

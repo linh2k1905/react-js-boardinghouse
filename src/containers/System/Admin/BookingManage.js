@@ -62,6 +62,11 @@ class PostManage extends Component {
         }
 
         this.props.getUser('ALL');
+        this.setState({
+
+            listUser: this.buidDataSelect(this.props.userRedux),
+            userList: this.props.postRedux
+        })
 
 
 
@@ -72,13 +77,7 @@ class PostManage extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
 
-        if (prevProps.userRedux != this.props.userRedux) {
-            this.setState({
 
-                listUser: this.buidDataSelect(this.props.userRedux),
-                userList: this.props.postRedux
-            })
-        }
 
 
 

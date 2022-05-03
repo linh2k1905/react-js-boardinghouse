@@ -76,7 +76,7 @@ class HouseList extends Component {
                                         <div
                                             className='price-house'>
                                             <FormattedMessage id='system.post-manage.price'
-                                            />: {item.price}
+                                            />: {item.price / 1000000} Triệu(VND)
 
                                         </div>
                                         <div
@@ -87,8 +87,8 @@ class HouseList extends Component {
                                         </div>
                                         <div
                                             className='area-house'>
-                                            <FormattedMessage id='system.user-manage.email'
-                                            />: {item.User.email}
+                                            <FormattedMessage id='header.city'
+                                            />: {item.City.name}
 
                                         </div>
                                         <div

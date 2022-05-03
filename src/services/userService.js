@@ -114,10 +114,10 @@ const handelGetAllCommentByHouseId = (data) => {
 }
 const handelGetAllBooking = (data) => {
 
-    return axios.get(`api/admin-booking?id=${data}`);
+    return axios.get(`/api/admin-booking?id=${data}`);
 }
 const handelDeleteBooking = (id) => {
-    return axios.delete(`api/delete-booking-by-id?id=${id}`
+    return axios.delete(`/api/delete-booking-by-id?id=${id}`
     );
 }
 const editBooKingService = (data) => {

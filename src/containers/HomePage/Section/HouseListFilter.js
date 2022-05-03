@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-//import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-
-import { language, path } from '../../../utils';
-import * as actions from '../../../store/actions';
-import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router'
 class HouseListFilter extends Component {
     constructor(props) {
@@ -54,7 +48,7 @@ class HouseListFilter extends Component {
                     {listHouseArr && listHouseArr.map((item, index) => {
                         let imagebase64 = '';
                         if (item.image) {
-                            imagebase64 = new Buffer(item.image, 'base64').toString('binary');
+                            imagebase64 = Buffer.from(item.image, 'base64').toString('binary');
 
 
                         }

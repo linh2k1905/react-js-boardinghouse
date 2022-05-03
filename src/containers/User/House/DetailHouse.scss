@@ -1,105 +1,143 @@
-.house-detail-container{
-   height: 800px;
- 
+.house-detail-container {
+    height: 800px;
+
     margin: 0 50px;
-    
-    .house-intro{
+
+    .house-intro {
         display: flex;
-        height: 300px;     
-        .contain-left
-        {
+        height: 300px;
+
+        .contain-left {
             width: 70%;
-        
+
             margin-right: 25px;
             background: no-repeat;
-            background-position:center ;
+            background-position: center;
             background-size: cover;
-           
+
         }
-      
-        .contain-right{
+
+        .contain-right {
             width: 30%;
-            
+
             background: no-repeat;
-            background-position:center ;
+            background-position: center;
             background-size: cover;
             justify-content: center;
         }
     }
 
-    .detail-house-info{
-        width:70%;
-       
+    .detail-house-info {
+        width: 70%;
+
         height: auto;
+
         .address-house-infor {
             font-size: 18px;
             font-weight: 400;
             color: blue;
         }
+
         .name-house-infor {
             font-size: 20px;
             font-weight: 600;
-            color: red;
+            color: blue;
         }
-        .price-house-infor{
-            font-size: 20px;
-            font-weight: 600;
-            color: orange;
+
+        .price-house-infor {
+            font-size: 18px;
+            font-weight: 400;
+            color: blue;
 
         }
-        .price-house-area{
-            font-size: 20px;
-            font-weight: 600;
-            color: rgb(22, 11, 177);
+
+        .price-house-area {
+            font-size: 18px;
+            font-weight: 400;
+            color: blue;
 
         }
-        .city-infor{
-          font-weight: 600px;
-          font-size: 20px;
-          color: blue;
+
+        .city-infor {
+            font-weight: 600px;
+            font-size: 18px;
+            color: blue;
         }
-        .desc-house{
-            font-size: 15px;
+
+        .desc-house {
+            font-size: 16px;
             color: blue;
         }
     }
-    .schedule-owner{
+
+    .schedule-owner {
         width: 30%;
         height: 300px;
-        h3{
-            color: red;
-            
+
+        h3 {
+            color: blue;
+
             width: auto;
         }
-        p{
+
+        p {
             color: blue;
             font-size: 15px;
         }
-      
+
     }
-    .map-detail-house{
-      width: 100%;height: 100%;
+
+    .title-map {
+        color: blue;
+        font-size: 30px;
+        justify-content: center;
+        text-align: center;
+        font-weight: 600;
+        padding: 10px;
     }
-    .comment-house{
+
+    .map-detail-house {
+        width: 100%;
+        height: 100%;
+    }
+
+    .comment-house {
         border: 1px solid rgb(238, 229, 229);
         height: 500px;
         margin-top: 10px;
         position: relative;
-        .title-comment{
+
+        .title-comment {
             padding: 10px;
             font-size: 16px;
-            font-weight: 400px;
+            font-weight: 600px;
+            opacity: 0.5;
+
         }
-        .all-comments{
-          
-                .name-commenter {
-                    padding: 10px;
-                    color: blue;
-                    font-size: 18px;
-                    font-weight: 400;
+
+        .comment-input {
+
+            margin: 10px 10px;
+        }
+
+        .btn-post-comment {
+            margin: 10px 10px;
+            color: aliceblue;
+            background-color: blue;
+            width: 5%;
+            border: 1px solid wheat;
+        }
+
+        .all-comments {
+
+            .name-commenter {
+                padding: 10px;
+                color: blue;
+                font-size: 18px;
+                font-weight: 400;
             }
 
-            
+
         }
-       }
+    }
 }
