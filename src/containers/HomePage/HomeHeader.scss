@@ -55,12 +55,14 @@
 
         .right-content {
             width: 55%;
-
             display: flex;
             align-items: center;
+            justify-content: end;
+            margin-right: 5px;
 
             .welcome-text {
                 color: blue;
+                font-weight: bold;
 
             }
 
@@ -70,25 +72,37 @@
                 padding: 5px;
                 color: blue;
                 font-weight: 600;
-                background: gainsboro;
+                // background: gainsboro;
                 border: none;
                 border-radius: 3px;
+
+                .avatar {
+
+
+                    width: 50px;
+                    height: 30px;
+                    background: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    border-radius: 50%;
+
+                }
             }
 
             .child-right-content {
-                border: 1px solid orange;
+
                 height: 36px;
                 width: 85px;
                 text-align: center;
                 padding: 7px;
                 margin: 5px;
-                border-radius: 3px;
+                border-radius: 10px;
                 background-color: blue;
                 color: white;
 
                 &.btn-post {
-                    background-color: rgb(182, 16, 16);
-                    width: 125px;
+                    background-color: blue;
+                    width: 100px;
 
                 }
 
@@ -263,9 +277,11 @@
 
 .modal-content {
     button {
-        background: blue !important;
+        background: rgb(6, 128, 169) !important;
         color: white;
         font-size: 15px;
+        border: none;
+        padding: 3px;
 
     }
 }
@@ -609,4 +625,10 @@
     align-items: center;
     display: flex;
     background-color: greenyellow;
+}
+
+.btn-ok {
+    height: 30px;
+    width: 50px;
+    border-radius: 5px;
 }

@@ -12,7 +12,7 @@ import ModalPrice from './ModalPrice';
 import ModalPost from './ModalPost';
 import ModalUpdateUser from './ModalUpdateUser';
 import ModalUser from '../System/ModalUser';
-import { searchHouseByUserService, editUserService } from '../../services/userService';
+import { searchHouseByUserService, editUserService, searchHouseByCityService } from '../../services/userService';
 import * as actions from '../../store/actions';
 import { withRouter } from 'react-router'
 import { update } from 'lodash';
@@ -23,8 +23,8 @@ class HomeHeader extends Component {
             isOpenModalArea: false,
             isOpenModalPrice: false,
             typeHouse: [],
-            citiesSelected: {},
-            roomSelected: {},
+            citiesSelected: '',
+            roomSelected: '',
             areaValue: '',
             priceValue: '',
             isSearch: false,
@@ -38,8 +38,13 @@ class HomeHeader extends Component {
 
 
     }
-    changeLanguage = (language) => {
-        this.props.changeLanguageRedux(language);
+    changeLanguage = () => {
+        let language = this.props.language;
+        if (language === LANGUAGES.VI)
+            this.props.changeLanguageRedux(LANGUAGES.EN);
+        if (language === LANGUAGES.EN)
+            this.props.changeLanguageRedux(LANGUAGES.VI);
+
     }
     // area
     handleClickArea = () => {
@@ -136,15 +141,22 @@ class HomeHeader extends Component {
         this.props.isSearchCheck(true);
 
         let { priceValue, areaValue, citiesSelected, roomSelected } = this.state;
-        let obj = {};
-        obj.idCity = citiesSelected.id;
-        obj.idTypeHouse = roomSelected.id;
-        obj.area = areaValue;
-        obj.price = priceValue;
+        if (citiesSelected && !areaValue && !roomSelected && !priceValue) {
+            let obj = {};
+            obj.idCity = citiesSelected.id;
+            let res = await searchHouseByCityService(obj);
+            this.props.listHouseFilerFunction(res.data);
+            console.log('city', res.data);
+        }
+
 
 
         if (priceValue && areaValue && citiesSelected && roomSelected) {
-
+            let obj = {};
+            obj.idCity = citiesSelected.id;
+            obj.idTypeHouse = roomSelected.id;
+            obj.area = areaValue;
+            obj.price = priceValue;
             let res = await searchHouseByUserService(obj);
             this.props.listHouseFilerFunction(res.data);
             console.log(res.data);
@@ -198,6 +210,12 @@ class HomeHeader extends Component {
     render() {
         let { language, isOpenFinder, isLoggedIn, userInfo, processLogout } = this.props;
         let { typeHouse, citiesSelected, roomSelected, areaValue, priceValue } = this.state;
+        let image = '';
+        let imagebase64 = '';
+        if (userInfo && userInfo.image)
+            image = userInfo.image;
+        imagebase64 = Buffer.from(image, 'base64').toString('binary');
+
         return (
 
             <React.Fragment>
@@ -208,7 +226,7 @@ class HomeHeader extends Component {
                             <div className='header-logo'
                                 onClick={() => this.handleClickBackHome()}
                             >
-                                <i className="fas fa-home icon-homepage"></i> TimPhongTro.com
+                                <i className="fas fa-home icon-homepage">Home</i> TimPhongTro123.com
                             </div>
                         </div>
                         <div className='center-content'>
@@ -222,7 +240,17 @@ class HomeHeader extends Component {
 
                                     onClick={() => this.handleClickToUpdateInfomation()}
                                 >
-                                    {userInfo.firstName && userInfo.lastName ? "Hello, " + userInfo.firstName + " " + userInfo.lastName : userInfo.email}
+                                    {userInfo && userInfo.image ?
+                                        <div
+
+                                            className="avatar"
+                                            style={{ backgroundImage: `url(${imagebase64})` }}
+                                        ></div> :
+                                        <div
+                                            className="avatar"
+                                            style={{ backgroundImage: `url("https://thumbs.dreamstime.com/z/no-image-available-set-pictures-means-photo-blank-picture-camera-photography-icon-silhouette-man-missing-61062496.jpg")` }}
+                                        ></div>
+                                    }
                                     <ModalUpdateUser
                                         isOpen={this.state.isModalUpdateUserInfo}
                                         toggleModalUser={this.toggleModalUser}
@@ -256,8 +284,8 @@ class HomeHeader extends Component {
                                 <a><FormattedMessage id="header.post" /> <i className="fas fa-plus-circle"></i> </a>
                             </div>
                             <div className='language'>
-                                <div onClick={() => { this.changeLanguage(LANGUAGES.EN) }} className={this.props.language === LANGUAGES.EN ? 'language-en action' : 'language-en'}><span >EN</span></div>
-                                <div onClick={() => { this.changeLanguage(LANGUAGES.VI) }} className={this.props.language === LANGUAGES.VI ? 'language-vi action' : 'language-vi'}><span >VI</span></div>
+                                <div onClick={() => { this.changeLanguage(LANGUAGES.EN) }} className={this.props.language === LANGUAGES.EN ? 'language-en action' : 'language-en'}><span ><i class="fas fa-globe"></i></span></div>
+
 
                             </div>
                             <ModalPost
@@ -266,8 +294,10 @@ class HomeHeader extends Component {
                                 typeHouse={this.props.typeHouses}
                             />
                             {userInfo &&
-                                <div className="btn btn-logout" onClick={processLogout}>
-                                    {language === LANGUAGES.VI ? 'THOÁT' : 'EXIT'}
+                                <div className="btn btn-logout "
+                                    onClick={processLogout}>
+                                    {language === LANGUAGES.VI ? 'THOÁT ' : 'EXIT '}
+                                    <i className="fas fa-sign-out-alt"></i>
                                 </div>
                             }
 

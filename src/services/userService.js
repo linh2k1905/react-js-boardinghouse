@@ -76,28 +76,32 @@ const bulkCreateSchedulService = (data) => {
 }
 const getScheduleOwnerFromDate = (id, date) => {
 
-    return axios.get(`api/get-schedule-owner?id=${id}&date=${date}`);
+    return axios.get(`/api/get-schedule-owner?id=${id}&date=${date}`);
 }
 
 const searchHouseByUserService = (data) => {
 
     return axios.get(`/api/get-filter-house-from-home?idTypeHouse=${data.idTypeHouse}&idCity=${data.idCity}&price=${data.price}&area=${data.area}`);
 }
+const searchHouseByCityService = (data) => {
+
+    return axios.get(`/api/get-all-home-by-city?idCity=${data.idCity}`);
+}
 const searchHouseByTypeHouse = (data) => {
 
-    return axios.get(`api/get-all-type-house-by-id?id=${data}`);
+    return axios.get(`/api/get-all-type-house-by-id?id=${data}`);
 }
 const searchUserByTypeUser = (roleId) => {
 
-    return axios.get(`api/get-all-users-by-type-user?roleId=${roleId}`);
+    return axios.get(`/api/get-all-users-by-type-user?roleId=${roleId}`);
 }
 const handleGetInfoBooking = (idHouse, idOwner) => {
 
-    return axios.get(`api/get-info-booking?idHouse=${idHouse}&idOwner=${idOwner}`);
+    return axios.get(`/api/get-info-booking?idHouse=${idHouse}&idOwner=${idOwner}`);
 }
 const handlePostBooking = (data) => {
 
-    return axios.post('api/user-booking', data);
+    return axios.post('/api/user-booking', data);
 }
 
 const handlePostComment = (data) => {
@@ -198,5 +202,6 @@ export {
     getHouseByEmailUser,
     handleVerifyBookingCancle,
     handleVerifyBookingFromOwner,
-    getBookingByUserId
+    getBookingByUserId,
+    searchHouseByCityService
 }

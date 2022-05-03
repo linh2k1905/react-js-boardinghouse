@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from '@mui/material/Slider';
+import './../HomePage/HomeHeader.scss'
 const MIN_VALUE = 0;
 const MAX_VALUE = 100;
 const marks = [
@@ -61,7 +62,7 @@ class ModalArea extends React.Component {
     render() {
         return (
             <Modal
-                //centered={true}
+                centered={true}
                 size={'lg'}
                 isOpen={this.props.isOpen}
                 toggle={this.toggle}
@@ -70,7 +71,7 @@ class ModalArea extends React.Component {
                 <ModalBody>
                     <Slider
                         size="small"
-                        defaultValue={0}
+                        defaultValue={null}
                         aria-label="Small"
                         valueLabelDisplay="auto"
                         marks={marks}
@@ -78,13 +79,14 @@ class ModalArea extends React.Component {
                         max={50}
                         onChange={(event) => this.handleOnchangeArea(event)}
                     />
-                    {
 
-                    }
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={this.toggle}>Đã chọn xong</Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Đóng</Button>
+                    <button
+                        onClick={this.toggle}
+                        className="btn btn-ok "
+                    > Ok</button>
+                    <button className='btn btn-ok' onClick={this.toggle}>Đóng</button>
                 </ModalFooter>
             </Modal>
 

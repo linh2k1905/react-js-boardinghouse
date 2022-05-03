@@ -77,7 +77,7 @@ class ModalPrice extends React.Component {
                 <ModalBody>
                     <Slider
                         size="small"
-                        defaultValue={0}
+                        defaultValue={null}
                         aria-label="Small"
                         valueLabelDisplay="auto"
                         marks={marks}
