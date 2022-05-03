@@ -107,6 +107,12 @@ class DetailTypeHouse extends Component {
                                                 />: {item.User.tel}
 
                                             </div>
+                                            <div
+                                                className='area-house'>
+                                                <FormattedMessage id='system.user-manage.email'
+                                                />: {item.User.email}
+
+                                            </div>
 
                                         </div>
 

@@ -91,6 +91,12 @@ class HouseListFilter extends Component {
 
                                         <div
                                             className='area-house'>
+                                            <FormattedMessage id='system.user-manage.email'
+                                            />: {item.User.email}
+
+                                        </div>
+                                        <div
+                                            className='area-house'>
                                             <FormattedMessage id='system.user-manage.mobile'
                                             />: {item.User.tel}
 
