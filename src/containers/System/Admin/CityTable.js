@@ -180,11 +180,12 @@ class CityTable extends Component {
                 <div className='col-12 mb5'>
                     <table className="TableManage">
                         <tr>
-                            <th>Name House</th>
+                            <th>Name</th>
                             <th>City</th>
                             <th>Adrress</th>
                             <th>Owner</th>
                             <th>Created Date</th>
+                            <th>Khóa</th>
 
 
                         </tr>
@@ -202,6 +203,13 @@ class CityTable extends Component {
                                             <td>{item.address}</td>
                                             <td>{item.User.firstName} {item.User.lastName}</td>
                                             <td>{this.handleTime(item.createdAt)}</td>
+                                            <td> <td className='action-special'>
+                                                <button
+                                                    className='btn-edit'
+                                                    onClick={() => { }}
+                                                >
+                                                    <i className="fa fa-lock"></i> </button>
+                                            </td></td>
 
 
 

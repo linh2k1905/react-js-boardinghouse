@@ -91,9 +91,8 @@ class PostTable extends Component {
             <div className='col-12 mb5'>
                 <table className="TableManage">
                     <tr>
-                        <th>User</th>
+                        <th>House</th>
                         <th>Adrress</th>
-                        <th>Owner</th>
                         <th>CreateDate</th>
                         <th className='action-special'>Action</th>
 
@@ -108,7 +107,6 @@ class PostTable extends Component {
                                     <tr id={index}>
                                         <td>{item.name}</td>
                                         <td>{item.address}</td>
-                                        <td>{item.User.firstName}</td>
                                         <td>{this.handleDate(item.createdAt)}</td>
                                         <td className='action-special'>
                                             <button

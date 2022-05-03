@@ -86,7 +86,7 @@ export const adminMenu = [
 export const ownerMenu = [
 
     {
-        name: 'menu.system.user',
+        name: 'menu.system.booking',
         menus: [
             {
                 name: 'menu.system.system-administrator.owner-booking',

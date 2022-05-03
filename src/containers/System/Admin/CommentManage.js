@@ -179,7 +179,7 @@ class CommentManage extends Component {
                                                 className='btn-edit'
                                                 onClick={() => this.handleHideComment(item)}
                                             >
-                                                <i class="fa fa-lock"></i> </button>
+                                                <i className="fa fa-lock"></i> </button>
                                         </td>
                                     </tr>
                                 )
