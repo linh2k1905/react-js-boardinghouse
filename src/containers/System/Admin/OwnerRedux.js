@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { toast } from 'react-toastify';
 import TableManageOwner from './TableManageOwner';
-import Lightbox from 'react-image-lightbox';
-
 class OwnerRedux extends Component {
 
     constructor(props) {
@@ -291,7 +288,7 @@ class OwnerRedux extends Component {
                                 onChange={(event) => this.handleOnChangeImage(event)}
                             />
                             <label htmlFor='load-image'
-                                className='load-image'
+
 
                             >
                                 <FormattedMessage id='system.user-manage.upload' /> <i className="fas fa-image"></i></label>

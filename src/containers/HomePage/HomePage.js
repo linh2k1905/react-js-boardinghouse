@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
-import TypeHouse from './Section/TypeHouse';
 import HouseList from './Section/HouseList';
 import BodyHomePage from './BodyHomePage';
 
@@ -53,7 +52,7 @@ class HomePage extends Component {
 
                 <Owner />
                 <BodyHomePage />
-                <About />
+                {isSearch ? '' : <About />}
                 <HomeFooter />
 
             </div>

@@ -141,7 +141,7 @@ class HomeHeader extends Component {
         this.props.isSearchCheck(true);
 
         let { priceValue, areaValue, citiesSelected, roomSelected } = this.state;
-        if (citiesSelected && !areaValue && !roomSelected && !priceValue) {
+        if (citiesSelected && (!areaValue || !roomSelected || !priceValue)) {
             let obj = {};
             obj.idCity = citiesSelected.id;
             let res = await searchHouseByCityService(obj);
@@ -294,7 +294,7 @@ class HomeHeader extends Component {
                                 typeHouse={this.props.typeHouses}
                             />
                             {userInfo &&
-                                <div className="btn btn-logout "
+                                <div className="btn btn-logout-home "
                                     onClick={processLogout}>
                                     {language === LANGUAGES.VI ? 'THOÁT ' : 'EXIT '}
                                     <i className="fas fa-sign-out-alt"></i>

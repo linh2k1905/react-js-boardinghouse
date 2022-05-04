@@ -291,7 +291,7 @@ class UserRedux extends Component {
                                 onChange={(event) => this.handleOnChangeImage(event)}
                             />
                             <label htmlFor='load-image'
-                                className='load-image'
+
 
                             >
                                 <FormattedMessage id='system.user-manage.upload' /> <i className="fas fa-image"></i></label>

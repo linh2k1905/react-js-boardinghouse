@@ -206,9 +206,12 @@ class ModalPost extends React.Component {
             >
                 <ModalHeader className='header-post'>
 
-                    <div className='right'> <button className='btn btn-close-post'
-                        onClick={() => this.toggle()}
-                    ><FormattedMessage id='common.close' /></button>
+                    <div className='right'>
+                        <button className=' btn-close-post'
+                            onClick={() => this.toggle()}
+                        >
+                            <span>Close</span>
+                        </button>
 
                     </div>
                 </ModalHeader>
@@ -368,9 +371,6 @@ class ModalPost extends React.Component {
 
                                 />
                                 <label htmlFor='load-image'
-                                    className='load-image'
-
-
                                 >
                                     <FormattedMessage id='system.user-manage.upload' /> <i className="fas fa-image"></i></label>
 
@@ -387,7 +387,7 @@ class ModalPost extends React.Component {
                         <div className='col-12 mb-3'>
 
                             <button
-                                className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning col-1 ' : 'btn btn-primary col-1 btn-save'}
+                                className={this.state.action === CRUD_ACTIONS.EDIT ? ' btn-warning col-1 ' : ' btn-primary col-1 btn-save'}
                                 onClick={() => this.handleSavePost()}
 
 

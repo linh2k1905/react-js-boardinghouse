@@ -82,11 +82,7 @@ class ModalArea extends React.Component {
 
                 </ModalBody>
                 <ModalFooter>
-                    <button
-                        onClick={this.toggle}
-                        className="btn btn-ok "
-                    > Ok</button>
-                    <button className='btn btn-ok' onClick={this.toggle}>Đóng</button>
+                    <button onClick={this.toggle}>OK</button>
                 </ModalFooter>
             </Modal>
 

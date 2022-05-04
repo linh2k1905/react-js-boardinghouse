@@ -45,7 +45,6 @@ class PostTable extends Component {
             let res = await getHouseByEmailUser(userInfo.email);
             this.setState({
                 listHouses: res.houses,
-                listHouses: this.props.postRedux
             })
         }
 
@@ -92,10 +91,10 @@ class PostTable extends Component {
             <div className='col-12 mb5'>
                 <table className="TableManage">
                     <tr>
-                        <th>House</th>
-                        <th>Adrress</th>
-                        <th>CreateDate</th>
-                        <th className='action-special'>Action</th>
+                        <th className='col-2'>Tên nhà trọ</th>
+                        <th className='col-6'>Địa chỉ</th>
+                        <th className='col-2'>Ngày đăng</th>
+                        <th >Tùy chỉnh</th>
 
                     </tr>
                     {houses && houses.length > 0 &&
@@ -109,7 +108,7 @@ class PostTable extends Component {
                                         <td>{item.name}</td>
                                         <td>{item.address}</td>
                                         <td>{this.handleDate(item.createdAt)}</td>
-                                        <td className='action-special'>
+                                        <td >
                                             <button
                                                 className='btn-edit'
                                                 onClick={() => this.handleEditPost(item)}

@@ -3,11 +3,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FormattedMessage } from 'react-intl';
-import { CRUD_ACTIONS, LANGUAGES, CommonUtils } from '../../utils';
-import * as actions from '../../store/actions';
-import { Link, withRouter } from 'react-router-dom';
+import { CRUD_ACTIONS, CommonUtils } from '../../utils';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { add } from 'lodash';
 class ModalUpdateUser extends React.Component {
     constructor(props) {
         super(props);

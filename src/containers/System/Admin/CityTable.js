@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import { getFilterHouseService } from '../../../services/userService'
@@ -133,6 +131,9 @@ class CityTable extends Component {
         let time = moment(new Date(date)).format('MM/DD/YYYY');
         return time;
     }
+    handleBlockUserPostAndUser = (id, userId) => {
+        console.log('Block event success', id, userId);
+    }
     render() {
 
 
@@ -206,7 +207,7 @@ class CityTable extends Component {
                                             <td> <td className='action-special'>
                                                 <button
                                                     className='btn-edit'
-                                                    onClick={() => { }}
+                                                    onClick={() => { this.handleBlockUserPostAndUser(item.id, item.User.id) }}
                                                 >
                                                     <i className="fa fa-lock"></i> </button>
                                             </td></td>

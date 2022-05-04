@@ -5,11 +5,6 @@ export const adminMenu = [
         menus: [
             {
                 name: 'menu.system.system-administrator.user-manage',
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
-
-                // ]
                 link: '/system/user-redux'
             },
             {
@@ -61,11 +56,6 @@ export const adminMenu = [
         menus: [
             {
                 name: 'menu.system.list',
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
-
-                // ]
                 link: '/system/list'
             },
             {
@@ -90,11 +80,6 @@ export const ownerMenu = [
         menus: [
             {
                 name: 'menu.system.system-administrator.owner-booking',
-                // subMenus: [
-                //     { name: 'menu.system.system-administrator.user-manage', link: '/system/user-manage' },
-                //     { name: 'menu.system.system-administrator.user-redux', link: '/system/user-redux' },
-
-                // ]
                 link: '/system/manage-booking'
             },
             {
@@ -107,7 +92,7 @@ export const ownerMenu = [
         ]
 
     },
-    { //hệ thống
+    {
         name: 'menu.system.post',
 
         menus: [

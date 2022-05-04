@@ -42,10 +42,11 @@ class TableManageAdmin extends Component {
                 <table id="TableManageUser">
                     <tr>
                         <th>Email</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Address</th>
-                        <th>Action</th>
+                        <th>Họ</th>
+                        <th>Tên</th>
+                        <th>Địa chỉ</th>
+                        <th>Vai trò</th>
+                        <th>Hành động</th>
                     </tr>
                     {arrUser && arrUser.map((item, index) => {
                         return (
@@ -54,6 +55,7 @@ class TableManageAdmin extends Component {
                                 <td>{item.firstName}</td>
                                 <td>{item.lastName}</td>
                                 <td>{item.address}</td>
+                                <td>{item.roleId}</td>
                                 <td>
                                     <button
                                         className='btn-edit'

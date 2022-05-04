@@ -88,8 +88,7 @@ class ModalPrice extends React.Component {
 
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={() => this.toggle()}>Đã chọn xong</Button>{' '}
-                    <Button color="secondary" onClick={() => this.toggle()}>Đóng</Button>
+                    <button onClick={() => this.toggle()}>Đã chọn xong</button>
                 </ModalFooter>
             </Modal>
 

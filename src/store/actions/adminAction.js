@@ -208,9 +208,11 @@ export const createNewPost = (data) => {
 
             let res = await createNewPostService(data);
             console.log(res);
-            if (res && res.errorCode === 0) {
-
-                toast.success("Create a new post success!!!");
+            if (res) {
+                if (res.errorCode === 0)
+                    toast.success("Tạo bài đăng thành công");
+                if (res.errorCode === -1)
+                    toast.error(res.messageCode);
                 dispatch(savePostSuccess());
 
 

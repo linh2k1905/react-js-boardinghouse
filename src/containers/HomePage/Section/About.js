@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-//import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { FormattedMessage } from 'react-intl';
-
+import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 class About extends Component {
 
     render() {

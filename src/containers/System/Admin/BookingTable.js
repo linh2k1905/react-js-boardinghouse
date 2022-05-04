@@ -108,16 +108,16 @@ class BookingTable extends Component {
         let bookings = this.state.listBookings;
         return (
             <div className='col-12 mb5'>
-                <table className="TableManage">
+                <table className="TableManageBooking">
                     <tr>
-                        <th>Time</th>
-                        <th>Status</th>
-                        <th>Date</th>
+                        <th>Thời gian</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày đặt </th>
 
-                        <th>Email user booking</th>
+                        <th>Mail người đặt lịch</th>
 
-                        <th>Action</th>
-                        <th>Deny or Accept</th>
+                        <th>Tùy chỉnh</th>
+                        <th>Xác nhận</th>
 
                     </tr>
                     {bookings && bookings.length > 0 &&

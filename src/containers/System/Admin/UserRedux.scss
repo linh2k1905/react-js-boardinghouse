@@ -1,154 +1,243 @@
-.input-user{
+.input-user {
+  padding: 10px;
+
+  .btn-save {
+    color: black;
+    background-color: rgb(8, 8, 216);
+    float: right;
+  }
+
+  .load-image {
+    padding: 5px;
+    background: #ddd;
+    border-radius: 3px;
+    width: 102px;
+    height: 102px;
+
+  }
+
+}
+
+.preview-image-container {
+
+  .preview-image {
+    width: 150px;
+    height: 150px;
     padding: 10px;
-  
-    .btn-save{
-        color: black;
-        background-color: rgb(8, 8, 216);
-        float: right;
-    }
-    .load-image{
-        padding: 5px;
-        background: #ddd;
-        border-radius: 3px;
-        width: 102px;
-        height: 102px;
-    
-    }
-   
+    margin: 10px;
+    background: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+  }
 }
-.preview-image-container{
-        
-    .preview-image{
-        width: 150px;
-        height: 150px;
-        padding: 10px;
-        margin: 10px;
-        background: no-repeat;
-        background-position:center ;
-        background-size: cover;
-      
-    }
-}
+
 .TableManage {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    .action-special{
-      text-align: center;
-    }
-   
-  }
-  
-  .TableManage td, .TableManage th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    
-  }
-  
-  .TableManage tr:nth-child(even){background-color: #f2f2f2;}
-  
-  .TableManage tr:hover {background-color: #ddd;}
-  
-  .TableManage th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4b38f8;
-    color: white;
-  }
-  .TableManage button{
-    cursor: pointer;
-    border-radius: 10px;
-    border: none;
-    color: #f1eeee;
-    background: #1964ed;
-  }
-  .btn-edit{
-        width: 50px; 
-        height: 25px ; 
-        outline: none; 
-        border: honeydew; 
-        background: #ece8e0; 
-        color: rgb(8, 3, 37);
-        &:hover{
-        background-color: transparent !important;
-        color: rgb(199, 41, 13)!important;
-        }
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+  .action-special {
+    text-align: center;
   }
 
-  .btn-delete{
-    width: 50px; 
-    height: 25px ; 
-    outline: none; 
-    border: honeydew; 
-    background: #ece8e0; 
-    color: rgb(10, 4, 61);
-    &:hover{
+}
+
+.TableManage td,
+.TableManage th {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+
+.TableManage tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.TableManage tr:hover {
+  background-color: #ddd;
+}
+
+.TableManage th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4b38f8;
+  color: white;
+  text-align: center;
+}
+
+.TableManage {
+  .setCenter {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.TableManage button {
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  color: #1964ed;
+  background-color: whitesmoke;
+
+
+}
+
+
+.btn-edit {
+  width: 50px;
+  height: 25px;
+  outline: none;
+  border: honeydew;
+  background: #ece8e0;
+  color: rgb(8, 3, 37);
+
+  &:hover {
     background-color: transparent !important;
-    color: rgb(199, 13, 22)!important;
-    }
+    color: rgb(12, 217, 56) !important;
+  }
 }
-.modal-user-container{
-  .modal-content{
-    .modal-header{
-     
-        button{
-          background: rgb(211, 11, 11) !important;
-          color: rgb(19, 1, 1);
-          border:none;
-          border-radius: 3px;
-          width: 30px;
-          font-size: 18px;
-        }
+
+.btn-delete {
+  width: 50px;
+  height: 25px;
+  outline: none;
+  border: honeydew;
+  background: #ece8e0;
+  color: rgb(10, 4, 61);
+
+  &:hover {
+    background-color: transparent !important;
+    color: rgb(199, 13, 22) !important;
+  }
+}
+
+.modal-user-container {
+  .modal-content {
+    .modal-header {
+
+      button {
+        color: white;
+        border: none;
+        border-radius: 3px;
+        width: 30px;
+        font-size: 18px;
+      }
 
     }
-    
 
-  
-}
-  .modal-user-body{
+
+
+  }
+
+  .modal-user-body {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-  .input-container{
-    display: flex;
-    flex-direction: column;
-    width: 49%;
-    &.max-width-input{
-      width: 100%;
-    }
-    input{
-      border-radius: 3px;
-      height: 30px;
-      border: 1px solid grey;
-      outline: none;
-      padding: 0 10px;
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      width: 49%;
+
+      &.max-width-input {
+        width: 100%;
+      }
+
+      input {
+        border-radius: 3px;
+        height: 30px;
+        border: 1px solid grey;
+        outline: none;
+        padding: 0 10px;
+      }
     }
   }
-}}
+}
 
-.container-listhouse-filter{
-  .filter-houses{
+.container-listhouse-filter {
+  .filter-houses {
     width: 100%;
     height: 35px;
     justify-items: center;
-    .btn-thongke{
+
+    .btn-thongke {
       border: none;
       color: whitesmoke;
       background-color: blue;
       height: 33px;
       border-radius: 3px;
       margin-top: 26px;
-      
+
     }
-    .city-table{
+
+    .city-table {
       margin: 10px 10px;
       padding: 10px 10px;
 
     }
   }
 }
-.city-manage{
+
+.city-manage {
   margin: 10px 10px;
-  
+
+}
+
+.TableManageBooking {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+  .action-special {
+    text-align: center;
+  }
+
+}
+
+.TableManageBooking td,
+.TableManageBooking th {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+
+.TableManageBooking tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.TableManageBooking tr:hover {
+  background-color: #ddd;
+}
+
+.TableManageBooking th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #4b38f8;
+  color: white;
+  text-align: center;
+}
+
+.TableManageBooking td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+.TableManageBooking {
+  .setCenter {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.TableManageBooking button {
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  color: #1964ed;
+  background-color: whitesmoke;
+
+
 }

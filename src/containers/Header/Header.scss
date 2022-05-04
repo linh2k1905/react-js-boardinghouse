@@ -4,13 +4,13 @@
     z-index: 99;
     display: flex;
     justify-content: space-between;
-    background-color: $colormain;
+    background-color: #4b38f8;
     color: $common-text-color;
     height: 40px;
     position: relative;
 
     .btn-logout {
-        color: $common-text-color;
+        color: whitesmoke;
         line-height: 40px;
         height: 40px;
         padding: 0 10px;
@@ -21,7 +21,7 @@
 
         i {
             font-size: $base-size + 1px;
-            color: blue;
+            color: white;
             size: 20;
         }
     }

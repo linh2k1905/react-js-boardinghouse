@@ -58,7 +58,7 @@
             "system-administrator": {
                 "user-manage": "Quản lý tất cả",
                 "user-owner": "Quản lý chủ trọ",
-                "owner-booking": "Quản lý  lịch trình",
+                "owner-booking": "Quản lý thời gian",
                 "owner-schedule": "Quản lý lịch hẹn",
                 "user-admin": "Quản lý admin",
                 "admin-comment": "Quản lý bình luận"

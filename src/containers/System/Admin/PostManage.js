@@ -401,7 +401,7 @@ class PostManage extends Component {
 
                             />
                             <label htmlFor='load-image'
-                                className='load-image'
+
 
 
                             >

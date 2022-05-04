@@ -244,14 +244,25 @@ class DetailHouse extends Component {
 
                             {allcomments && allcomments.length > 0 &&
                                 allcomments.map((item, index) => {
-
-
+                                    let image = '';
+                                    let avatar = ''
+                                    if (item.image) {
+                                        image = item.image;
+                                        avatar = Buffer.from(image, 'base64').toString('binary');
+                                    }
 
                                     return (
 
-                                        <div>
-                                            <div className='name-commenter'>
-                                                {item.User.firstName + " " + item.User.lastName}: {item.content}
+                                        <div
+                                            key={index}
+                                        >
+                                            <div className='name-commenter row'>
+                                                <div className='avatar-comment col-2'
+                                                    style={
+                                                        { backgroundImage: `url("https://thumbs.dreamstime.com/z/no-image-available-set-pictures-means-photo-blank-picture-camera-photography-icon-silhouette-man-missing-61062496.jpg")` }}
+
+                                                ></div>
+                                                <div className='user-comment col-2'> {item.User.lastName + " " + item.User.firstName}</div>: <div className='content-comment col-6' >{item.content}</div>
                                             </div>
 
 

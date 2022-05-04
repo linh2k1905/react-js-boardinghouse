@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { CommonUtils } from '../../utils';
 import { toast } from 'react-toastify';
@@ -151,11 +151,13 @@ class ModalUser extends Component {
             <Modal
                 isOpen={this.props.isOpen}
                 toggle={() => { this.toggle() }}
-                className={'modal-user-container'}
+                className='modal-user-container'
                 size='lg'
 
             >
-                <ModalHeader toggle={() => { this.toggle() }}><FormattedMessage id="header.signup" /></ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>
+                    <FormattedMessage id="header.signup" />
+                </ModalHeader>
                 <ModalBody>
                     <div className='modal-user-body'>
                         <div className='col-12 input-user '>
@@ -278,14 +280,12 @@ class ModalUser extends Component {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button
-                        color="primary"
-
+                    <button
                         className='px-3'
                         onClick={() => { this.handleAddNewUser() }}>
                         Lưu
-                    </Button>{' '}
-                    <Button color="secondary" className='px-3' onClick={() => { this.toggle() }}>Đóng</Button>
+                    </button>
+                    <button className='px-3' onClick={() => { this.toggle() }}>Đóng</button>
                 </ModalFooter>
             </Modal>
         )
