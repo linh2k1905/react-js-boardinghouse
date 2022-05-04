@@ -52,8 +52,8 @@ class HomePage extends Component {
 
                 <Owner />
                 <BodyHomePage />
-                {isSearch ? '' : <About />}
-                <HomeFooter />
+                {isSearch ? '' : <About />}{isSearch ? '' : <HomeFooter />}
+
 
             </div>
         );
