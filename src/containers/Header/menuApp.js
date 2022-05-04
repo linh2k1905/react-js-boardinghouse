@@ -1,7 +1,7 @@
 export const adminMenu = [
 
     {
-        name: 'menu.system.user',
+        name: 'menu.system.system-administrator.user-manage',
         menus: [
             {
                 name: 'menu.system.system-administrator.user-manage',

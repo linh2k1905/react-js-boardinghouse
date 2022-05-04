@@ -173,7 +173,7 @@ class UserRedux extends Component {
 
         return (
             <div className='container'>
-                <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-owner' /></div>
+                <div className="title" ><FormattedMessage id='menu.system.system-administrator.user-manage' /></div>
 
                 <form>
                     <div className='row'>

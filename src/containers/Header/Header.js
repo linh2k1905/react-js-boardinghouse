@@ -61,13 +61,7 @@ class Header extends Component {
             <div className="header-container">
 
                 <Navigator menus={this.state.menuApp} />
-                <div className='middle-taskbar'>
-                    <div className='welcome'
-                        style={imageBase64 ? { backgroundImage: `url(${imageBase64})` } : ""}
-                    >
 
-                    </div>
-                </div>
                 <div className='language'>
 
                     <span>
