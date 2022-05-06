@@ -192,7 +192,7 @@ class PostManage extends Component {
                     time: time,
                     idHouse: houseSelected.value,
                     date: formatDate,
-                    nameOwner: userInfo.lastName + " " + userInfo.firstName,
+                    nameOwner: houseChoosen.data.User.lastName + " " + houseChoosen.data.User.firstName,
                     address: houseSelected.label,
                     name: houseChoosen.data.name,
                 });
