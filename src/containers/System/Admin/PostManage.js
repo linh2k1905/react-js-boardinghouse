@@ -6,6 +6,7 @@ import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import Select from 'react-select';
 import PostTable from './PostTable';
+import { USER_ROLE } from '../../../utils'
 
 class PostManage extends Component {
 
@@ -55,7 +56,7 @@ class PostManage extends Component {
         await this.props.getTypeHouseStart();
         await this.props.getCityStart();
         await this.props.getOwner();
-        if (this.props.userInfo && this.props.userInfo.roleId === 2) {
+        if (this.props.userInfo && this.props.userInfo.roleId === USER_ROLE.OWNER) {
             console.log(this.props.userInfo);
             this.setState({
                 selectedOption: {
@@ -65,7 +66,6 @@ class PostManage extends Component {
                 userId: this.props.userInfo.id
             })
         }
-        console.log(this.props.typeHouseRedux);
         this.setState({
             typeHouseArray: this.props.typeHouseRedux,
             cityArray: this.props.citiesRedux,
@@ -147,6 +147,7 @@ class PostManage extends Component {
 
     }
     handleEditPost = (house) => {
+        console.log(house);
 
         let imagebase64 = '';
         if (house.image) {

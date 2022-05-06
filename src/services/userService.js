@@ -103,6 +103,10 @@ const handlePostBooking = (data) => {
 
     return axios.post('/api/user-booking', data);
 }
+const handlePostBookingWithoutPassword = (data) => {
+
+    return axios.post('/api/user-booking-none-password', data);
+}
 
 const handlePostComment = (data) => {
 
@@ -165,6 +169,11 @@ const getBookingByUserId = (id) => {
 
     return axios.get(`/api/get-all-booking-by-user-id?id=${id}`)
 }
+const getBlockUserAndPost = (data) => {
+
+    return axios.put('/api/get-block-user-has-post-unvailable', data);
+}
+
 export {
     handelLoginAPI,
     getAllUser,
@@ -203,5 +212,7 @@ export {
     handleVerifyBookingCancle,
     handleVerifyBookingFromOwner,
     getBookingByUserId,
-    searchHouseByCityService
+    searchHouseByCityService,
+    handlePostBookingWithoutPassword,
+    getBlockUserAndPost
 }

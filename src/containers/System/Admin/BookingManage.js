@@ -6,9 +6,10 @@ import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import BookingTable from './BookingTable';
 import Select from 'react-select';
-import { handlePostBooking, editBooKingService, getHouseByEmailUser, getHouseServiceById } from '../../../services/userService';
+import { handlePostBooking, handlePostBookingWithoutPassword, editBooKingService, getHouseByEmailUser, getHouseServiceById } from '../../../services/userService';
 import moment, { months } from 'moment';
 import localization from 'moment/locale/vi';
+import { USER_ROLE } from '../../../utils';
 import DatePicker from "../../../components/Input/DatePicker";
 const rangeTime = [{ value: "7am-8am", isSelect: false },
 { value: "8am-9am", isSelect: false },
@@ -34,7 +35,7 @@ class PostManage extends Component {
             time: '',
             action: CRUD_ACTIONS.CREATE,
             currentDate: '',
-            password: '',
+
             datePickerEdit: [],
             datePicker: [],
             editBookingId: '',
@@ -45,25 +46,23 @@ class PostManage extends Component {
     }
 
     async componentDidMount() {
-        if (this.props.userInfo && this.props.userInfo.roleId === 1) {
+        this.props.getUser(USER_ROLE.USER);
+        if (this.props.userInfo && this.props.userInfo.roleId === USER_ROLE.ADMIN) {
             this.props.getAllPost();
             this.setState({
                 listHouse: this.buidDataSelectHouse(this.props.postRedux),
-
-
             })
         }
 
-        if (this.props.userInfo && this.props.userInfo.roleId === 2) {
+        if (this.props.userInfo && this.props.userInfo.roleId === USER_ROLE.OWNER) {
             let res = await getHouseByEmailUser(this.props.userInfo.email);
             this.setState({
                 listHouse: this.buidDataSelectHouse(res.houses)
             })
         }
 
-        this.props.getUser('ALL');
-        this.setState({
 
+        this.setState({
             listUser: this.buidDataSelect(this.props.userRedux),
             userList: this.props.postRedux
         })
@@ -77,6 +76,19 @@ class PostManage extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapsot) {
 
+        if (prevProps.userRedux != this.props.userRedux) {
+            this.setState({
+
+                listUser: this.buidDataSelect(this.props.userRedux),
+            })
+
+        }
+        if (prevProps.postRedux != this.props.postRedux) {
+            this.setState({
+                listHouse: this.buidDataSelectHouse(this.props.postRedux),
+            })
+
+        }
 
 
 
@@ -166,19 +178,19 @@ class PostManage extends Component {
     }
     handleSaveBooking = async () => {
         let check = this.checkValidInput();
-        let { desc, time, email, houseSelected, currentDate, password, action, editBookingId } = this.state;
+        let { desc, time, email, houseSelected, currentDate, action, editBookingId } = this.state;
         if (check) {
             if (action === CRUD_ACTIONS.CREATE) {
                 let formatDate = new Date(currentDate).getTime().toString();
                 let houseChoosen = await getHouseServiceById(houseSelected.value);
                 console.log(houseChoosen);
-                let res = await handlePostBooking({
+                let res = await handlePostBookingWithoutPassword({
                     email: email.value,
                     desc: desc,
                     time: time,
                     idHouse: houseSelected.value,
                     date: formatDate,
-                    password: password,
+
                     name: houseChoosen.name,
                     address: houseChoosen.address
                 });
@@ -192,7 +204,6 @@ class PostManage extends Component {
                     time: time,
                     idHouse: houseSelected.value,
                     date: formatDate,
-                    password: password,
                     id: editBookingId
                 });
 
@@ -295,15 +306,7 @@ class PostManage extends Component {
                             />
 
                         </div>
-                        <div className='col-4 input-user'>
-                            <label>Password</label>
-                            <input
-                                className='form-control'
-                                type='password'
-                                onChange={(event) => this.onChangeInput(event, 'password')}
-                            ></input>
 
-                        </div>
                     </div>
                     <div className='col-12 mb-3'>
 

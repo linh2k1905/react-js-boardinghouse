@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
-import { getFilterHouseService } from '../../../services/userService'
+import { getFilterHouseService, getBlockUserAndPost } from '../../../services/userService'
 import moment from 'moment';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
+import { STATUS } from '../../../utils';
 const customStyles = {
     option: (provided, state) => ({
         ...provided,
@@ -131,8 +133,15 @@ class CityTable extends Component {
         let time = moment(new Date(date)).format('MM/DD/YYYY');
         return time;
     }
-    handleBlockUserPostAndUser = (id, userId) => {
-        console.log('Block event success', id, userId);
+    handleBlockUserPostAndUser = async (id, userId) => {
+        let data = {};
+        data.idUser = userId;
+        data.idHouse = id;
+        let res = await getBlockUserAndPost(data);
+        if (res.errorCode === 0) {
+            toast.success("Đã khóa thành công tài khoản và bài đăng");
+        }
+
     }
     render() {
 
@@ -199,18 +208,30 @@ class CityTable extends Component {
 
 
                                         <tr id={index}>
+
                                             <td>{item.name}</td>
                                             <td>{item.City.name}</td>
                                             <td>{item.address}</td>
                                             <td>{item.User.firstName} {item.User.lastName}</td>
                                             <td>{this.handleTime(item.createdAt)}</td>
-                                            <td> <td className='action-special'>
-                                                <button
-                                                    className='btn-edit'
-                                                    onClick={() => { this.handleBlockUserPostAndUser(item.id, item.User.id) }}
-                                                >
-                                                    <i className="fa fa-lock"></i> </button>
-                                            </td></td>
+                                            <td className='action-special'>
+                                                {item.status === STATUS.STATUS_OK ?
+                                                    <button
+                                                        className='btn-edit'
+                                                        onClick={() => { this.handleBlockUserPostAndUser(item.id, item.User.id) }}
+                                                    >
+                                                        <i className="fa fa-lock"></i>
+                                                    </button> :
+                                                    <button
+                                                        className='btn-edit'
+                                                        onClick={() => { this.handleUnBlockUserPostAndUser(item.id, item.User.id) }}
+                                                    >
+                                                        <i class="fas fa-unlock"></i>
+                                                    </button>
+
+                                                }
+
+                                            </td>
 
 
 

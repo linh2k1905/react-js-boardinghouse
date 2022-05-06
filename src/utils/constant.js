@@ -40,6 +40,11 @@ export const CRUD_ACTIONS = {
 export const USER_ROLE = {
     ADMIN: 1,
     OWNER: 2,
-    FLATMATE: 3,
-    USER: 4,
+
+    USER: 3,
+}
+export const STATUS = {
+    STATUS_OK: "OK",
+    STATUS_UN: "Unvailable",
+
 }
