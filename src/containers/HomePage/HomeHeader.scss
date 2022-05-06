@@ -636,3 +636,18 @@
     width: 50px;
     border-radius: 5px;
 }
+
+.fix-center {
+    margin-left: 300px;
+
+    .hinhdaidien {
+
+
+        width: 100px;
+        height: 100px;
+        background: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+}

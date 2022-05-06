@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { CRUD_ACTIONS, CommonUtils } from '../../utils';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import './HomeHeader.scss'
 class ModalUpdateUser extends React.Component {
     constructor(props) {
         super(props);
@@ -163,6 +164,14 @@ class ModalUpdateUser extends React.Component {
                 <ModalHeader><FormattedMessage id='system.user-manage.edit-user' /></ModalHeader>
                 <ModalBody>
                     <form>
+                        <div
+                            className='row fix-center'
+                        >
+                            <div
+                                className="hinhdaidien"
+                                style={{ backgroundImage: `url(${this.props.imagebase64})` }}
+                            ></div>
+                        </div>
                         <div className='row'>
                             <div className='col-12 input-user'>
                                 <label><FormattedMessage id='system.user-manage.firstname' /></label>
@@ -237,9 +246,6 @@ class ModalUpdateUser extends React.Component {
 
                                 />
                                 <label htmlFor='load-image'
-                                    className='load-image'
-
-
                                 >
                                     <FormattedMessage id='system.user-manage.upload' /> <i className="fas fa-image"></i></label>
 
@@ -266,11 +272,7 @@ class ModalUpdateUser extends React.Component {
                     </form>
 
                 </ModalBody>
-                <ModalFooter>
-                    <button className='btn btn-primary'
-                        onClick={() => this.toggle()}
-                    ><FormattedMessage id='common.close' /></button>
-                </ModalFooter>
+
 
             </Modal>
 

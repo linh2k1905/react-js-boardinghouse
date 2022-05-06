@@ -255,6 +255,8 @@ class HomeHeader extends Component {
                                         isOpen={this.state.isModalUpdateUserInfo}
                                         toggleModalUser={this.toggleModalUser}
                                         handleUpdateUserFromParent={this.handleUpdateUserFromParent}
+                                        imagebase64={imagebase64 ? imagebase64 : "https://nhadatcantho.top/public/upload/images/thumb_hinhsanpham/noimage.png"}
+
                                     />
                                 </div> :
                                 <>
