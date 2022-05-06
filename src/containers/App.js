@@ -57,6 +57,7 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={path.SYSTEM} component={userIsAuthenticated(Owner)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.DETAIL_HOUSE} component={DetailHouse} />
                                     <Route path={path.DETAIL_TYPE_HOUSE} component={DetailTypeHouse} />
