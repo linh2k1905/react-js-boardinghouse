@@ -63,8 +63,6 @@ class App extends Component {
                                     <Route path={path.DETAIL_FLATMATE} component={DetailFlatmate} />
                                     <Route path={path.VERIFY_MAIL} component={VerifyEmail} />
                                     <Route path={path.VERIFY_MAIL_CANCEL} component={VerifyEmailCancel} />
-                                    <Route path="/system/manage-booking" component={userIsAuthenticated(Owner)} />
-
                                 </Switch>
                             </CustomScrollbars>
                         </div>

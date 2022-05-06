@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
+import { CRUD_ACTIONS } from '../../../utils';
 import * as actions from '../../../store/actions';
 import './UserRedux.scss';
 import BookingTable from './BookingTable';
 import Select from 'react-select';
-import { handlePostBooking, handlePostBookingWithoutPassword, editBooKingService, getHouseByEmailUser, getHouseServiceById } from '../../../services/userService';
+import { handlePostBookingWithoutPassword, editBooKingService, getHouseByEmailUser, getHouseServiceById } from '../../../services/userService';
 import moment, { months } from 'moment';
 import localization from 'moment/locale/vi';
 import { USER_ROLE } from '../../../utils';
@@ -150,6 +150,7 @@ class PostManage extends Component {
 
     }
     buidDataSelectHouse = (data) => {
+
         let result = [];
         if (data && data.length > 0) {
             data.map((item, index) => {
@@ -178,6 +179,7 @@ class PostManage extends Component {
     }
     handleSaveBooking = async () => {
         let check = this.checkValidInput();
+        let { userInfo } = this.props;
         let { desc, time, email, houseSelected, currentDate, action, editBookingId } = this.state;
         if (check) {
             if (action === CRUD_ACTIONS.CREATE) {
@@ -190,9 +192,9 @@ class PostManage extends Component {
                     time: time,
                     idHouse: houseSelected.value,
                     date: formatDate,
-
-                    name: houseChoosen.name,
-                    address: houseChoosen.address
+                    nameOwner: userInfo.lastName + " " + userInfo.firstName,
+                    address: houseSelected.label,
+                    name: houseChoosen.data.name,
                 });
 
             }

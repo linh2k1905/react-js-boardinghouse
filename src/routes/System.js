@@ -9,7 +9,6 @@ import PostManage from '../containers/System/Admin/PostManage';
 import Header from '../containers/Header/Header';
 import CityManage from '../containers/System/Admin/CityManage';
 import BookingManage from '../containers/System/Admin/BookingManage';
-import Owner from './Owner';
 import ManageSchedule from '../containers/System/Owner/ManageSchedule'
 import CommentManage from '../containers/System/Admin/CommentManage';
 class System extends Component {
@@ -19,7 +18,7 @@ class System extends Component {
         return (
             <React.Fragment>
                 {
-                    isLoggedIn && <Header />}
+                    (isLoggedIn) && <Header />}
                 <div className="system-container">
                     <div className="system-list">
                         <Switch>
@@ -44,7 +43,8 @@ class System extends Component {
 const mapStateToProps = state => {
     return {
         systemMenuPath: state.app.systemMenuPath,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo
     };
 };
 
