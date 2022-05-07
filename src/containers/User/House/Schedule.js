@@ -284,7 +284,7 @@ class Schedule extends Component {
                                     <p>Giá:{ownerState.price} VND</p>
                                     <p>Diện tích:{ownerState.area}m2</p>
                                     <p>Loại nhà:{
-                                        ownerState.HouseType.name}</p>
+                                        ownerState.HouseType.nameVi}</p>
                                 </div>
                                 : ""}
 

@@ -70,6 +70,11 @@ class DetailHouse extends Component {
                 detailHouse: this.state.detailHouse,
             })
         }
+        if (prevState.allcomments != this.state.allcomments) {
+            this.setState({
+                allcomments: this.state.allcomments
+            })
+        }
 
     }
     isSearchCheck = (isOpenFinder) => {
@@ -259,10 +264,10 @@ class DetailHouse extends Component {
                                             <div className='name-commenter row'>
                                                 <div className='avatar-comment col-2'
                                                     style={
-                                                        { backgroundImage: `url("https://thumbs.dreamstime.com/z/no-image-available-set-pictures-means-photo-blank-picture-camera-photography-icon-silhouette-man-missing-61062496.jpg")` }}
+                                                        { backgroundImage: avatar ? `url(${avatar})` : `url("https://thumbs.dreamstime.com/z/no-image-available-set-pictures-means-photo-blank-picture-camera-photography-icon-silhouette-man-missing-61062496.jpg")` }}
 
                                                 ></div>
-                                                <div className='user-comment col-2'> {item.User.lastName + " " + item.User.firstName}</div>: <div className='content-comment col-6' >{item.content}</div>
+                                                <div className='user-comment col-3'> {item.User.lastName + " " + item.User.firstName}</div>: <div className='content-comment col-6' >{item.content}</div>
                                             </div>
 
 
