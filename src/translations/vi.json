@@ -54,7 +54,7 @@
             "user": "Quản lý người dùng",
             "post": "Quản lý bài đăng",
             "booking": "Quản lý lịch đặt",
-            "list": "Quản lý thống kê",
+            "list": "Quản lý khóa",
             "system-administrator": {
                 "user-manage": "Quản lý tất cả",
                 "user-owner": "Quản lý chủ trọ",
