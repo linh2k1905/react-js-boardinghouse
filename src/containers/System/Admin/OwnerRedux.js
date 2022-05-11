@@ -146,7 +146,7 @@ class OwnerRedux extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('This required ' + arrCheck[i]);
+                alert('Không được để trống ' + arrCheck[i]);
                 break;
             }
         }

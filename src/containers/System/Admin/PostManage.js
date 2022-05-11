@@ -7,6 +7,7 @@ import './UserRedux.scss';
 import Select from 'react-select';
 import PostTable from './PostTable';
 import { USER_ROLE } from '../../../utils'
+import { toast } from 'react-toastify';
 
 class PostManage extends Component {
 
@@ -104,7 +105,7 @@ class PostManage extends Component {
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
-                alert('This required ' + arrCheck[i]);
+                alert('Không được để trống ' + arrCheck[i]);
                 break;
             }
         }
@@ -210,12 +211,12 @@ class PostManage extends Component {
                 price: this.state.price,
                 address: this.state.address,
                 area: this.state.area,
-
+                image: this.state.image,
                 descEn: this.state.descEn,
                 descVi: this.state.descVi,
                 id: this.state.idHouseEdit
 
-            })
+            });
 
 
 
