@@ -138,13 +138,13 @@ export const deleteAUser = (id) => {
                 dispatch(fetchAllUserStart());
             }
             else {
-                toast.error("Delete user error!!");
+                alert("Delete user error!!");
                 dispatch(deleteUserFailed());
             }
 
         } catch (error) {
             dispatch(deleteUserFailed());
-            toast.error("Delete user error!!");
+            alert("Delete user error!!");
             console.log(error);
 
         }

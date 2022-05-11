@@ -212,6 +212,7 @@ class Schedule extends Component {
                         }
 
                     >
+                        <option>Chọn ngày</option>
                         {allDays && allDays.length > 0 &&
                             allDays.map((item, index) => {
                                 return (
