@@ -254,7 +254,7 @@ class Schedule extends Component {
 
                 >
                     <ModalHeader >
-                        <div className='header-left'>Chọn diện tích</div>
+                        <div className='header-left'>Đặt lịch hẹn</div>
 
 
 

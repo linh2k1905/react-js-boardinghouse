@@ -59,7 +59,7 @@ class DropdownRoom extends React.Component {
                     caret
                     className='bg-dropdown-toggle'>
                     <i className="fas fa-warehouse"></i>
-                    {roomSelect.name ? roomSelect.name : <FormattedMessage id="header.type" />}
+                    {roomSelect.nameVi ? roomSelect.nameVi : <FormattedMessage id="header.type" />}
 
                 </DropdownToggle>
 
