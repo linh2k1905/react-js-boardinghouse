@@ -7,6 +7,7 @@ import { getHouseServiceById, getAllUser, handleGetInfoBooking, handlePostCommen
 import { MapContainer, TileLayer, Marker, Popup, Map } from 'react-leaflet';
 import Schedule from './Schedule';
 import HomeFooter from '../../HomePage/HomeFooter';
+import { LANGUAGES } from '../../../utils';
 class DetailHouse extends Component {
 
     constructor(props) {
@@ -157,10 +158,14 @@ class DetailHouse extends Component {
 
                             <p className='address-house-infor'><FormattedMessage id="system.post-manage.address" />: {address}</p>
                             <div className='desc-house'>
-                                <span>Mô tả</span>
-                                <div>{descriptionEn ? descriptionEn : ''}
-                                </div>
-                                {descriptionVi ? descriptionVi : ''}
+                                <span><FormattedMessage id="system.post-manage.desc" /></span>
+                                {this.props.language === LANGUAGES.EN ?
+                                    <div>{descriptionEn ? descriptionEn : ''} </div> :
+                                    <div>{descriptionVi ? descriptionVi : ''}</div>
+                                }
+
+
+
                             </div>
 
 
@@ -198,7 +203,7 @@ class DetailHouse extends Component {
 
                     </div>
 
-                    <div className='title-map md-20'>Xem vị trí nhà trọ trên bản đồ </div>
+                    <div className='title-map md-20'><FormattedMessage id="system.post-manage.showmap" /> </div>
                     {position.latFloat && position.langFloat &&
                         <div className='map-detail-house'>
                             <MapContainer
@@ -225,7 +230,7 @@ class DetailHouse extends Component {
                     }
 
                     <div className='comment-house'>
-                        <div className='title-comment'><p>Comments about post</p></div>
+                        <div className='title-comment'><p><FormattedMessage id="common.comment-about" /> </p></div>
                         <div className='form-group'> <form>
                             <div className='row'>
                                 <div className='col-8'>
@@ -240,12 +245,12 @@ class DetailHouse extends Component {
 
                                     className='btn  btn-post-comment'
                                     onClick={() => this.handleCommentPost()}
-                                >Post</button>
+                                ><FormattedMessage id="common.post-comment" /></button>
                             </div>
                         </form>
                         </div>
                         <div className='all-comments'>
-                            <div className='title-comment'>Tất cả bình luận</div>
+                            <div className='title-comment'><FormattedMessage id="common.allcomment" /></div>
 
                             {allcomments && allcomments.length > 0 &&
                                 allcomments.map((item, index) => {
@@ -294,7 +299,8 @@ class DetailHouse extends Component {
 
 const mapStateToProps = state => {
     return {
-        userInfo: state.user.userInfo
+        userInfo: state.user.userInfo,
+        language: state.app.language
 
     };
 };

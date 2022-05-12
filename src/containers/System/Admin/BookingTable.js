@@ -110,14 +110,14 @@ class BookingTable extends Component {
             <div className='col-12 mb5'>
                 <table className="TableManageBooking">
                     <tr>
-                        <th>Thời gian</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày đặt </th>
+                        <th><FormattedMessage id="system.booking-manage.time" /></th>
+                        <th><FormattedMessage id="system.user-manage.status" /></th>
+                        <th><FormattedMessage id="common.bookDate" /> </th>
 
-                        <th>Mail người đặt lịch</th>
+                        <th><FormattedMessage id="system.user-manage.email" /> </th>
 
-                        <th>Tùy chỉnh</th>
-                        <th>Xác nhận</th>
+                        <th><FormattedMessage id="common.action" /></th>
+                        <th><FormattedMessage id="common.accept" /></th>
 
                     </tr>
                     {bookings && bookings.length > 0 &&

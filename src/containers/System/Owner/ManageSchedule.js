@@ -164,7 +164,7 @@ class ManageSchedule extends Component {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-6'>
-                            <label>Chọn chủ nhà</label>
+                            <label><FormattedMessage id="common.chooseUser" /></label>
                             <Select
                                 value={this.state.selectedOption}
                                 onChange={this.handleChange}
@@ -174,7 +174,7 @@ class ManageSchedule extends Component {
                             />
                         </div>
                         <div className='col-6'>
-                            <label>Chọn ngày</label>
+                            <label><FormattedMessage id="common.chooseday" /></label>
                             <DatePicker
                                 onChange={this.handleChangeDatePicker}
                                 className="form-control"

@@ -7,6 +7,7 @@ import moment from 'moment';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { STATUS } from '../../../utils';
+import { FormattedMessage } from 'react-intl';
 const customStyles = {
     option: (provided, state) => ({
         ...provided,
@@ -153,7 +154,7 @@ class CityTable extends Component {
                 <div className='filter-houses row col-12 mb-5'>
 
                     <div className='col-5'>
-                        <label>Chọn thành phố</label>
+                        <label><FormattedMessage id="header.city" /></label>
 
                         <Select
 
@@ -164,7 +165,7 @@ class CityTable extends Component {
                         />
                     </div>
                     <div className='col-5'>
-                        <label>Chọn email </label>
+                        <label><FormattedMessage id="system.user-manage.email" /> </label>
 
                         <Select
 
@@ -190,12 +191,12 @@ class CityTable extends Component {
                 <div className='col-12 mb5'>
                     <table className="TableManage">
                         <tr>
-                            <th>Name</th>
-                            <th>City</th>
-                            <th>Adrress</th>
-                            <th>Owner</th>
-                            <th>Created Date</th>
-                            <th>Khóa</th>
+                            <th><FormattedMessage id="system.post-manage.name" /></th>
+                            <th><FormattedMessage id="header.city" /></th>
+                            <th><FormattedMessage id="system.post-manage.address" /></th>
+                            <th><FormattedMessage id="common.infoOwner" /></th>
+                            <th><FormattedMessage id="system.post-manage.dateCreate" /></th>
+                            <th><FormattedMessage id="common.block" /></th>
 
 
                         </tr>

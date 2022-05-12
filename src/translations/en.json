@@ -41,7 +41,22 @@
         "find-flatmate": "Find Flatmate",
         "fullname": "Fullname",
         "aim": "Choose a content",
-        "avatar": "Change Image"
+        "avatar": "Change Image",
+        "chooseday": "Choose date",
+        "allcomment": "All comments",
+        "comment-about": "Comments about post",
+        "post-comment": "Post",
+        "role": "Role",
+        "action": "Action",
+        "chooseUser": "Owner",
+        "bookDate": "Date",
+        "block": "Block",
+        "filter-commenter": "Choose User",
+        "filter-house": "Choose House",
+        "filter": "Filter",
+        "username": "Username",
+        "content": "Content",
+        "status": "Status"
     },
     "login": {
         "login": "Login",
@@ -72,7 +87,7 @@
         "user-manage": {
             "fail-to-load-fouser": "Fail to load system users list",
             "user-id": "User ID",
-            "usertype": "User type",
+            "usertype": "Role",
             "lastname": "Last Name",
             "address": "Address",
             "upload": " Upload",
@@ -111,8 +126,11 @@
             "area": "Area",
             "lat": "Latitude",
             "lang": "Longitude",
+            "desc": "Description",
             "descEn": "English Description",
-            "descVi": "Vietnamese Description"
+            "descVi": "Vietnamese Description",
+            "showmap": "The Display Position in Map",
+            "dateCreate": "Created at"
         },
         "booking-manage": {
             "booking-manage": "Booking manangement",

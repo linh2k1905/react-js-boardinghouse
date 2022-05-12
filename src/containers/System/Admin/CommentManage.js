@@ -121,7 +121,7 @@ class CommentManage extends Component {
                 <div className='filter-houses row col-12 mb-5'>
 
                     <div className='col-4 mt-2'>
-                        <label>Lọc người bình luận</label>
+                        <label><FormattedMessage id="common.filter-commenter" /></label>
 
                         <Select
                             options={usersArr}
@@ -129,7 +129,7 @@ class CommentManage extends Component {
                         />
                     </div>
                     <div className='col-6 mt-2'>
-                        <label>Lọc theo nhà trọ </label>
+                        <label><FormattedMessage id="common.filter-house" /></label>
 
                         <Select
                             options={allHouses}
@@ -140,7 +140,7 @@ class CommentManage extends Component {
                         <button
 
                             className='btn-thongke'
-                        >Thống kê</button>
+                        ><FormattedMessage id="common.filter" /></button>
 
                     </div>
                 </div>
@@ -150,12 +150,12 @@ class CommentManage extends Component {
                 <div className='col-12 mb5'>
                     <table className="TableManage">
                         <tr>
-                            <th>User Comment</th>
-                            <th>Content</th>
-                            <th>Status</th>
-                            <th>Comment content</th>
-                            <th>Date Comments</th>
-                            <th className='action-special'>Actions</th>
+                            <th><FormattedMessage id="common.username" /></th>
+                            <th><FormattedMessage id="common.content" /></th>
+                            <th><FormattedMessage id="common.status" /></th>
+                            <th><FormattedMessage id="system.post-manage.address" /></th>
+                            <th><FormattedMessage id="system.booking-manage.date" /></th>
+                            <th className='action-special'><FormattedMessage id="common.action" /></th>
 
 
 

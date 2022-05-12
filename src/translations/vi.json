@@ -41,7 +41,22 @@
         "find-flatmate": "Tìm bạn chung phòng",
         "fullname": "Tên đầy đủ",
         "aim": "Mục đích bài đăng",
-        "avatar": "Đổi ảnh đại diện"
+        "avatar": "Đổi ảnh đại diện",
+        "chooseday": "Chọn ngày",
+        "allcomment": "Tất cả bình luận",
+        "comment-about": "Bình luận bài đăng",
+        "post-comment": "Đăng",
+        "role": "Vai trò",
+        "action": "Hành động",
+        "chooseUser": "Chủ nhà",
+        "bookDate": "Ngày đặt",
+        "block": "Khóa",
+        "filter-commenter": "Lọc người bình luận",
+        "filter-house": "Lọc nhà trọ",
+        "filter": "Thống kê",
+        "username": "Tên người bình luận",
+        "content": "Nội dung",
+        "status": "Trạng thái"
     },
     "login": {
         "login": "Đăng nhập",
@@ -110,8 +125,11 @@
             "area": "Diện tích",
             "lat": "Vĩ độ",
             "lang": "Kinh độ",
+            "desc": "Mô tả",
             "descEn": "Mô tả Tiếng Anh",
-            "descVi": "Mô tả Tiếng Việt"
+            "descVi": "Mô tả Tiếng Việt",
+            "showmap": "Xem vị trí nhà trọ trên bản đồ",
+            "dateCreate": "Ngày đăng"
         },
         "booking-manage": {
             "booking-manage": "Quản lý lịch hẹn",

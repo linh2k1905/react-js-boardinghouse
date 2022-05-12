@@ -91,10 +91,10 @@ class PostTable extends Component {
             <div className='col-12 mb5'>
                 <table className="TableManage">
                     <tr>
-                        <th className='col-2'>Tên nhà trọ</th>
-                        <th className='col-6'>Địa chỉ</th>
-                        <th className='col-2'>Ngày đăng</th>
-                        <th >Tùy chỉnh</th>
+                        <th className='col-2'><FormattedMessage id="system.post-manage.name" /></th>
+                        <th className='col-6'><FormattedMessage id="system.post-manage.address" /></th>
+                        <th className='col-2'><FormattedMessage id="system.post-manage.dateCreate" /></th>
+                        <th ><FormattedMessage id="common.action" /></th>
 
                     </tr>
                     {houses && houses.length > 0 &&

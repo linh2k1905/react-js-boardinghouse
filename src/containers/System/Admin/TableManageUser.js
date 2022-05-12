@@ -41,12 +41,12 @@ class TableManageUser extends Component {
             <React.Fragment>
                 <table id="TableManageUser">
                     <tr>
-                        <th>Email</th>
-                        <th>Tên</th>
-                        <th>Họ</th>
-                        <th>Địa chỉ</th>
-                        <th>Vai trò</th>
-                        <th>Tùy chỉnh</th>
+                        <th><FormattedMessage id="system.user-manage.email" /></th>
+                        <th><FormattedMessage id="system.user-manage.firstname" /></th>
+                        <th><FormattedMessage id="system.user-manage.lastname" /></th>
+                        <th><FormattedMessage id="system.post-manage.address" /></th>
+                        <th><FormattedMessage id="common.role" /></th>
+                        <th><FormattedMessage id="common.action" /></th>
 
                     </tr>
                     {arrUser && arrUser.map((item, index) => {
