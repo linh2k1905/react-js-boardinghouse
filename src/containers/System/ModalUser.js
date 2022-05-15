@@ -20,7 +20,7 @@ class ModalUser extends Component {
             firstName: '',
             lastName: '',
             address: '',
-            roleId: '',
+            roleId: 3,
             tel: '',
             image: '',
             previewImage: '',
@@ -74,7 +74,7 @@ class ModalUser extends Component {
                     firstName: '',
                     lastName: '',
                     address: '',
-                    roleId: '',
+                    roleId: 3,
                     tel: '',
                     image: '',
                     previewImage: '',
@@ -94,13 +94,7 @@ class ModalUser extends Component {
         }
 
     }
-    setRoleState = (event) => {
-        console.log(event.target.value);
-        this.setState({
-            roleId: event.target.value
-        })
 
-    }
     handleOnChangeImage = async (event) => {
         let data = event.target.files;
 
@@ -253,7 +247,7 @@ class ModalUser extends Component {
                                 className='form-control'
                             />
                         </div>
-                        <div className='input-container'>
+                        <div className='input-container max-width-input'>
                             <label>
                                 Tel
                             </label>
@@ -264,18 +258,7 @@ class ModalUser extends Component {
                                 className='form-control'
                             />
                         </div>
-                        <div className='input-container'>
-                            <label>
-                                Vai trò
-                            </label>
-                            <select className='form-control'
-                                onChange={(event) => this.setRoleState(event)}
-                            >
-                                <option value={3}>Chọn kiểu người dùng</option>
-                                <option value={3}>Bạn cùng phòng</option>
-                                <option value={4}>Khách thuê</option>
-                            </select>
-                        </div>
+
 
                     </div>
                 </ModalBody>
