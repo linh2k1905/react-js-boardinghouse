@@ -72,6 +72,7 @@ class CommentManage extends Component {
         await editCommentService({
             id: item.id
         })
+        window.location.reload();
     }
     handleDeleteComment = async (item) => {
         await deleteCommentById(item.id);
@@ -179,7 +180,7 @@ class CommentManage extends Component {
                                                 className='btn-edit'
                                                 onClick={() => this.handleHideComment(item)}
                                             >
-                                                <i className="fa fa-lock"></i> </button>
+                                                {item.status === "OK" ? <i className="fa fa-lock"></i> : <i className="fa fa-unlock"></i>}   </button>
                                         </td>
                                     </tr>
                                 )

@@ -155,6 +155,7 @@ class PostManage extends Component {
         if (house.image) {
             imagebase64 = Buffer.from(house.image, 'base64').toString('binary');
 
+
         }
         this.setState({
             idHouseEdit: house.id,
@@ -209,7 +210,7 @@ class PostManage extends Component {
                 price: price,
                 address: address,
                 area: area,
-                image: isChangeImage ? image : '',
+                image: image,
                 descEn: descEn,
                 descVi: descVi,
                 id: this.state.idHouseEdit

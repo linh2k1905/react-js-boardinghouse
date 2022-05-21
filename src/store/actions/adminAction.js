@@ -362,6 +362,7 @@ export const fetchEditPost = (data) => {
             if (res && res.errorCode === 0) {
                 toast.success("Edit success");
                 dispatch(editPostSuccess());
+                window.location.reload();
             }
             else {
                 dispatch(editPostFail());

@@ -225,7 +225,9 @@ class CityTable extends Component {
                                                     </button> :
                                                     <button
                                                         className='btn-edit'
-                                                        onClick={() => { this.handleUnBlockUserPostAndUser(item.id, item.User.id) }}
+                                                        onClick={() => {
+                                                            toast.error("Không thể mở khóa bài này do chính sách của chúng tôi")
+                                                        }}
                                                     >
                                                         <i class="fas fa-unlock"></i>
                                                     </button>
