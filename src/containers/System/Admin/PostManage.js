@@ -34,7 +34,8 @@ class PostManage extends Component {
             action: CRUD_ACTIONS.CREATE,
             idHouseEdit: '',
             selectedOption: '',
-            idUserEdit: ''
+            idUserEdit: '',
+            isChangeImage: false
         }
     }
     buidDataSelect = (data) => {
@@ -125,7 +126,8 @@ class PostManage extends Component {
             let objectURL = URL.createObjectURL(file);
             this.setState({
                 previewImageURL: objectURL,
-                image: base64
+                image: base64,
+                isChangeImage: true
             })
         }
     }
@@ -148,11 +150,10 @@ class PostManage extends Component {
 
     }
     handleEditPost = (house) => {
-        console.log(house);
 
         let imagebase64 = '';
         if (house.image) {
-            imagebase64 = new Buffer.from(house.image, 'base64').toString('binary');
+            imagebase64 = Buffer.from(house.image, 'base64').toString('binary');
 
         }
         this.setState({
@@ -183,7 +184,7 @@ class PostManage extends Component {
 
         let isValid = this.checkValidInput();
         if (isValid === false) return;
-        let { action, name, userId, cityId, typeHouseId, price, address, image, area, descVi, descEn, idHouseEdit, selectedOption } = this.state;
+        let { action, isChangeImage, name, userId, cityId, typeHouseId, price, address, image, area, descVi, descEn, idHouseEdit, selectedOption } = this.state;
 
         if (action === CRUD_ACTIONS.CREATE) {
             this.props.createNewPostRedux({
@@ -203,17 +204,14 @@ class PostManage extends Component {
         }
         if (action === CRUD_ACTIONS.EDIT) {
 
-
-
-
             this.props.editPostRedux({
-                name: this.state.name,
-                price: this.state.price,
-                address: this.state.address,
-                area: this.state.area,
-                image: this.state.image,
-                descEn: this.state.descEn,
-                descVi: this.state.descVi,
+                name: name,
+                price: price,
+                address: address,
+                area: area,
+                image: isChangeImage ? image : '',
+                descEn: descEn,
+                descVi: descVi,
                 id: this.state.idHouseEdit
 
             });

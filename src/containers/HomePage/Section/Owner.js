@@ -50,20 +50,22 @@ class Owner extends Component {
                                 let imagebase64 = '';
                                 if (item.image) {
                                     imagebase64 = new Buffer(item.image, 'base64').toString('binary');
+                                    let nameEn = `${item.firstName} ${item.lastName}`;
+                                    return (
+                                        <div className='Owner-customize'
+                                            onClick={() => this.handleShowTheFlateMate(item)}
+
+                                        >
+                                            <div className='img-customize image-avatar'
+                                                style={{ backgroundImage: `url(${imagebase64})` }}
+                                            ></div>
+                                            <div className='name-owner'>{nameEn}</div>
+                                        </div>
+                                    )
                                 }
 
-                                let nameEn = `${item.firstName} ${item.lastName}`;
-                                return (
-                                    <div className='Owner-customize'
-                                        onClick={() => this.handleShowTheFlateMate(item)}
 
-                                    >
-                                        <div className='img-customize image-avatar'
-                                            style={{ backgroundImage: `url(${imagebase64})` }}
-                                        ></div>
-                                        <div className='name-owner'>{nameEn}</div>
-                                    </div>
-                                )
+
                             })
 
                         }

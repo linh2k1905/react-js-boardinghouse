@@ -44,7 +44,7 @@ class Schedule extends Component {
             let res = await getScheduleOwnerFromDate(ownerIdFromParent, today);
 
             if (res && res.data) {
-                console.log('check time by res.dât', res.data);
+                console.log('check time by res', res.data);
                 this.setState({
                     availableTime: res.data
                 })
@@ -127,7 +127,7 @@ class Schedule extends Component {
 
             if (res && res.data) {
                 this.setState({
-                    availableTime: res.data
+                    availableTime: res.data,
                 })
             }
 
@@ -146,48 +146,68 @@ class Schedule extends Component {
 
         })
     }
+    checkInput = () => {
+        let { email, password, dateSelect } = this.state;
+        if (!email || !password) {
+            alert("Vui lòng nhập email mật khẩu");
+            return false;
+        }
+        else if (!dateSelect.time || !dateSelect.date) {
+            alert("Vui lòng chọn ngày tháng năm");
+            return false;
+        }
+        return true;
+    }
     handleClickBookingButton = async () => {
-        let res = await handlePostBooking({
-            email: this.state.email,
-            password: this.state.password,
-            idHouse: this.state.ownerState.id,
-            time: this.state.dateSelect.time,
-            date: this.state.dateSelect.date,
-            tel: this.state.tel ? this.state.tel : '',
-            desc: this.state.desc ? this.state.desc : '',
-            name: this.state.ownerState.name ? this.state.ownerState.name : '',
-            address: this.state.ownerState.address ? this.state.ownerState.address : '',
-            nameOwner: this.state.ownerState.User && this.state.ownerState.User.firstName && this.state.ownerState.User.lastName ? this.state.ownerState.User.firstName + " " + this.state.ownerState.User.lastName : ' '
-        });
-        if (res.data.users[1]) {
-            this.setState({
-                created: true,
+        let { userInfo } = this.props;
+
+        if (this.checkInput() && userInfo) {
+            console.log('1', this.state.dateSelect);
+            let res = await handlePostBooking({
+                firstName: userInfo.firstName ? userInfo.firstName : '!',
+                lastName: userInfo.lastName ? userInfo.lastName : '!',
+                email: this.state.email,
+                password: this.state.password,
+                idHouse: this.state.ownerState.id,
+                time: this.state.dateSelect.time,
+                date: this.state.dateSelect.date,
+                tel: this.state.tel ? this.state.tel : '',
+                desc: this.state.desc ? this.state.desc : '',
+                name: this.state.ownerState.name ? this.state.ownerState.name : '',
+                address: this.state.ownerState.address ? this.state.ownerState.address : '',
+                nameOwner: this.state.ownerState.User && this.state.ownerState.User.firstName && this.state.ownerState.User.lastName ? this.state.ownerState.User.firstName + " " + this.state.ownerState.User.lastName : ' '
+            });
+            if (res.data.users[1]) {
+                this.setState({
+                    created: true,
 
 
-            })
+                })
+
+            }
+            if (!this.state.created) {
+                this.toggle();
+            }
+            else {
+                this.props.history.push('/home')
+            }
 
         }
-        if (!this.state.created) {
-            this.toggle();
-        }
-        else {
-            this.props.history.push('/home')
-        }
+
+
     }
     handleClickSchduleButton = (item) => {
 
-
+        console.log(' check date', item.date);
         this.setState({
             isOpen: true,
             dateSelect: item
         })
     }
     handleShowDateFromString = (str) => {
-        let date = moment(Date(str)).format('dddd - DD/MM/YYYY');
-        return (
-            <>{this.capitalizeFirstLetter(date)}</>
-        );
-        return <></>
+        str = parseInt(str);
+        let dateURTC = moment(new Date(str)).format('DD/MM/YYYY');
+        return dateURTC;
 
     }
     handleInputBooking = (event, id) => {
@@ -212,7 +232,7 @@ class Schedule extends Component {
                         }
 
                     >
-                        <option>Click here</option>
+
                         {allDays && allDays.length > 0 &&
                             allDays.map((item, index) => {
                                 return (
@@ -270,8 +290,8 @@ class Schedule extends Component {
                                     <p>Địa chỉ:{ownerState.User.address}</p>
                                     <p>Địa chỉ mail:{ownerState.User.email}</p>
                                     <p>Tel:{ownerState.User.tel}</p>
-                                    <p>{dateSelect.time}</p>
-                                    <p>{this.handleShowDateFromString(dateSelect.date)}</p>
+                                    <p>Thời gian: {dateSelect.time}</p>
+                                    <p>Ngày: {this.handleShowDateFromString(dateSelect.date)}</p>
 
                                 </div> : ""
 
