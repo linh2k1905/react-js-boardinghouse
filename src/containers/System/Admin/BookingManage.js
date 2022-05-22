@@ -11,6 +11,7 @@ import moment, { months } from 'moment';
 import localization from 'moment/locale/vi';
 import { USER_ROLE } from '../../../utils';
 import DatePicker from "../../../components/Input/DatePicker";
+import { toast } from 'react-toastify';
 const rangeTime = [{ value: "7am-8am", isSelect: false },
 { value: "8am-9am", isSelect: false },
 { value: "9am-10am", isSelect: false },
@@ -208,6 +209,9 @@ class PostManage extends Component {
                     date: formatDate,
                     id: editBookingId
                 });
+                if (res.errorCode === 0) {
+                    toast.success("Dời lịch thành công");
+                }
 
             }
 
