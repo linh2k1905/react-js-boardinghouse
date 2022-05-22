@@ -7,7 +7,8 @@ import './UserRedux.scss';
 import { getFilterHouseService } from '../../../services/userService'
 import moment from 'moment';
 import Select from 'react-select';
-import { getAllComment, deleteCommentById, editCommentService } from '../../../services/userService'
+import { toast } from 'react-toastify';
+import { getAllComment, deleteCommentById, editCommentService, handelGetAllCommentByHouseIdAndUserId } from '../../../services/userService'
 
 class CommentManage extends Component {
 
@@ -33,7 +34,7 @@ class CommentManage extends Component {
     }
     async componentDidMount() {
 
-        this.props.getAllOwner(4);
+        this.props.getAllOwner(3);
         this.props.getAllHouse();
         let res = await getAllComment();
         console.log('check res', res);
@@ -108,6 +109,29 @@ class CommentManage extends Component {
         return result;
 
     }
+    onChangeValueUser = (value) => {
+        console.log(value);
+        this.setState({
+            idUser: value.value
+        })
+    }
+    onChangeValueHouse = (value) => {
+        console.log(value);
+        this.setState({
+            idHouse: value.value
+        })
+
+    }
+    handleCommentFilter = async () => {
+        let { idHouse, idUser } = this.state;
+        console.log(idHouse)
+        let res = await handelGetAllCommentByHouseIdAndUserId({ idHouse, idUser });
+        console.log(res);
+        this.setState({
+
+            allCommentsArray: res.comments
+        })
+    }
 
 
 
@@ -126,6 +150,7 @@ class CommentManage extends Component {
 
                         <Select
                             options={usersArr}
+                            onChange={(value) => this.onChangeValueUser(value)}
 
                         />
                     </div>
@@ -134,13 +159,19 @@ class CommentManage extends Component {
 
                         <Select
                             options={allHouses}
+                            onChange={(value) => this.onChangeValueHouse(value)}
                         />
                     </div>
 
-                    <div className='col-2'>
+                    <div className='col-2'
+                    >
                         <button
 
                             className='btn-thongke'
+                            onClick={() => {
+                                this.handleCommentFilter();
+                            }}
+
                         ><FormattedMessage id="common.filter" /></button>
 
                     </div>
@@ -166,7 +197,7 @@ class CommentManage extends Component {
                                 return (
                                     <tr>
 
-                                        <td>{item.User.firstName + item.User.lastName}</td>
+                                        <td>{item.User.firstName + " " + item.User.lastName}</td>
                                         <td>{item.content}</td>
                                         <td>{item.status}</td>
                                         <td>{item.House.name}</td>

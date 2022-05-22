@@ -112,9 +112,14 @@ const handlePostComment = (data) => {
 
     return axios.post('/api/create-new-comment', data);
 }
+
 const handelGetAllCommentByHouseId = (data) => {
 
     return axios.get(`/api/get-all-comment-by-houseId?idHouse=${data}`);
+}
+const handelGetAllCommentByHouseIdAndUserId = (data) => {
+
+    return axios.get(`/api/get-all-comment-by-houseId-and-userId?idHouse=${data.idHouse}&idUser=${data.idUser}`);
 }
 const handelGetAllBooking = (data) => {
 
@@ -214,5 +219,6 @@ export {
     getBookingByUserId,
     searchHouseByCityService,
     handlePostBookingWithoutPassword,
-    getBlockUserAndPost
+    getBlockUserAndPost,
+    handelGetAllCommentByHouseIdAndUserId
 }

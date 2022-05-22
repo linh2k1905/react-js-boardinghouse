@@ -103,20 +103,28 @@ class ManageSchedule extends Component {
             rangeTime: time
         })
     }
-    handleSaveSchedule = async () => {
+    checkInput = () => {
         let { rangeTime, selectedOption, currentDate } = this.state;
         if (!currentDate) {
-            toast.error("You should choose date");
+            toast.error("Bạn cần chọn ngày");
+            return false;
         }
-        if (selectedOption && _.isEmpty(selectedOption)) {
-            toast.error("You should choose the Owner");
+        else
+            if (selectedOption && _.isEmpty(selectedOption)) {
+                toast.error("Bạn cần chọn người chủ trọ");
+                return false;
 
 
-        }
+            }
+
+        return true;
+    }
+    handleSaveSchedule = async () => {
+        let { rangeTime, selectedOption, currentDate } = this.state;
+
         let formatDate = new Date(currentDate).getTime();
-        console.log("check date", formatDate);
         let result = [];
-        if (rangeTime && rangeTime.length > 0) {
+        if (rangeTime && rangeTime.length > 0 && this.checkInput()) {
             let selectedTime = rangeTime.filter(item => item.isSelect === true);
             if (selectedTime && selectedTime.length > 0) {
                 selectedTime.map(schedule => {
@@ -127,27 +135,35 @@ class ManageSchedule extends Component {
                     result.push(obj);
 
                 })
+                if (result.length > 0 && result) {
+                    console.log('check', result);
+                    let res = await bulkCreateSchedulService({
+                        arrTime: result,
+                        idOwner: selectedOption.value,
+                        formatDate: formatDate.toString()
+                    });
+                    if (res && res.errorCode === 0) {
+                        toast.success("Thêm thời gian rảnh thành công");
+                        window.location.reload();
+                    }
+                    else {
+                        toast.error("Có lỗi khi thêm ")
+                    }
 
-                let res = await bulkCreateSchedulService({
-                    arrTime: result,
-                    idOwner: selectedOption.value,
-                    formatDate: formatDate.toString()
-                });
-                console.log('check res', res);
-                if (res && res.errorCode === 0) {
-                    toast.success("You update the new schedule");
                 }
-                else {
-                    toast.error("Error when ")
-                }
+
+
 
 
             }
-            console.log("check selected time", selectedTime);
+            else {
+                toast.error("Bạn chưa chọn khung giờ ")
+            }
+
         }
 
 
-        console.log("check schedule result", result);
+
 
     }
     render() {

@@ -162,7 +162,6 @@ class Schedule extends Component {
         let { userInfo } = this.props;
 
         if (this.checkInput() && userInfo) {
-            console.log('1', this.state.dateSelect);
             let res = await handlePostBooking({
                 firstName: userInfo.firstName ? userInfo.firstName : '!',
                 lastName: userInfo.lastName ? userInfo.lastName : '!',
@@ -177,15 +176,23 @@ class Schedule extends Component {
                 address: this.state.ownerState.address ? this.state.ownerState.address : '',
                 nameOwner: this.state.ownerState.User && this.state.ownerState.User.firstName && this.state.ownerState.User.lastName ? this.state.ownerState.User.firstName + " " + this.state.ownerState.User.lastName : ' '
             });
-            if (res.data.users[1]) {
+            console.log(res);
+            if (res.data.errorCode === 0) {
                 this.setState({
                     created: true,
 
 
                 })
+                toast.success("Đã đặt lịch thành công");
 
             }
-            if (!this.state.created) {
+            else {
+                toast.error(res.data.errorMessage);
+                this.setState({
+                    created: false
+                })
+            }
+            if (this.state.created) {
                 this.toggle();
             }
             else {
