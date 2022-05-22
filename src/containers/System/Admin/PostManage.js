@@ -105,12 +105,12 @@ class PostManage extends Component {
         ]
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
-                isValid = false;
+
                 alert('Không được để trống ' + arrCheck[i]);
-                break;
+                return false;
             }
         }
-        return isValid;
+        return true;
 
     }
 
@@ -184,10 +184,9 @@ class PostManage extends Component {
 
 
         let isValid = this.checkValidInput();
-        if (isValid === false) return;
         let { action, isChangeImage, name, userId, cityId, typeHouseId, price, address, image, area, descVi, descEn, idHouseEdit, selectedOption } = this.state;
 
-        if (action === CRUD_ACTIONS.CREATE) {
+        if (action === CRUD_ACTIONS.CREATE && isValid) {
             this.props.createNewPostRedux({
                 name: name,
                 userId: userId,
